@@ -18,6 +18,7 @@ nav:
       - Load Rubric: adr/0003-load-rubric.md
       - Submission Loader: adr/0004-submission-loader.md
       - Base LLM Interface: adr/0005-base-llm-interface.md
+      - OpenAI LLM Interface: adr/0006-openai-llm-interface.md
   - API:
       - Overview: api/overview.md
   - Examples:
