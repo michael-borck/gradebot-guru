@@ -4,10 +4,6 @@ nav:
   - Installation: installation.md
   - User Guide: user_guide.md
   - Developer Guide: developer_guide.md
-  - Roadmap: roadmap.md
-  - Contributing: contributing.md
-  - Code of Conduct: code_of_conduct.md
-  - Changelog: changelog.md
   - Architecture: architecture.md
   - SRS: srs.md
   - ADRs:
@@ -21,9 +17,28 @@ nav:
       - OpenAI LLM Interface: adr/0006-openai-llm-interface.md
   - API:
       - Overview: api/overview.md
+      - Configuration: api/config.md
+      - Rubric Loader: api/rubric_loader.md
+      - Submission Loader: api/submission_loader.md
+      - Base LLM: api/base_llm.md
+      - OpenAI LLM: api/openai_llm.md
   - Examples:
       - Rubrics: examples/rubrics.md
       - Submissions: examples/submissions.md
       - Prompts: examples/prompts.md
+  - Roadmap: roadmap.md
+  - Contributing: contributing.md
+  - Changelog: changelog.md
+  - FAQ: faq.md
+  - Code of Conduct: code_of_conduct.md
+  - License: license.md
 theme:
   name: material
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          rendering:
+            show_source: true
