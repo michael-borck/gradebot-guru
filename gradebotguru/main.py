@@ -1,40 +1,44 @@
-# Main entry point for the CLI application
+'''
+Main entry point for the CLI application
+- Parse command-line arguments
+- Load rubric file using rubric_loader
+- Load student submissions using submission_loader
+- Initialize grader with loaded rubric and submissions
+- Generate and send prompts to the LLM using llm_interface
+- Parse responses using response_parser
+- Output results to the CLI
+'''
 
-# Main entry point for the CLI application
-# Parse command-line arguments
-# Load rubric file using rubric_loader
-# Load student submissions using submission_loader
-# Initialize grader with loaded rubric and submissions
-# Generate and send prompts to the LLM using llm_interface
-# Parse responses using response_parser
-# Output results to the CLI
-
+from gradebotguru.config import load_config
+from gradebotguru.rubric_loader import load_rubric
+from gradebotguru.submission_loader import load_submissions
+from gradebotguru.grader import Grader
+from gradebotguru.llm_interface.factory import create_llm
+from gradebotguru.logging_config import setup_logging
 
 def main():
-    # 1. Initialize GradeBotGuru object (loads configuration, sets up LLM interface)
-    gradebot = GradeBotGuru()
+    # Initialize logging
+    setup_logging()
 
-    # 2. Get student submissions (depending on interface):
-    #   - CLI: Read from file or directory
-    #   - GUI: User selects files, drag-and-drop
-    #   - Web: Upload via form
-    #   - API: Receive submissions via API call
-    submissions = get_submissions()  # Placeholder for actual submission retrieval logic
+    # Load configuration
+    config = load_config()
 
-    # 3. Loop through each submission:
+    # Initialize LLM interface
+    llm_interface = create_llm(config['llm_provider'])
+
+    # Load rubric
+    rubric = load_rubric(config['rubric_path'])
+
+    # Initialize Grader
+    grader = Grader(rubric)
+
+    # Load submissions
+    submissions = load_submissions('path/to/submissions')
+
+    # Grade each submission
     for submission in submissions:
-        # 3.1 Extract relevant text (e.g., essay, code)
-        # 3.2 Pass text to grader.py
-        grade, feedback = gradebot.grader.grade(submission)
-        
-        # 3.3 Output results (depending on interface):
-        #   - CLI: Print to console
-        #   - GUI: Display in window
-        #   - Web: Show on results page
-        #   - API: Return as JSON response
-        output_results(grade, feedback)  # Placeholder for actual output logic
-
-    # 4. Clean up (optional, depending on interface and resources used)
+        grade, feedback = grader.grade(submission)
+        print(f"Grade: {grade}, Feedback: {feedback}")
 
 if __name__ == "__main__":
     main()

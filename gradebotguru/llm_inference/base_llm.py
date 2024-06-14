@@ -2,5 +2,9 @@
 
 class BaseLLM:
     def send_prompt(self, prompt):
-        # Send the prompt to the LLM
-        # Return the response from the LLM
+        # Placeholder for sending prompt to LLM
+        return "response"
+
+    def parse_response(self, response):
+        # Placeholder for parsing response from LLM
+        return "grade", "feedback"

@@ -1,5 +1,10 @@
 # Factory to create LLM instances
 
+from gradebotguru.llm_interface.openai import OpenAILLM
+
 def create_llm(provider_name):
-    # Based on provider_name, instantiate the appropriate LLM class
-    # Return the LLM instance
+    # Placeholder for LLM creation logic
+    if provider_name == 'openai':
+        return OpenAILLM()
+    else:
+        raise ValueError("Unsupported LLM provider")
