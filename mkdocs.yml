@@ -13,6 +13,8 @@ nav:
   - ADRs:
       - Template: adr/adr_template.md
       - Example: adr/adr_001_example.md
+      - Configuration Loader: adr/0001-configuration-loader.md
+      - Logging Configuration: adr/0002-logging-configuration.md
   - API:
       - Overview: api/overview.md
   - Examples:
