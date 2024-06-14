@@ -16,6 +16,7 @@ nav:
       - Use Custom LLM Interface: adr/0005-use-custom-llm-interface.md
       - Base LLM Interface: adr/0006-base-llm-interface.md
       - OpenAI LLM Interface: adr/0007-openai-llm-interface.md
+      - LLM Factory: adr/0008-llm-factory.md
   - API:
       - Overview: api/overview.md
       - Configuration: api/config.md
