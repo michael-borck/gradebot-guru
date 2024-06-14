@@ -5,6 +5,21 @@
 
 GradeBot Guru is your friendly AI-powered grading assistant, designed to automate the evaluation of student submissions and provide fast, accurate, and insightful feedback.
 
+## Table of Contents
+
+- [GradeBot Guru: Your AI Grading Assistant ��‍♂️🤖](#gradebot-guru-your-ai-grading-assistant-️)
+  - [Table of Contents](#table-of-contents)
+  - [Features ✨](#features-)
+  - [Installation 🛠️](#installation-️)
+  - [Usage 🚀](#usage-)
+  - [Configuration ⚙️](#configuration-️)
+  - [Examples 📚](#examples-)
+  - [Development 👩‍💻](#development-)
+  - [Contributing 🙌](#contributing-)
+  - [License 📄](#license-)
+  - [Contact 📬](#contact-)
+  - [Additional Resources](#additional-resources)
+
 ## Features ✨
 
 * **Automated Grading:**  Quickly and consistently grade student work based on a provided rubric.
@@ -18,6 +33,14 @@ GradeBot Guru is your friendly AI-powered grading assistant, designed to automat
 
    ```bash
    pip install gradebot-guru
+   ```
+
+2. **Install from Source (Development Setup):**
+
+   ```bash
+   git clone https://github.com/teaching-repositories/gradebot-guru.git
+   cd gradebot-guru
+   poetry install
    ```
 
 ## Usage 🚀
@@ -39,10 +62,46 @@ gradebot-guru <submissions_dir> --rubric <rubric_path>
 gradebot-guru assignments/ --rubric rubrics/essay_rubric.csv
 ```
 
+## Development 👩‍💻
+
+1. **Running Tests:**
+
+   ```bash
+   poetry run pytest
+   ```
+
+2. **Code Formatting:**
+
+   ```bash
+   poetry run black .
+   ```
+
+3. **Type Checking:**
+
+   ```bash
+   poetry run mypy .
+   ```
+
+4. **Building Documentation:**
+
+   ```bash
+   poetry run mkdocs serve
+   ```
+
 ## Contributing 🙌
 
-Contributions are welcome! Please feel free to open issues or submit pull requests.
+Contributions are welcome! Please see the [Contributing Guidelines](CONTRIBUTING.md) for more details.
 
 ## License 📄
 
 This project is licensed under the MIT License. See the `LICENSE` file for details.
+
+## Contact 📬
+
+For questions or feedback, please contact Michael Borck at [michael@borck.me](mailto:michael@borck.me).
+
+## Additional Resources
+
+- [Project Homepage](http://yourhomepage.com)
+- [Documentation](https://teaching-repositories.github.io/gradebot-guru/)
+- [Repository](https://github.com/teaching-repositories/gradebot-guru)

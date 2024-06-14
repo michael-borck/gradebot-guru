@@ -1,25 +1,23 @@
 site_name: GradeBot Guru Documentation
-
-theme:
-  name: readthedocs
-
-markdown_extensions:
-  - pymdownx.arithmatex:
-      generic: true
-
-
-extra_javascript:
-  - javascripts/mathjax.js
-  - https://polyfill.io/v3/polyfill.min.js?features=es6
-  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
-
 nav:
   - Home: index.md
-
-plugins:
-  - search
-  - mkdocstrings:
-      handlers:
-        python:
-          rendering:
-            show_source: true
+  - Installation: installation.md
+  - User Guide: user_guide.md
+  - Developer Guide: developer_guide.md
+  - Roadmap: roadmap.md
+  - Contributing: contributing.md
+  - Code of Conduct: code_of_conduct.md
+  - Changelog: changelog.md
+  - Architecture: architecture.md
+  - SRS: srs.md
+  - ADRs:
+      - Template: adr/adr_template.md
+      - Example: adr/adr_001_example.md
+  - API:
+      - Overview: api/overview.md
+  - Examples:
+      - Rubrics: examples/rubrics.md
+      - Submissions: examples/submissions.md
+      - Prompts: examples/prompts.md
+theme:
+  name: material
