@@ -2,6 +2,13 @@
 
 ## [Unreleased]
 
+## [0.3.0] - 2023-06-14
+### Added
+- Implement OpenAI LLM interface in `llm_inference/openai_llm.py` to extend the `BaseLLM` class.
+- Implement `generate_text` method to interact with the OpenAI API for text generation.
+- Implement `get_model_info` method to provide information about the OpenAI model.
+- Write unit tests for the `OpenAILLM` class methods using `pytest` and `pytest-mock`.
+
 ## [0.2.0] - 2023-06-14
 ### Added
 - Implement submission loader in `submission_loader.py` to load and parse student submissions from a directory.
