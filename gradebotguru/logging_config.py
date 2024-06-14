@@ -1,6 +1,24 @@
-# Logging configuration
+# logging_config.py
 
-def setup_logging():
-    # Placeholder for setting up logging configuration
-    import logging
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+import logging
+
+LOGGING_LEVEL = logging.INFO
+LOGGING_FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+LOGGING_FILE = 'gradebotguru.log'
+
+def setup_logging(level=LOGGING_LEVEL, format=LOGGING_FORMAT, filename=LOGGING_FILE):
+    # Clear existing handlers
+    for handler in logging.root.handlers[:]:
+        logging.root.removeHandler(handler)
+    
+    logging.basicConfig(
+        level=level,
+        format=format,
+        filename=filename,
+        filemode='a'  # Append mode
+    )
+    
+    console = logging.StreamHandler()
+    console.setLevel(level)
+    console.setFormatter(logging.Formatter(format))
+    logging.getLogger('').addHandler(console)

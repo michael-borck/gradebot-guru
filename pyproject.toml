@@ -25,6 +25,7 @@ mkdocstrings-python = "^1.10.0"
 black = "^23.3.0"  # Example dependency for code formatting
 coverage = "^6.5.0"  # Example dependency for test coverage
 
+pytest-mock = "^3.14.0"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

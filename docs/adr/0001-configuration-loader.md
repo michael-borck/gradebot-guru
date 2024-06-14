@@ -47,38 +47,55 @@ We will implement a configuration loader in `config.py` that:
    The `load_config` function loads the configuration from a file and environment variables.
 
    ```python
-   # config.py
+    import json
+    import os
+    from typing import Dict, Any, Optional
 
-   import json
-   import os
+    CONFIG_SCHEMA: Dict[str, Any] = {
+        'llm_provider': 'openai',  # or 'local'
+        'rubric_path': 'path/to/rubric.csv',
+        'submission_path': 'path/to/submissions',
+        'logging_level': 'INFO',  # or 'DEBUG', 'ERROR'
+        'other_setting': 'value'
+    }
 
-   CONFIG_SCHEMA = {
-       'llm_provider': 'openai',  # or 'local'
-       'rubric_path': 'path/to/rubric.csv',
-       'submission_path': 'path/to/submissions',
-       'logging_level': 'INFO',  # or 'DEBUG', 'ERROR'
-       'other_setting': 'value'
-   }
 
-   def get_default_config():
-       return CONFIG_SCHEMA.copy()
+    def get_default_config() -> Dict[str, Any]:
+        """
+        Get the default configuration settings.
 
-   def load_config(config_file_path=None):
-       config = get_default_config()
-       
-       # Load from a configuration file if provided
-       if config_file_path and os.path.exists(config_file_path):
-           with open(config_file_path, 'r') as file:
-               file_config = json.load(file)
-               config.update(file_config)
-       
-       # Override with environment variables if they exist
-       for key in config.keys():
-           env_value = os.getenv(key.upper())
-           if env_value:
-               config[key] = env_value
-       
-       return config
+        Returns:
+            Dict[str, Any]: A copy of the default configuration schema.
+        """
+        return CONFIG_SCHEMA.copy()
+
+
+    def load_config(config_file_path: Optional[str] = None) -> Dict[str, Any]:
+        """
+        Load the configuration settings, merging defaults with settings from a file
+        and environment variables.
+
+        Args:
+            config_file_path (Optional[str]): Path to the configuration file. Defaults to None.
+
+        Returns:
+            Dict[str, Any]: The final configuration settings.
+        """
+        config = get_default_config()
+
+        # Load from a configuration file if provided
+        if config_file_path and os.path.exists(config_file_path):
+            with open(config_file_path, 'r') as file:
+                file_config = json.load(file)
+                config.update(file_config)
+
+        # Override with environment variables if they exist
+        for key in config.keys():
+            env_value = os.getenv(key.upper())
+            if env_value:
+                config[key] = env_value
+
+        return config
    ```
 
 3. **Write Unit Tests for the Configuration Loader:**
@@ -86,33 +103,58 @@ We will implement a configuration loader in `config.py` that:
    We write unit tests to ensure the configuration loader works correctly.
 
    ```python
-   # tests/test_config.py
-
     import os
-    import json
     import pytest
-    from unittest.mock import patch, mock_open
+    from pytest_mock import MockerFixture
     from gradebotguru.config import load_config, get_default_config
 
-    def test_load_default_config():
+
+    def test_load_default_config() -> None:
+        """
+        Test that the default configuration is loaded correctly.
+        """
         config = load_config()
         assert config == get_default_config()
 
-    @patch('os.path.exists', return_value=True)
-    @patch('builtins.open', new_callable=mock_open, read_data='{"llm_provider": "local"}')
-    def test_load_config_from_file(mock_open, mock_exists):
+
+    def test_load_config_from_file(mocker: MockerFixture) -> None:
+        """
+        Test that configuration is loaded correctly from a file.
+        
+        Args:
+            mocker (MockerFixture): pytest-mock fixture for patching.
+        """
+        mocker.patch('os.path.exists', return_value=True)
+        mocker.patch('builtins.open', mocker.mock_open(read_data='{"llm_provider": "local"}'))
+
         config = load_config('path/to/config.json')
         assert config['llm_provider'] == 'local'
 
-    @patch.dict(os.environ, {'LLM_PROVIDER': 'local'})
-    def test_load_config_from_env():
+
+    def test_load_config_from_env(mocker: MockerFixture) -> None:
+        """
+        Test that configuration is loaded correctly from environment variables.
+        
+        Args:
+            mocker (MockerFixture): pytest-mock fixture for patching.
+        """
+        mocker.patch.dict(os.environ, {'LLM_PROVIDER': 'local'})
+
         config = load_config()
         assert config['llm_provider'] == 'local'
 
-    @patch('os.path.exists', return_value=True)
-    @patch('builtins.open', new_callable=mock_open, read_data='{"llm_provider": "local"}')
-    @patch.dict(os.environ, {'RUBRIC_PATH': 'new/path/to/rubric.csv'})
-    def test_load_config_file_and_env(mock_open, mock_exists):
+
+    def test_load_config_file_and_env(mocker: MockerFixture) -> None:
+        """
+        Test that configuration is loaded correctly from both a file and environment variables.
+        
+        Args:
+            mocker (MockerFixture): pytest-mock fixture for patching.
+        """
+        mocker.patch('os.path.exists', return_value=True)
+        mocker.patch('builtins.open', mocker.mock_open(read_data='{"llm_provider": "local"}'))
+        mocker.patch.dict(os.environ, {'RUBRIC_PATH': 'new/path/to/rubric.csv'})
+
         config = load_config('path/to/config.json')
         assert config['llm_provider'] == 'local'
         assert config['rubric_path'] == 'new/path/to/rubric.csv'
