@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [0.4.0] - 2023-06-14
+### Added
+- Implement LLM factory in `llm_inference/factory.py` to create instances of different LLM classes.
+- Add unit tests for the LLM factory to ensure correct instance creation.
+- Add ADR for LLM factory implementation.
+
 ## [0.3.0] - 2023-06-14
 ### Added
 - Implement OpenAI LLM interface in `llm_inference/openai_llm.py` to extend the `BaseLLM` class.
