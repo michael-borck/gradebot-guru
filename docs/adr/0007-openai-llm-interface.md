@@ -1,4 +1,4 @@
-# ADR 0006: OpenAI LLM Interface
+# ADR 0007: OpenAI LLM Interface
 
 ## Status
 

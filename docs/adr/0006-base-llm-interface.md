@@ -1,4 +1,4 @@
-# ADR 0005: Base LLM Interface
+# ADR 0006: Base LLM Interface
 
 ## Status
 

@@ -13,8 +13,9 @@ nav:
       - Logging Configuration: adr/0002-logging-configuration.md
       - Load Rubric: adr/0003-load-rubric.md
       - Submission Loader: adr/0004-submission-loader.md
-      - Base LLM Interface: adr/0005-base-llm-interface.md
-      - OpenAI LLM Interface: adr/0006-openai-llm-interface.md
+      - Use Custom LLM Interface: adr/0005-use-custom-llm-interface.md
+      - Base LLM Interface: adr/0006-base-llm-interface.md
+      - OpenAI LLM Interface: adr/0007-openai-llm-interface.md
   - API:
       - Overview: api/overview.md
       - Configuration: api/config.md
