@@ -1,15 +1,31 @@
 [tool.poetry]
 name = "gradebotguru"
-version = "0.1.0"
+version = "0.0.1"
 description = "AI-powered grading assistant for fast, accurate, and insightful feedback on student work."
-authors = ["Michael Borck <michael.borck@curtin.edu.au>"]
-license = "MIT"
+authors = ["Michael Borck <michael@borck.me>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
+numpy = "^1.26.4"
+pymdown-extensions = "^10.8.1"
+pycparser = "^2.22"
+poetry-plugin-export = "^1.7.1"
 
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.2.0"
+mkdocs = "^1.6.0"
+mkdocstrings = "^0.25.0"
+mypy = "^1.10.0"
+flake8 = "^7.0.0"
+mkdocs-material = "^9.5.20"
+mkdocstrings-python = "^1.10.0"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.urls]
+"Homepage" = "http://yourhomepage.com"
+"Documentation" = "https://teaching-repositories.github.io/simnexus/"
+"Repository" = "https://github.com/teaching-repositories/simnexus"

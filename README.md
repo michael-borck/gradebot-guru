@@ -1,4 +1,4 @@
-# GradeBot Guru: Your AI Grading Assistant 🧙‍♂️🤖
+# GradeBot Guru: Your AI Grading Assistant ��‍♂️🤖
 
 [![PyPI Version](https://img.shields.io/pypi/v/gradebot-guru?color=blue)](https://pypi.org/project/gradebot-guru/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
