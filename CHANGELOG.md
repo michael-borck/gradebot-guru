@@ -302,6 +302,7 @@ This update adds comprehensive API documentation for the GradeBot Guru project, 
 <small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/1.0.0...HEAD)</small>
 
 ### Others
+* Bump version to 0.4.1 and update changelog (fbbee8d)
 * Bump version to 0.4.1 and update changelog (02da346)
 * chore: add release script (fab12ec)
 * docs: add new documentation files (6e0ed88)
