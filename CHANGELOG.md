@@ -24,13 +24,15 @@ The load_submissions function ensures that student submissions are correctly loa
 - Write unit tests for the load_rubric function using pytest and pytest-mock.
 
 The load_rubric function ensures that grading rubrics are correctly loaded and parsed, forming a crucial part of the grading logic in GradeBot Guru. (00b7a59)
-### Others
+
+### Documentation
+* docs: Update changelog for version 0.2.0 (31b8a37)
+
+### Chores
 * chore: Update changelog and version to 0.2.0
 
 - Update CHANGELOG.md for version 0.2.0.
 - Update version to 0.2.0 in pyproject.toml. (5e99a1f)
-* docs: Update changelog for version 0.2.0 (31b8a37)
-* Update version to 0.1.0 (23fb192)
 
 ## [v0.3.0] - 2024-06-14
 
@@ -53,7 +55,8 @@ The OpenAILLM class provides a concrete implementation for interacting with the 
 - Write unit tests for the BaseLLM class methods using pytest.
 
 The BaseLLM class provides a consistent and extensible interface for interacting with various large language models in GradeBot Guru. (c009c6e)
-### Others
+
+### Chores
 * chore: Update changelog and version to 0.3.0
 
 - Update CHANGELOG.md for version 0.3.0.
@@ -63,12 +66,8 @@ The BaseLLM class provides a consistent and extensible interface for interacting
 
 <small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/v0.3.0...v0.4.0)</small>
 
-### Others
+### Documentation
 * docs: Add ADR for LLM factory implementation (f556f97)
-* chore: Update changelog and version to 0.4.0
-
-- Update CHANGELOG.md for version 0.4.0.
-- Update version to 0.4.0 in pyproject.toml. (5804881)
 * docs: Renumbered LLM interface ADRs (3fac245)
 * docs: Add ADR for using custom LLM interface (dbf62ab)
 * docs: Add API documentation using mkdocstrings
@@ -84,6 +83,12 @@ The BaseLLM class provides a consistent and extensible interface for interacting
 - Ensure API documentation is generated from docstrings.
 
 This update adds comprehensive API documentation for the GradeBot Guru project, making it easier for developers to understand and use the implemented modules. (8c62b67)
+
+### Chores
+* chore: Update changelog and version to 0.4.0
+
+- Update CHANGELOG.md for version 0.4.0.
+- Update version to 0.4.0 in pyproject.toml. (5804881)
 
 ## [0.4.1] - 2024-06-15
 
@@ -176,14 +181,10 @@ The load_rubric function ensures that grading rubrics are correctly loaded and p
   - tests/test_response_parser.py
   - tests/test_rubric_loader.py
   - tests/test_submission_loader.py (b8f50d8)
-### Others
-* Bump version to 0.4.1 and update changelog (39c09cb)
+
+### Documentation
 * docs: initialize changelog with existing commit history (630c724)
 * docs: Add ADR for LLM factory implementation (56a73b5)
-* chore: Update changelog and version to 0.4.0
-
-- Update CHANGELOG.md for version 0.4.0.
-- Update version to 0.4.0 in pyproject.toml. (6a18312)
 * docs: Renumbered LLM interface ADRs (d3c258c)
 * docs: Add ADR for using custom LLM interface (4c2007d)
 * docs: Add API documentation using mkdocstrings
@@ -199,36 +200,13 @@ The load_rubric function ensures that grading rubrics are correctly loaded and p
 - Ensure API documentation is generated from docstrings.
 
 This update adds comprehensive API documentation for the GradeBot Guru project, making it easier for developers to understand and use the implemented modules. (64e9d23)
-* chore: Update changelog and version to 0.3.0
-
-- Update CHANGELOG.md for version 0.3.0.
-- Update version to 0.3.0 in pyproject.toml. (a82396e)
-* chore: Update changelog and version to 0.2.0
-
-- Update CHANGELOG.md for version 0.2.0.
-- Update version to 0.2.0 in pyproject.toml. (beca767)
 * docs: Update changelog for version 0.2.0 (da842a0)
-* chore: Update version to 0.1.0
-
-- Update pyproject.toml to set the project version to 0.1.0 for the first release. (91e9f4f)
 * docs: Add and update changelog for version 0.1.0
 
 - Create CHANGELOG.md to manually track project changes and updates.
 - Delete outdated changelog file (docs/change_log.md).
 - Add new changelog file to documentation (docs/changelog.md).
 - Update mkdocs.yml to include the new changelog in the documentation navigation. (3cfd004)
-* refactor: Add docstrings and type hints to existing code
-
-- Add docstrings and type hints to enhance code readability and maintainability:
-  - Modified: gradebotguru/config.py
-  - Modified: gradebotguru/logging_config.py
-  - Modified: tests/test_config.py
-- Add ADR for logging configuration implementation (docs/adr/0002-logging-configuration.md).
-- Update ADR for configuration loader to include type hints and docstrings (docs/adr/0001-configuration-loader.md).
-- Update project dependencies and settings:
-  - Modified: poetry.lock
-  - Modified: pyproject.toml
-- Add unit tests for logging configuration (tests/test_logging.py). (e94887a)
 * docs: Setup initial documentation structure
 
 - Add bug report and pull request templates:
@@ -258,6 +236,29 @@ This update adds comprehensive API documentation for the GradeBot Guru project, 
 - Update mkdocs.yml to include the new documentation structure
 - Add poetry.lock for dependency management
 - Modify pyproject.toml with project dependencies and settings (cd851f3)
+* docs: Update README with initial project details
+
+- Add initial project details to README.md. (926bda7)
+* docs: Add LICENSE file
+
+- Add LICENSE file to the repository to specify the project's license. (588a85f)
+
+### Chores
+* chore: Update changelog and version to 0.4.0
+
+- Update CHANGELOG.md for version 0.4.0.
+- Update version to 0.4.0 in pyproject.toml. (6a18312)
+* chore: Update changelog and version to 0.3.0
+
+- Update CHANGELOG.md for version 0.3.0.
+- Update version to 0.3.0 in pyproject.toml. (a82396e)
+* chore: Update changelog and version to 0.2.0
+
+- Update CHANGELOG.md for version 0.2.0.
+- Update version to 0.2.0 in pyproject.toml. (beca767)
+* chore: Update version to 0.1.0
+
+- Update pyproject.toml to set the project version to 0.1.0 for the first release. (91e9f4f)
 * chore: Setup initial project environment and structure
 
 - Add GitHub Actions CI workflow (.github/workflows/ci.yml)
@@ -271,40 +272,57 @@ This update adds comprehensive API documentation for the GradeBot Guru project, 
 - Add mkdocs.yml for MkDocs configuration
 - Modify pyproject.toml with project dependencies and settings
 - Initialize tests package (__init__.py file) (4d7cef1)
-* docs: Update README with initial project details
-
-- Add initial project details to README.md. (926bda7)
-* docs: Add LICENSE file
-
-- Add LICENSE file to the repository to specify the project's license. (588a85f)
 * chore: Initial commit
 
 - Add .gitignore
 - Add README.md (empty)
 - Add pyproject.toml (3a5a7be)
 
+### Refactoring
+* refactor: Add docstrings and type hints to existing code
+
+- Add docstrings and type hints to enhance code readability and maintainability:
+  - Modified: gradebotguru/config.py
+  - Modified: gradebotguru/logging_config.py
+  - Modified: tests/test_config.py
+- Add ADR for logging configuration implementation (docs/adr/0002-logging-configuration.md).
+- Update ADR for configuration loader to include type hints and docstrings (docs/adr/0001-configuration-loader.md).
+- Update project dependencies and settings:
+  - Modified: poetry.lock
+  - Modified: pyproject.toml
+- Add unit tests for logging configuration (tests/test_logging.py). (e94887a)
+
 ## [0.4.2] - 2024-06-15
 
 <small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/0.4.1...0.4.2)</small>
-
-### Others
-* Bump version to 0.4.2 and update changelog (b0632c5)
 
 ## [1.0.0] - 2024-06-15
 
 <small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/0.4.2...1.0.0)</small>
 
-### Others
-* Bump version to 1.0.0 and update changelog (bf9ad3b)
+## [0.5.0] - 2024-06-15
+
+<small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/1.0.0...0.5.0)</small>
+
+### Documentation
+* docs: add new documentation files (6e0ed88)
+
+### Chores
+* chore: add release script (fab12ec)
+* chore: update configuration files (7efe081)
 
 ## Unreleased
 
-<small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/1.0.0...HEAD)</small>
+<small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/0.5.0...HEAD)</small>
 
-### Others
-* Bump version to 0.4.1 and update changelog (fbbee8d)
-* Bump version to 0.4.1 and update changelog (02da346)
-* chore: add release script (fab12ec)
-* docs: add new documentation files (6e0ed88)
-* chore: update configuration files (7efe081)
+### Documentation
+* docs: add docstrings, type hints, and doctests to rubric_loader.py using StringIO for testing (e20bbf3)
+* docs: add docstrings, type hints, and doctests to submission_loader.py (8f7231c)
+* docs: add docstrings, type hints, and doctests to logging_config.py (a778f41)
+* docs: add doctests to submission_loader.py (fdbe1cb)
+* docs: add doctests to config.py (d742e40)
+
+### Chores
+* chore: replace symbolic links with actual files in the docs folder for changelog, code of conduct, contributing, and roadmap (a68a187)
+* chore: add automated release script with version bumping and changelog generation (f1503a1)
 
