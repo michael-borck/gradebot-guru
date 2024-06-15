@@ -1,6 +1,7 @@
 import os
 from typing import Any, Dict
 
+
 def load_text(file_path: str) -> str:
     """
     Load a text file and return its content as a string.
@@ -22,6 +23,7 @@ def load_text(file_path: str) -> str:
     with open(file_path, 'r', encoding='utf-8') as file:
         return file.read()
 
+
 def load_markdown(file_path: str) -> str:
     """
     Load a Markdown file and return its content as a string.
@@ -41,6 +43,7 @@ def load_markdown(file_path: str) -> str:
     >>> os.remove(temp_file.name)
     """
     return load_text(file_path)
+
 
 def load_pdf(file_path: str) -> str:
     """
@@ -75,6 +78,7 @@ def load_pdf(file_path: str) -> str:
     except ImportError:
         raise ImportError("pypdf is required to load PDF files")
 
+
 def load_docx(file_path: str) -> str:
     """
     Load a DOCX file and return its text content as a string.
@@ -106,6 +110,7 @@ def load_docx(file_path: str) -> str:
     except ImportError:
         raise ImportError("python-docx is required to load DOCX files")
 
+
 def load_code(file_path: str) -> str:
     """
     Load a code file and return its content as a string.
@@ -125,6 +130,7 @@ def load_code(file_path: str) -> str:
     >>> os.remove(temp_file.name)
     """
     return load_text(file_path)
+
 
 def load_submission(file_path: str) -> str:
     """
