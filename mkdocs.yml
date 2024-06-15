@@ -17,6 +17,7 @@ nav:
       - Base LLM Interface: adr/0006-base-llm-interface.md
       - OpenAI LLM Interface: adr/0007-openai-llm-interface.md
       - LLM Factory: adr/0008-llm-factory.md
+      - Build Process: adr/0009-build-process.md
   - API:
       - Overview: api/overview.md
       - Configuration: api/config.md
@@ -28,6 +29,7 @@ nav:
       - Rubrics: examples/rubrics.md
       - Submissions: examples/submissions.md
       - Prompts: examples/prompts.md
+  - Project Management: project_management.md
   - Roadmap: roadmap.md
   - Contributing: contributing.md
   - Changelog: changelog.md

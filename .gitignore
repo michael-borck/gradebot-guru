@@ -172,3 +172,7 @@ cython_debug/
 /.quarto/
 /_site/
 /_archive/
+
+# Node.js dependencies
+node_modules/
+package-lock.json
