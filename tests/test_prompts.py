@@ -2,6 +2,7 @@ import pytest
 from gradebotguru.prompts import generate_prompt, generate_system_prompt, generate_user_prompt
 from typing import Dict, Any
 
+
 @pytest.fixture
 def rubric() -> Dict[str, Dict[str, Any]]:
     """
@@ -25,6 +26,7 @@ def rubric() -> Dict[str, Dict[str, Any]]:
         }
     }
 
+
 @pytest.fixture
 def submission() -> str:
     """
@@ -35,6 +37,7 @@ def submission() -> str:
     """
     return "This is a sample student submission for testing purposes."
 
+
 def test_generate_system_prompt() -> None:
     """
     Test the generation of the system prompt.
@@ -44,6 +47,7 @@ def test_generate_system_prompt() -> None:
     expected_prompt = "You are an AI assistant designed to evaluate student submissions based on a provided rubric."
     actual_prompt = generate_system_prompt()
     assert actual_prompt == expected_prompt
+
 
 def test_generate_user_prompt(rubric: Dict[str, Dict[str, Any]], submission: str) -> None:
     """
@@ -60,10 +64,13 @@ def test_generate_user_prompt(rubric: Dict[str, Dict[str, Any]], submission: str
         "- Grammar: Proper use of grammar and syntax. (Max Points: 5)\n"
         "\nEvaluate the following submission:\n\n"
         "This is a sample student submission for testing purposes.\n\n"
-        "Provide detailed feedback and a grade."
+        "Provide detailed feedback and a grade in the following format:\n"
+        "Grade: <grade>\n"
+        "Feedback: <feedback>\n"
     )
     actual_prompt = generate_user_prompt(rubric, submission, "essay")
     assert actual_prompt == expected_prompt
+
 
 def test_generate_prompt(rubric: Dict[str, Dict[str, Any]], submission: str) -> None:
     """
@@ -81,10 +88,13 @@ def test_generate_prompt(rubric: Dict[str, Dict[str, Any]], submission: str) -> 
         "- Grammar: Proper use of grammar and syntax. (Max Points: 5)\n"
         "\nEvaluate the following submission:\n\n"
         "This is a sample student submission for testing purposes.\n\n"
-        "Provide detailed feedback and a grade."
+        "Provide detailed feedback and a grade in the following format:\n"
+        "Grade: <grade>\n"
+        "Feedback: <feedback>\n"
     )
     actual_prompt = generate_prompt(rubric, submission, "essay")
     assert actual_prompt == expected_prompt
+
 
 def test_generate_user_prompt_with_code(rubric: Dict[str, Dict[str, Any]], submission: str) -> None:
     """
@@ -101,10 +111,13 @@ def test_generate_user_prompt_with_code(rubric: Dict[str, Dict[str, Any]], submi
         "- Grammar: Proper use of grammar and syntax. (Max Points: 5)\n"
         "\nEvaluate the following submission:\n\n"
         "This is a sample student submission for testing purposes.\n\n"
-        "Provide detailed feedback and a grade."
+        "Provide detailed feedback and a grade in the following format:\n"
+        "Grade: <grade>\n"
+        "Feedback: <feedback>\n"
     )
     actual_prompt = generate_user_prompt(rubric, submission, "code")
     assert actual_prompt == expected_prompt
+
 
 def test_generate_prompt_with_code(rubric: Dict[str, Dict[str, Any]], submission: str) -> None:
     """
@@ -122,7 +135,9 @@ def test_generate_prompt_with_code(rubric: Dict[str, Dict[str, Any]], submission
         "- Grammar: Proper use of grammar and syntax. (Max Points: 5)\n"
         "\nEvaluate the following submission:\n\n"
         "This is a sample student submission for testing purposes.\n\n"
-        "Provide detailed feedback and a grade."
+        "Provide detailed feedback and a grade in the following format:\n"
+        "Grade: <grade>\n"
+        "Feedback: <feedback>\n"
     )
     actual_prompt = generate_prompt(rubric, submission, "code")
     assert actual_prompt == expected_prompt
