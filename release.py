@@ -136,7 +136,7 @@ def copy_files() -> None:
     dest_dir = 'docs/'
     os.makedirs(dest_dir, exist_ok=True)
     for file in files_to_copy:
-        shutil.copy(file, dest_dir)
+        shutil.copy(file.lower(), dest_dir)
 
 
 def push_changes() -> None:
