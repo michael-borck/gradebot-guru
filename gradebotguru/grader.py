@@ -13,6 +13,10 @@ def preprocess_submission(submission: str) -> str:
 
     Returns:
     - str: The preprocessed submission text.
+
+    Examples:
+    >>> preprocess_submission("This is a test submission.")
+    'This is a test submission.'
     """
     # Placeholder for preprocessing logic
     return submission
@@ -28,6 +32,10 @@ def postprocess_results(grade: float, feedback: str) -> Tuple[float, str]:
 
     Returns:
     - tuple: The postprocessed grade and feedback.
+
+    Examples:
+    >>> postprocess_results(85.0, "Good job!")
+    (85.0, 'Good job!')
     """
     # Placeholder for postprocessing logic
     return grade, feedback
@@ -44,6 +52,22 @@ def grade_submission(submission: str, rubric: Dict[str, Dict[str, Any]], llm_int
 
     Returns:
     - tuple: The grade and feedback for the submission.
+
+    Examples:
+    >>> class MockLLM(BaseLLM):
+    ...     def get_response(self, prompt: str) -> str:
+    ...         return "Grade: 85\\nFeedback: Good job!"
+    ...     def generate_text(self, prompt: str, **kwargs: Dict[str, Any]) -> str:
+    ...         return "Mocked text"
+    ...     def get_model_info(self) -> Dict[str, Any]:
+    ...         return {"model_name": "mock-model"}
+    >>> rubric = {
+    ...     "Content": {"description": "Quality and relevance of content.", "max_points": 10},
+    ...     "Clarity": {"description": "Clarity of expression and organization.", "max_points": 5},
+    ...     "Grammar": {"description": "Proper use of grammar and syntax.", "max_points": 5}
+    ... }
+    >>> grade_submission("This is a test submission.", rubric, MockLLM())
+    (85.0, 'Good job!')
     """
     preprocessed_submission = preprocess_submission(submission)
     prompt = generate_prompt(rubric, preprocessed_submission)
