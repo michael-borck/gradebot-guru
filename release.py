@@ -124,7 +124,7 @@ def commit_changes(version: str) -> None:
     repo.git.add('pyproject.toml')
     repo.git.add('CHANGELOG.md')
     repo.git.add('docs/')  # Add any other necessary files or directories
-    repo.index.commit(f"Bump version to {version} and update changelog")
+    repo.index.commit(f"chore: bump version to {version} and update changelog")
     repo.create_tag(version)
 
 
