@@ -2,6 +2,7 @@ import csv
 from typing import Dict
 from io import StringIO
 
+
 def load_rubric(file_path: str | StringIO) -> Dict[str, float]:
     """
     Load and parse a grading rubric from a CSV file or StringIO object.
