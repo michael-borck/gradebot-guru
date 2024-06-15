@@ -1,5 +1,3 @@
-# llm_inference/factory.py
-
 from typing import Any, Dict
 from gradebotguru.llm_inference.base_llm import BaseLLM
 from gradebotguru.llm_inference.openai_llm import OpenAILLM

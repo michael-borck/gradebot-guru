@@ -2,6 +2,7 @@ import pytest
 from pytest_mock import MockerFixture
 from gradebotguru.rubric_loader import load_rubric
 
+
 def test_load_rubric(mocker: MockerFixture) -> None:
     """
     Test loading and parsing a rubric from a CSV file.

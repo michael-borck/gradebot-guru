@@ -4,6 +4,7 @@ from pytest_mock import MockerFixture
 from typing import List
 from gradebotguru.submission_loader import load_submissions
 
+
 def test_load_submissions(mocker: MockerFixture) -> None:
     """
     Test loading and parsing submissions from a directory.
