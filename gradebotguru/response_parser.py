@@ -1,7 +1,6 @@
 import re
 from typing import Dict, Any
 
-
 def parse_response(response: str) -> Dict[str, Any]:
     """
     Parse the response from the LLM to extract grades and feedback.
@@ -11,6 +10,23 @@ def parse_response(response: str) -> Dict[str, Any]:
 
     Returns:
     - Dict[str, Any]: A dictionary containing the extracted grades and feedback.
+
+    Examples:
+    >>> response = "Grade: 85.5\\nFeedback: Good work on the assignment. However, there are some areas that need improvement."
+    >>> parse_response(response)
+    {'grade': 85.5, 'feedback': 'Good work on the assignment. However, there are some areas that need improvement.'}
+
+    >>> response = "Grade: 90\\nFeedback: "
+    >>> parse_response(response)
+    {'grade': 90.0, 'feedback': ''}
+
+    >>> response = "Feedback: Excellent effort, but there are a few mistakes."
+    >>> parse_response(response)
+    {'grade': None, 'feedback': 'Excellent effort, but there are a few mistakes.'}
+
+    >>> response = "No relevant information here."
+    >>> parse_response(response)
+    {'grade': None, 'feedback': None}
     """
     grade_pattern = re.compile(r"Grade:\s*(\d+(\.\d+)?)")
     feedback_pattern = re.compile(r"Feedback:\s*(.+)", re.DOTALL)
