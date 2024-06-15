@@ -379,9 +379,42 @@ This update adds comprehensive API documentation for the GradeBot Guru project, 
 * chore: Bump version to 0.4.1 and update changelog (a0e50f0)
 * chore: Bump version to 0.4.1 and update changelog (0ed676b)
 
+## [0.5.4] - 2024-06-15
+
+<small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/0.5.3...0.5.4)</small>
+
+### Chores
+* chore: bump version to 0.5.4 and update changelog (a55ccdd)
+
 ## Unreleased
 
-<small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/0.5.3...HEAD)</small>
+<small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/0.5.4...HEAD)</small>
 
-No notable changes.
+### Features
+* feat: Implement prompt generation and response parsing with tests
+
+- Added prompt generation functions with response templates in prompts.py.
+- Implemented response parsing to extract grades and feedback in response_parser.py.
+- Created comprehensive tests for prompt generation in tests/test_prompts.py.
+- Added tests for response parsing in tests/test_response_parser.py. (093beff)
+
+### Documentation
+* docs: Add ADR for implementing default loaders for submissions
+
+- Added ADR 0012 to outline the implementation of default loaders for various submission formats (text, markdown, PDF, DOCX, code).
+- Updated mkdocs.yml to include the new ADR document. (96ab43c)
+* docs: Add ADR for implementing default loaders for submissions
+
+- Added ADR 0012 to outline the implementation of default loaders for various submission formats (text, markdown, PDF, DOCX, code).
+- Updated mkdocs.yml to include the new ADR document. (c964a83)
+
+### Chores
+* chore: delete wrong version of ROADMAP in docs folder (8082e4d)
+
+### Refactoring
+* refactor: Replace PyPDF2 with pypdf and update submission loader
+
+- Replaced PyPDF2 with pypdf in submission_loader.py and test_submission_loader.py.
+- Updated pyproject.toml and poetry.lock to include pypdf as a dependency.
+- Adjusted code to use PdfWriter from pypdf instead of PdfFileWriter. (0729857)
 

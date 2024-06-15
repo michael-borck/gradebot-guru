@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "gradebotguru"
-version = "0.5.4"
+version = "0.5.5"
 description = "AI-powered grading assistant for fast, accurate, and insightful feedback on student work."
 authors = [ "Michael Borck <michael@borck.me>",]
 readme = "README.md"
@@ -20,6 +20,8 @@ pandas = "^1.5.0"
 pypdf2 = "^3.0.1"
 python-docx = "^1.1.2"
 pypdf = "^4.2.0"
+gitpython = "^3.1.43"
+toml = "^0.10.2"
 
 [tool.poetry.urls]
 Homepage = "http://yourhomepage.com"
