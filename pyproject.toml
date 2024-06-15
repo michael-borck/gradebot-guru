@@ -1,8 +1,12 @@
+[build-system]
+requires = [ "poetry-core",]
+build-backend = "poetry.core.masonry.api"
+
 [tool.poetry]
 name = "gradebotguru"
-version = "0.4.0"
+version = "0.4.1"
 description = "AI-powered grading assistant for fast, accurate, and insightful feedback on student work."
-authors = ["Michael Borck <michael@borck.me>"]
+authors = [ "Michael Borck <michael@borck.me>",]
 readme = "README.md"
 
 [tool.poetry.dependencies]
@@ -11,8 +15,13 @@ numpy = "^1.26.4"
 pymdown-extensions = "^10.8.1"
 pycparser = "^2.22"
 poetry-plugin-export = "^1.7.1"
-openai = "^0.27.0"  # Example dependency for OpenAI API
-pandas = "^1.5.0"  # Example dependency for data handling
+openai = "^0.27.0"
+pandas = "^1.5.0"
+
+[tool.poetry.urls]
+Homepage = "http://yourhomepage.com"
+Documentation = "https://teaching-repositories.github.io/gradebotguru/"
+Repository = "https://github.com/teaching-repositories/gradebotguru"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.2.0"
@@ -22,15 +31,6 @@ mypy = "^1.10.0"
 flake8 = "^7.0.0"
 mkdocs-material = "^9.5.20"
 mkdocstrings-python = "^1.10.0"
-black = "^23.3.0"  # Example dependency for code formatting
-coverage = "^6.5.0"  # Example dependency for test coverage
-
+black = "^23.3.0"
+coverage = "^6.5.0"
 pytest-mock = "^3.14.0"
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
-
-[tool.poetry.urls]
-"Homepage" = "http://yourhomepage.com"
-"Documentation" = "https://teaching-repositories.github.io/gradebotguru/"
-"Repository" = "https://github.com/teaching-repositories/gradebotguru"
