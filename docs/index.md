@@ -16,9 +16,3 @@ Welcome to the GradeBot Guru documentation site. GradeBot Guru is an AI-powered 
 - [Examples](examples/rubrics.md)
 
 Use the navigation on the left to find the information you need.
-
-## Quick Links
-
-- [Roadmap](../ROADMAP.md)
-- [Contributing Guidelines](../CONTRIBUTING.md)
-- [Code of Conduct](../CODE_OF_CONDUCT.md)
