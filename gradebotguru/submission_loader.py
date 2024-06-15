@@ -1,5 +1,6 @@
 import os
-from typing import Dict, List
+from typing import Dict
+
 
 def load_submissions(directory: str) -> Dict[str, str]:
     """
@@ -22,10 +23,10 @@ def load_submissions(directory: str) -> Dict[str, str]:
         ...     with open(file2_path, 'w', encoding='utf-8') as f2:
         ...         _ = f2.write('Content of submission 2')
         ...     submissions = load_submissions(tmpdir)
-        ...     submissions == {
-        ...         'submission1.txt': 'Content of submission 1',
-        ...         'submission2.txt': 'Content of submission 2'
-        ...     }
+        >>> submissions == {
+        ...     'submission1.txt': 'Content of submission 1',
+        ...     'submission2.txt': 'Content of submission 2'
+        ... }
         True
     """
     submissions = {}
