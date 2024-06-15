@@ -22,6 +22,7 @@ nav:
       - Improving Marking Consistency: adr/0011-improving-marking-consistency.md
       - Default Loaders: adr/0012-default-loaders.md
       - Function Based Approach: adr/0013-function-based-approach.md
+      - LLM Inference: adr/0014-llm-inference.md
   - API:
       - Overview: api/overview.md
       - Configuration: api/config.md
