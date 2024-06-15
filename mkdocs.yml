@@ -19,6 +19,7 @@ nav:
       - LLM Factory: adr/0008-llm-factory.md
       - Build Process: adr/0009-build-process.md
       - Project Code Consistency: adr/0010-project-code-consistency.md
+      - Improving Marking Consistency: adr/0011-improving-marking-consistency.md
   - API:
       - Overview: api/overview.md
       - Configuration: api/config.md
