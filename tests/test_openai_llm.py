@@ -1,6 +1,6 @@
 import pytest
 from pytest_mock import MockerFixture
-from gradebotguru.llm_inference.openai_llm import OpenAILLM
+from gradebotguru.llm_interface.openai_llm import OpenAILLM
 from typing import Any, Dict
 
 

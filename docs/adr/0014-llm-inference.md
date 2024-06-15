@@ -1,15 +1,15 @@
-### ADR 0014: Organise llm_inference as a Sub-Package within gradebotguru
+#### ADR 0014: Organize llm_interface as a Sub-Package within gradebotguru
 
 #### Context
 
-To maintain a clear and organized structure within the GradeBotGuru project, we need to decide on the placement of the `llm_inference` module. The options are:
+To maintain a clear and organized structure within the GradeBotGuru project, we need to decide on the placement of the `llm_interface` module. The options are:
 
-1. **Keep `llm_inference` at the same level as `gradebotguru`.**
-2. **Organize `llm_inference` as a sub-package within `gradebotguru`.**
+1. **Keep `llm_interface` at the same level as `gradebotguru`.**
+2. **Organize `llm_interface` as a sub-package within `gradebotguru`.**
 
 #### Decision
 
-We decided to organize `llm_inference` as a sub-package within `gradebotguru`.
+We decided to organize `llm_interface` as a sub-package within `gradebotguru`.
 
 #### Rationale
 
@@ -20,7 +20,7 @@ We decided to organize `llm_inference` as a sub-package within `gradebotguru`.
 
 #### Implications
 
-1. **Project Structure**: All LLM-related modules are contained within the `llm_inference` sub-package, making the project structure more intuitive.
+1. **Project Structure**: All LLM-related modules are contained within the `llm_interface` sub-package, making the project structure more intuitive.
 2. **Ease of Maintenance**: Encapsulation and organization improve the maintainability of the codebase.
 3. **Consistency**: Future modules and sub-packages can follow this organizational pattern for consistency.
 
@@ -34,7 +34,7 @@ gradebotguru/
 ├── config.py
 ├── gradebotguru.py
 ├── grader.py
-├── llm_inference/
+├── llm_interface/
 │   ├── __init__.py
 │   ├── base_llm.py
 │   ├── factory.py

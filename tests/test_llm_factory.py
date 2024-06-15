@@ -1,6 +1,6 @@
 import pytest
-from gradebotguru.llm_inference.factory import create_llm
-from gradebotguru.llm_inference.openai_llm import OpenAILLM
+from gradebotguru.llm_interface.factory import create_llm
+from gradebotguru.llm_interface.openai_llm import OpenAILLM
 from typing import Dict
 
 

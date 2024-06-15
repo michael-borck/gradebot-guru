@@ -1,5 +1,5 @@
 import pytest
-from gradebotguru.llm_inference.base_llm import BaseLLM
+from gradebotguru.llm_interface.base_llm import BaseLLM
 from typing import Any, Dict
 
 
