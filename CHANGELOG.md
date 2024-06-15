@@ -311,9 +311,9 @@ This update adds comprehensive API documentation for the GradeBot Guru project, 
 * chore: add release script (fab12ec)
 * chore: update configuration files (7efe081)
 
-## Unreleased
+## [0.5.1] - 2024-06-15
 
-<small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/0.5.0...HEAD)</small>
+<small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/0.5.0...0.5.1)</small>
 
 ### Documentation
 * docs: add docstrings, type hints, and doctests to rubric_loader.py using StringIO for testing (e20bbf3)
@@ -325,4 +325,56 @@ This update adds comprehensive API documentation for the GradeBot Guru project, 
 ### Chores
 * chore: replace symbolic links with actual files in the docs folder for changelog, code of conduct, contributing, and roadmap (a68a187)
 * chore: add automated release script with version bumping and changelog generation (f1503a1)
+
+## Unreleased
+
+<small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/0.5.1...HEAD)</small>
+
+### Features
+* feat: Implement prompt generation with type hints and comprehensive tests
+
+- Added  with functions to generate system and user prompts.
+- Enhanced prompt generation to support different assessment types (essay, code).
+- Included type hints in the functions for better code clarity and type checking.
+- Created comprehensive tests using pytest for prompt generation functions.
+- Added docstrings to all tests for better documentation and understanding. (6c4e886)
+
+### Documentation
+* docs: Add API documentation for prompts
+
+- Added API documentation for prompt generation in docs/api/prompts.md. (d961642)
+* docs: Add ADR for improving marking consistency
+
+- Added ADR 0011 to outline strategies for improving marking consistency using prompt engineering, response augmentation, RAG, fine-tuning, hybrid approaches, continuous improvement, multi-modal assessment, and standardized feedback templates.
+- Updated mkdocs.yml to include the new ADR document. (e90ef63)
+* docs: Add documentation on refactoring and code consistency
+
+- Updated mkdocs.yml to reflect recent documentation changes.
+- Added '0010-project-code-consistency.md' to explain the time spent on refactoring, consistent style, and adding docstrings.
+- Ensured consistency in style and documentation across the project for better maintainability and readability. (3db390f)
+* docs: update ROADMAP.md to reflect completed tasks in Phase 1 and Phase 2 (79adecb)
+* docs: add docstrings, type hints, and doctests to rubric_loader.py using StringIO for testing (c58d0bc)
+* docs: add docstrings, type hints, and doctests to submission_loader.py (ba03657)
+* docs: add docstrings, type hints, and doctests to logging_config.py (d35c748)
+* docs: add doctests to submission_loader.py (8361050)
+* docs: add doctests to config.py (1bbf14a)
+
+### Chores
+* chore: Remove duplicate documentation files with incorrect case
+
+- Deleted , , and  as they were duplicates with incorrect casing.
+- Ensured proper casing for documentation file names. (8de8d7d)
+* chore: improve code consistency and project management
+
+- Added docstrings, type hints, and doctests to various modules
+- Updated release script to include 'chore' tag for version bumps
+- Ensured code complies with flake8 requirements
+- Enhanced readability and maintainability of the codebase (d9fa557)
+* chore: update release script to include 'chore' tag in version bump commit message (3f74cc6)
+* chore: Bump version to 0.5.1 and update changelog (a9a94b4)
+* chore: replace symbolic links with actual files in the docs folder for changelog, code of conduct, contributing, and roadmap (87b4b8d)
+* chore: add automated release script with version bumping and changelog generation (09d9560)
+* chore: Bump version to 0.5.0 and update changelog (48065e7)
+* chore: Bump version to 0.4.1 and update changelog (a0e50f0)
+* chore: Bump version to 0.4.1 and update changelog (0ed676b)
 

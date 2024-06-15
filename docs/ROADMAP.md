@@ -6,18 +6,18 @@
 
 #### Tasks:
 1. **Repository Setup:**
-   - ~~Create a GitHub repository.~~
-   - ~~Initialize the project with Poetry.~~
-   - ~~Set up the basic folder structure.~~
+   - Create a GitHub repository.
+   - Initialize the project with Poetry.
+   - Set up the basic folder structure.
 
 2. **CI/CD Pipeline:**
-   - ~~Configure GitHub Actions for automated testing, building, and publishing.~~
-   - ~~Set up secrets for PyPI in the GitHub repository.~~
+   - Configure GitHub Actions for automated testing, building, and publishing.
+   - Set up secrets for PyPI in the GitHub repository.
 
 3. **Initial Commit:**
-   - ~~Add a `README.md` with an overview of the project.~~
-   - ~~Add `LICENSE` (e.g., MIT License).~~
-   - ~~Commit the initial project structure and configurations.~~
+   - Add a `README.md` with an overview of the project.
+   - Add `LICENSE` (e.g., MIT License).
+   - Commit the initial project structure and configurations.
 
 ## Phase 2: Core Functionality Development
 
@@ -25,17 +25,17 @@
 
 #### Tasks:
 1. **Rubric Loader:**
-   - ~~Implement `rubric_loader.py` to load and parse grading rubrics from CSV and JSON files.~~
-   - ~~Write unit tests for rubric loading.~~
+   - Implement `rubric_loader.py` to load and parse grading rubrics from CSV and JSON files.
+   - Write unit tests for rubric loading.
 
 2. **Submission Loader:**
-   - ~~Implement `submission_loader.py` to load and parse student submissions from various file formats.~~
-   - ~~Write unit tests for submission loading.~~
+   - Implement `submission_loader.py` to load and parse student submissions from various file formats.
+   - Write unit tests for submission loading.
 
 3. **LLM Interface:**
-   - ~~Implement the `llm_interface` module using the factory pattern.~~
-   - ~~Create a base class (`base_llm.py`) and specific implementations (`gemini.py`, `local_llm.py`).~~
-   - ~~Write unit tests for LLM interactions.~~
+   - Implement the `llm_interface` module using the factory pattern.
+   - Create a base class (`base_llm.py`) and specific implementations (`gemini.py`, `local_llm.py`).
+   - Write unit tests for LLM interactions.
 
 4. **Prompt Generation:**
    - Implement `prompts.py` to generate well-formatted prompts for the LLM.
