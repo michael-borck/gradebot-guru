@@ -386,9 +386,9 @@ This update adds comprehensive API documentation for the GradeBot Guru project, 
 ### Chores
 * chore: bump version to 0.5.4 and update changelog (a55ccdd)
 
-## Unreleased
+## [0.5.5] - 2024-06-15
 
-<small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/0.5.4...HEAD)</small>
+<small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/0.5.4...0.5.5)</small>
 
 ### Features
 * feat: Implement prompt generation and response parsing with tests
@@ -409,6 +409,7 @@ This update adds comprehensive API documentation for the GradeBot Guru project, 
 - Updated mkdocs.yml to include the new ADR document. (c964a83)
 
 ### Chores
+* chore: bump version to 0.5.5 and update changelog (ce0f181)
 * chore: delete wrong version of ROADMAP in docs folder (8082e4d)
 
 ### Refactoring
@@ -417,4 +418,32 @@ This update adds comprehensive API documentation for the GradeBot Guru project, 
 - Replaced PyPDF2 with pypdf in submission_loader.py and test_submission_loader.py.
 - Updated pyproject.toml and poetry.lock to include pypdf as a dependency.
 - Adjusted code to use PdfWriter from pypdf instead of PdfFileWriter. (0729857)
+
+## Unreleased
+
+<small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/0.5.5...HEAD)</small>
+
+### Documentation
+* docs: Add ADR to organize llm_inference as a sub-package within gradebotguru
+
+- Documented the decision to keep llm_inference as a sub-package within gradebotguru.
+- Explained the rationale, implications, and implementation details. (6219848)
+* docs: Add ADR for adopting function-based design approach (3e9df58)
+
+### Chores
+* chore: deleted api.py functionality provided by factory (39abfed)
+* chore: renamed basellm.py to base_llm.py (2e0a471)
+
+### Refactoring
+* refactor: Rename llm_inference to llm_interface for clarity and consistency
+
+- Renamed llm_inference sub-package to llm_interface to better reflect its purpose as the interface for interacting with different LLMs.
+- Updated all affected import statements in the codebase to reflect this change.
+- Modified test files to use the updated llm_interface naming.
+- Added ADR 0014 to document the decision and rationale for organizing llm_interface as a sub-package within gradebotguru. (e301261)
+* refactor: Update BaseLLM abstract class and tests for improved architecture
+
+- Refined BaseLLM abstract class with get_response, generate_text, and get_model_info methods based on a better understanding of the program's architecture.
+- Updated MockLLM class for testing purposes.
+- Added tests for MockLLM to verify the implementation of get_response, generate_text, and get_model_info methods. (c61be26)
 
