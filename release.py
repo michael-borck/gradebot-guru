@@ -128,15 +128,22 @@ def commit_changes(version: str) -> None:
     repo.create_tag(version)
 
 
+import os
+import shutil
+
 def copy_files() -> None:
     """
-    Copies specific markdown files from the root folder to the docs folder.
+    Copies specific markdown files from the root folder to the docs folder,
+    converting the file names to lowercase.
     """
     files_to_copy = ['ROADMAP.md', 'CONTRIBUTING.md', 'CODE_OF_CONDUCT.md']
     dest_dir = 'docs/'
     os.makedirs(dest_dir, exist_ok=True)
+
     for file in files_to_copy:
-        shutil.copy(file.lower(), dest_dir)
+        src_file = file
+        dest_file = os.path.join(dest_dir, file.lower())
+        shutil.copy(src_file, dest_file)
 
 
 def push_changes() -> None:
