@@ -1,38 +1,116 @@
 import os
-from typing import Dict
+from typing import Any, Dict
 
 
-def load_submissions(directory: str) -> Dict[str, str]:
+def load_text(file_path: str) -> str:
     """
-    Load and parse student submissions from a directory.
+    Load a text file and return its content as a string.
 
-    Args:
-        directory (str): Path to the directory containing submissions.
+    Parameters:
+    - file_path (str): The path to the text file.
 
     Returns:
-        Dict[str, str]: A dictionary where keys are filenames and values are the content of the submissions.
-
-    Examples:
-        >>> import tempfile
-        >>> import os
-        >>> with tempfile.TemporaryDirectory() as tmpdir:
-        ...     file1_path = os.path.join(tmpdir, 'submission1.txt')
-        ...     file2_path = os.path.join(tmpdir, 'submission2.txt')
-        ...     with open(file1_path, 'w', encoding='utf-8') as f1:
-        ...         _ = f1.write('Content of submission 1')
-        ...     with open(file2_path, 'w', encoding='utf-8') as f2:
-        ...         _ = f2.write('Content of submission 2')
-        ...     submissions = load_submissions(tmpdir)
-        >>> submissions == {
-        ...     'submission1.txt': 'Content of submission 1',
-        ...     'submission2.txt': 'Content of submission 2'
-        ... }
-        True
+    - str: The content of the text file.
     """
-    submissions = {}
-    for filename in os.listdir(directory):
-        file_path = os.path.join(directory, filename)
-        if os.path.isfile(file_path):
-            with open(file_path, 'r', encoding='utf-8') as file:
-                submissions[filename] = file.read()
-    return submissions
+    with open(file_path, 'r', encoding='utf-8') as file:
+        return file.read()
+
+
+def load_markdown(file_path: str) -> str:
+    """
+    Load a Markdown file and return its content as a string.
+
+    Parameters:
+    - file_path (str): The path to the Markdown file.
+
+    Returns:
+    - str: The content of the Markdown file.
+    """
+    return load_text(file_path)
+
+
+def load_pdf(file_path: str) -> str:
+    """
+    Load a PDF file and return its text content as a string.
+
+    Parameters:
+    - file_path (str): The path to the PDF file.
+
+    Returns:
+    - str: The text content of the PDF file.
+
+    Requires:
+    - pypdf package.
+    """
+    try:
+        from pypdf import PdfReader
+        with open(file_path, 'rb') as file:
+            reader = PdfReader(file)
+            return ' '.join(page.extract_text() for page in reader.pages)
+    except ImportError:
+        raise ImportError("pypdf is required to load PDF files")
+
+
+def load_docx(file_path: str) -> str:
+    """
+    Load a DOCX file and return its text content as a string.
+
+    Parameters:
+    - file_path (str): The path to the DOCX file.
+
+    Returns:
+    - str: The text content of the DOCX file.
+
+    Requires:
+    - python-docx package.
+    """
+    try:
+        import docx
+        doc = docx.Document(file_path)
+        return ' '.join(paragraph.text for paragraph in doc.paragraphs)
+    except ImportError:
+        raise ImportError("python-docx is required to load DOCX files")
+
+
+def load_code(file_path: str) -> str:
+    """
+    Load a code file and return its content as a string.
+
+    Parameters:
+    - file_path (str): The path to the code file.
+
+    Returns:
+    - str: The content of the code file.
+    """
+    return load_text(file_path)
+
+
+def load_submission(file_path: str) -> str:
+    """
+    Load a submission file based on its extension and return its content as a string.
+
+    Parameters:
+    - file_path (str): The path to the submission file.
+
+    Returns:
+    - str: The content of the submission file.
+
+    Raises:
+    - ValueError: If the file format is not supported.
+    """
+    _, file_extension = os.path.splitext(file_path)
+    loaders = {
+        '.txt': load_text,
+        '.md': load_markdown,
+        '.pdf': load_pdf,
+        '.docx': load_docx,
+        '.py': load_code,
+        '.js': load_code,
+        '.css': load_code,
+        '.html': load_code,
+    }
+    loader = loaders.get(file_extension.lower())
+    if loader:
+        return loader(file_path)
+    else:
+        raise ValueError(f"Unsupported file format: {file_extension}")
