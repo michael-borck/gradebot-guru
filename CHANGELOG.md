@@ -326,9 +326,9 @@ This update adds comprehensive API documentation for the GradeBot Guru project, 
 * chore: replace symbolic links with actual files in the docs folder for changelog, code of conduct, contributing, and roadmap (a68a187)
 * chore: add automated release script with version bumping and changelog generation (f1503a1)
 
-## Unreleased
+## [0.5.3] - 2024-06-15
 
-<small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/0.5.1...HEAD)</small>
+<small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/0.5.1...0.5.3)</small>
 
 ### Features
 * feat: Implement prompt generation with type hints and comprehensive tests
@@ -360,6 +360,7 @@ This update adds comprehensive API documentation for the GradeBot Guru project, 
 * docs: add doctests to config.py (1bbf14a)
 
 ### Chores
+* chore: bump version to 0.5.3 and update changelog (87c4a2f)
 * chore: Remove duplicate documentation files with incorrect case
 
 - Deleted , , and  as they were duplicates with incorrect casing.
@@ -377,4 +378,10 @@ This update adds comprehensive API documentation for the GradeBot Guru project, 
 * chore: Bump version to 0.5.0 and update changelog (48065e7)
 * chore: Bump version to 0.4.1 and update changelog (a0e50f0)
 * chore: Bump version to 0.4.1 and update changelog (0ed676b)
+
+## Unreleased
+
+<small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/0.5.3...HEAD)</small>
+
+No notable changes.
 
