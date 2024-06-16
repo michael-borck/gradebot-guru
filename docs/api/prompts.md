@@ -1,3 +1,3 @@
-# Prompts
+# prompts.py
 
 ::: gradebotguru.prompts

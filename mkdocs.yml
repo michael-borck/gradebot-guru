@@ -28,18 +28,41 @@ nav:
       - Categorised Commit Messages: adr/0017-categorised-commit-messages.md
   - API:
       - Overview: api/overview.md
+      - Base LLM: api/base_llm.md
       - Configuration: api/config.md
+      - Core: api/core.md
+      - Factory: api/factory.md
+      - Grader: api/grader.md
+      - Local LLM: api/local_llm.md
+      - Logging Config: api/logging_config.md
+      - Main: api/main.md
+      - OpenAI LLM: api/openai_llm.md
+      - Prompts: api/prompts.md
       - Rubric Loader: api/rubric_loader.md
       - Submission Loader: api/submission_loader.md
-      - Base LLM: api/base_llm.md
-      - OpenAI LLM: api/openai_llm.md
   - Examples:
       - Rubrics: examples/rubrics.md
       - Submissions: examples/submissions.md
       - Prompts: examples/prompts.md
   - Admin Scripts:
       - Release: admin_scripts/release.md
-      - Upload Issues: admin_scripts/upload_issues.md     
+      - Upload Issues: admin_scripts/upload_issues.md
+      - Generate Markdown: admin_scripts/generate_markdown.md    
+  - Tests:
+      - Overview: tests/overview.md
+      - Test Base LLM: tests/test_base_llm.md
+      - Test Config: tests/test_config.md
+      - Test Core: tests/test_core.md
+      - Test Factory: tests/test_llm_factory.md
+      - Test Integration: tests/test_integration.md
+      - Test Local LLM: tests/test_local_llm.md
+      - Test Logging: tests/test_logging.md
+      - Test Main: tests/test_main.md
+      - test OpenAI LLM: tests/test_openai_llm.md
+      - Test Prompts: tests/test_prompts.md
+      - Test Response Parser: tests/test_response_parser.md
+      - Test Rubric Loader: tests/test_rubric_loader.md
+      - Test Submission Loader: tests/test_submission_loader.md
   - Project Management: project_management.md
   - Roadmap: roadmap.md
   - Contributing: contributing.md

@@ -1,3 +1,3 @@
-# Configuration
+# config.py
 
 ::: gradebotguru.config

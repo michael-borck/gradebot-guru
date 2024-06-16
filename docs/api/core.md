@@ -1,0 +1,3 @@
+# core.py
+
+::: gradebotguru.core

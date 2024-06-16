@@ -1,3 +1,3 @@
-# Base LLM
+# base_llm.py
 
-::: gradebotguru.llm_inference.base_llm
+::: gradebotguru.llm_interface.base_llm

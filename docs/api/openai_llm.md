@@ -1,3 +1,3 @@
-# OpenAI LLM
+# openai_llm.py
 
-::: gradebotguru.llm_inference.openai_llm
+::: gradebotguru.llm_interface.openai_llm
