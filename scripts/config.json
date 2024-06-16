@@ -1,5 +1,5 @@
 {
-    "REPO_OWNER": "username",
-    "REPO_NAME": "repository-name"
+    "REPO_OWNER": "add-owner-here",
+    "REPO_NAME": "add-repo-name-here",
+    "INSTRUCTIONS": "Set the GITHUB_TOKEN environment variable to your GitHub token."
 }
-
