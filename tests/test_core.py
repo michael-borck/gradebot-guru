@@ -1,20 +1,9 @@
 import pytest
 from pytest_mock import MockerFixture
 from gradebotguru.core import load_and_grade_submissions
-from gradebotguru.llm_interface.base_llm import BaseLLM
+from tests.test_utils import MockLLM
 import os
 from typing import Any, Dict
-
-
-class MockLLM(BaseLLM):
-    def get_response(self, prompt: str) -> str:
-        return "Grade: 85\nFeedback: Good job!"
-
-    def generate_text(self, prompt: str, **kwargs: Dict[str, Any]) -> str:
-        return "Mocked text"
-
-    def get_model_info(self) -> Dict[str, Any]:
-        return {"model_name": "mock-model"}
 
 
 def test_load_and_grade_submissions(mocker: MockerFixture) -> None:
@@ -42,6 +31,7 @@ def test_load_and_grade_submissions(mocker: MockerFixture) -> None:
 
     # Mock the output_results function to capture the outputs
     outputs = []
+    
     def mock_output_results(submission_id: str, grade: float, feedback: str) -> None:
         outputs.append((submission_id, grade, feedback))
     mocker.patch('gradebotguru.core.output_results', side_effect=mock_output_results)

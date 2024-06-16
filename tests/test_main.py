@@ -3,6 +3,7 @@ from pytest_mock import MockerFixture
 import sys
 import os
 from gradebotguru.main import main
+from tests.test_utils import MockLLM
 from typing import Any, Dict
 
 
@@ -46,9 +47,6 @@ def test_main(mocker: MockerFixture, mock_config: Dict[str, Any], mock_rubric: D
     mocker.patch('gradebotguru.main.load_config', return_value=mock_config)
 
     # Mock the create_llm function
-    class MockLLM:
-        def get_response(self, prompt: str) -> str:
-            return "Grade: 85\nFeedback: Good job!"
     mocker.patch('gradebotguru.main.create_llm', return_value=MockLLM())
 
     # Mock the load_rubric function
@@ -61,6 +59,7 @@ def test_main(mocker: MockerFixture, mock_config: Dict[str, Any], mock_rubric: D
 
     # Mock the output_results function to capture the outputs
     outputs = []
+    
     def mock_output_results(submission_id: str, grade: float, feedback: str) -> None:
         outputs.append((submission_id, grade, feedback))
     mocker.patch('gradebotguru.core.output_results', side_effect=mock_output_results)
