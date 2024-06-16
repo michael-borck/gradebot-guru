@@ -1,15 +1,17 @@
 import pytest
 from gradebotguru.llm_interface.local_llm import OllamaLLM
 
+
 @pytest.fixture
 def mock_ollama_llm():
     """
     Fixture to create a mock instance of OllamaLLM.
-    
+
     Returns:
         OllamaLLM: An instance of OllamaLLM with mock configuration.
     """
     return OllamaLLM(api_key="test_key", server_url="http://localhost:11434/v1", model="llama3")
+
 
 def test_generate_text(mock_ollama_llm, mocker):
     """
@@ -26,10 +28,11 @@ def test_generate_text(mock_ollama_llm, mocker):
         'choices': [{'message': {'content': 'This is a test response.'}}]
     }
     mocker.patch('openai.ChatCompletion.create', return_value=mock_response)
-    
+
     prompt = "Test prompt"
     response = mock_ollama_llm.generate_text(prompt)
     assert response == 'This is a test response.'
+
 
 def test_get_response(mock_ollama_llm, mocker):
     """
@@ -46,10 +49,11 @@ def test_get_response(mock_ollama_llm, mocker):
         'choices': [{'message': {'content': 'This is a test response.'}}]
     }
     mocker.patch('openai.ChatCompletion.create', return_value=mock_response)
-    
+
     prompt = "Test prompt"
     response = mock_ollama_llm.get_response(prompt)
     assert response == 'This is a test response.'
+
 
 def test_get_model_info(mock_ollama_llm):
     """
