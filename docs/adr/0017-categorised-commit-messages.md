@@ -38,3 +38,31 @@ Chosen option: "Automated change log generation with categorized commit messages
 
 - Use a release script to automate the version bumping, changelog generation, and commit tagging.
 - Ensure all commit messages follow the defined categories for consistency.
+
+## Examples
+
+```bash
+# Example of a feature commit
+git commit -m "feat: Add new functionality for handling detached HEAD state"
+
+# Example of a documentation commit
+git commit -m "docs: Update README with instructions for fixing detached HEAD state"
+
+# Example of a chore commit
+git commit -m "chore: Update dependencies and fix detached HEAD state issue"
+
+# Example of a refactor commit
+git commit -m "refactor: Improve code structure for handling detached HEAD state"
+
+# Example of a style commit
+git commit -m "style: Format code to meet style guidelines"
+
+# Example of a CI commit
+git commit -m "ci: Update CI configuration for better handling of detached HEAD state"
+
+# Example of a revert commit
+git commit -m "revert: Revert changes that caused detached HEAD state issue"
+
+# Example of a performance commit
+git commit -m "perf: Optimize performance of code handling detached HEAD state"
+```
