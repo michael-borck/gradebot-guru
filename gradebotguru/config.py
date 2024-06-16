@@ -7,8 +7,10 @@ CONFIG_SCHEMA: Dict[str, Any] = {
     'rubric_path': 'path/to/rubric.csv',
     'submission_path': 'path/to/submissions',
     'logging_level': 'INFO',  # or 'DEBUG', 'ERROR'
-    'other_setting': 'value'
+    'other_setting': 'value',
+    'api_key': ''  # Placeholder for the API key
 }
+
 
 def get_default_config() -> Dict[str, Any]:
     """
@@ -27,6 +29,7 @@ def get_default_config() -> Dict[str, Any]:
         'INFO'
     """
     return CONFIG_SCHEMA.copy()
+
 
 def load_config(config_file_path: Optional[str] = None) -> Dict[str, Any]:
     """
@@ -66,5 +69,11 @@ def load_config(config_file_path: Optional[str] = None) -> Dict[str, Any]:
         env_value = os.getenv(key.upper())
         if env_value:
             config[key] = env_value
+
+    # Explicitly check for API keys based on llm_provider
+    if config['llm_provider'] == 'openai':
+        api_key = os.getenv('OPENAI_API_KEY')
+        if api_key:
+            config['api_key'] = api_key
 
     return config

@@ -1,38 +1,31 @@
 import argparse
 import logging
-from typing import Any, Dict
-from gradebotguru.logging_config import setup_logging
 from gradebotguru.config import load_config
+from gradebotguru.rubric_loader import load_rubric
+from gradebotguru.submission_loader import load_submissions
+from gradebotguru.grader import grade_submission
 from gradebotguru.llm_interface.factory import create_llm
-from gradebotguru.core import load_and_grade_submissions
+from gradebotguru.logging_config import setup_logging
 
 
-def main() -> None:
-    """
-    Main entry point for the GradeBotGuru CLI application.
-
-    This function parses command-line arguments, loads configurations,
-    initializes the LLM interface, and processes submissions one at a time.
-    """
-    # Initialize logging
-    setup_logging()
-
-    # Parse command-line arguments
-    parser = argparse.ArgumentParser(description="GradeBotGuru CLI")
-    parser.add_argument('--config', type=str, help='Path to the configuration file', required=True)
-    parser.add_argument('--submissions', type=str, help='Path to the submissions folder', required=True)
+def main():
+    parser = argparse.ArgumentParser(description="Grade student submissions using an LLM.")
+    parser.add_argument("--config", type=str, required=True, help="Path to the configuration file.")
+    parser.add_argument("--submissions", type=str, required=True, help="Path to the submissions directory.")
     args = parser.parse_args()
 
-    # Load configuration
-    config: Dict[str, Any] = load_config(args.config)
+    setup_logging()
+    config = load_config(args.config)
     logging.info("Configuration loaded successfully.")
 
-    # Initialize LLM interface
-    llm_interface = create_llm(config['llm_provider'], config['api_key'])
-    logging.info("LLM interface initialized successfully.")
+    llm_interface = create_llm(config)
+    rubric = load_rubric(config['rubric_path'])
+    submissions = load_submissions(args.submissions)
 
-    # Load and grade submissions
-    load_and_grade_submissions(args.submissions, config['rubric_path'], llm_interface)
+    for submission_id, submission_text in submissions.items():
+        grade, feedback = grade_submission(submission_text, rubric, llm_interface)
+        print(f"Submission ID: {submission_id}, Grade: {grade}, Feedback: {feedback}")
+
 
 if __name__ == "__main__":
     main()
