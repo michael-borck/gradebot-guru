@@ -3,12 +3,12 @@ import os
 from typing import Dict, Any, Optional
 
 CONFIG_SCHEMA: Dict[str, Any] = {
-    'llm_provider': 'openai',  # or 'local'
+    'llm_providers': [],
+    'number_of_repeats': 1,
+    'repeat_each_provider': False,
     'rubric_path': 'path/to/rubric.csv',
     'submission_path': 'path/to/submissions',
-    'logging_level': 'INFO',  # or 'DEBUG', 'ERROR'
-    'other_setting': 'value',
-    'api_key': ''  # Placeholder for the API key
+    'logging_level': 'INFO'
 }
 
 
@@ -21,10 +21,16 @@ def get_default_config() -> Dict[str, Any]:
 
     Examples:
         >>> config = get_default_config()
-        >>> config['llm_provider']
-        'openai'
+        >>> config['llm_providers']
+        []
+        >>> config['number_of_repeats']
+        1
+        >>> config['repeat_each_provider']
+        False
         >>> config['rubric_path']
         'path/to/rubric.csv'
+        >>> config['submission_path']
+        'path/to/submissions'
         >>> config['logging_level']
         'INFO'
     """
@@ -47,14 +53,34 @@ def load_config(config_file_path: Optional[str] = None) -> Dict[str, Any]:
         >>> config = load_config()
         >>> config == default_config
         True
+        >>> mock_config_content = '''
+        ... {
+        ...     "llm_providers": [
+        ...         {"provider": "openai", "api_key": "mock_key", "model": "text-davinci-003"}
+        ...     ],
+        ...     "number_of_repeats": 3,
+        ...     "repeat_each_provider": true,
+        ...     "rubric_path": "custom/rubric.csv",
+        ...     "submission_path": "custom/submissions",
+        ...     "logging_level": "DEBUG"
+        ... }
+        ... '''
         >>> with open('test_config.json', 'w') as f:
-        ...     json.dump({"llm_provider": "local", "new_setting": "new_value"}, f)
+        ...     _ = f.write(mock_config_content)
         >>> config = load_config('test_config.json')
-        >>> config['llm_provider']
-        'local'
-        >>> config['new_setting']
-        'new_value'
-        >>> os.remove('test_config.json')
+        >>> config['llm_providers']
+        [{'provider': 'openai', 'api_key': 'mock_key', 'model': 'text-davinci-003'}]
+        >>> config['number_of_repeats']
+        3
+        >>> config['repeat_each_provider']
+        True
+        >>> config['rubric_path']
+        'custom/rubric.csv'
+        >>> config['submission_path']
+        'custom/submissions'
+        >>> config['logging_level']
+        'DEBUG'
+        >>> import os; os.remove('test_config.json')
     """
     config = get_default_config()
 
@@ -68,12 +94,11 @@ def load_config(config_file_path: Optional[str] = None) -> Dict[str, Any]:
     for key in config.keys():
         env_value = os.getenv(key.upper())
         if env_value:
-            config[key] = env_value
-
-    # Explicitly check for API keys based on llm_provider
-    if config['llm_provider'] == 'openai':
-        api_key = os.getenv('OPENAI_API_KEY')
-        if api_key:
-            config['api_key'] = api_key
+            if isinstance(config[key], bool):
+                config[key] = env_value.lower() in ['true', '1', 'yes']
+            elif isinstance(config[key], int):
+                config[key] = int(env_value)
+            else:
+                config[key] = env_value
 
     return config
