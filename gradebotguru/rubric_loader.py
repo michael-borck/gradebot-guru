@@ -1,34 +1,51 @@
 import csv
-from typing import Dict
-from io import StringIO
+from typing import Dict, Any
 
-
-def load_rubric(file_path: str | StringIO) -> Dict[str, float]:
+def load_rubric(file_path: str) -> Dict[str, Dict[str, Any]]:
     """
-    Load and parse a grading rubric from a CSV file or StringIO object.
+    Load and parse a grading rubric from a CSV file.
 
     Args:
-        file_path (str | StringIO): Path to the CSV file or StringIO object containing the rubric.
+        file_path (str): Path to the CSV file containing the rubric.
 
     Returns:
-        Dict[str, float]: A dictionary where keys are criteria and values are weights.
+        Dict[str, Dict[str, Any]]: A dictionary where keys are criteria and values are dictionaries with descriptions and max points.
 
     Examples:
-        >>> csv_content = '''criterion,weight
-        ... Clarity,0.3
-        ... Organization,0.4
-        ... Evidence,0.3
+        >>> csv_content = '''criterion,description,max_points
+        ... Clarity,Clarity of expression and organization.,5
+        ... Organization,Quality and structure of content.,10
+        ... Evidence,Support and relevance of arguments.,5
         ... '''
-        >>> with StringIO(csv_content) as f:
-        ...     rubric = load_rubric(f)
+        >>> with open('temp_rubric.csv', 'w') as f:
+        ...     _ = f.write(csv_content)
+        >>> rubric = load_rubric('temp_rubric.csv')
         >>> rubric
-        {'Clarity': 0.3, 'Organization': 0.4, 'Evidence': 0.3}
+        {'Clarity': {'description': 'Clarity of expression and organization.', 'max_points': 5},\
+ 'Organization': {'description': 'Quality and structure of content.', 'max_points': 10},\
+ 'Evidence': {'description': 'Support and relevance of arguments.', 'max_points': 5}}
+        >>> import os; os.remove('temp_rubric.csv')
+
+        >>> csv_content = '''criterion,max_points
+        ... Clarity,5
+        ... Organization,10
+        ... Evidence,5
+        ... '''
+        >>> with open('temp_rubric.csv', 'w') as f:
+        ...     _ = f.write(csv_content)
+        >>> rubric = load_rubric('temp_rubric.csv')
+        >>> rubric
+        {'Clarity': {'description': '', 'max_points': 5},\
+ 'Organization': {'description': '', 'max_points': 10},\
+ 'Evidence': {'description': '', 'max_points': 5}}
+        >>> import os; os.remove('temp_rubric.csv')
     """
     rubric = {}
-    with file_path as file:  # Use the passed object directly
+    with open(file_path, 'r') as file:
         reader = csv.DictReader(file)
         for row in reader:
             criterion = row['criterion']
-            weight = float(row['weight'])
-            rubric[criterion] = weight
+            description = row.get('description', '')  # Handle missing description
+            max_points = int(row['max_points'])
+            rubric[criterion] = {"description": description, "max_points": max_points}
     return rubric
