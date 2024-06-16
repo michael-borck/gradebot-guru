@@ -38,16 +38,16 @@
    - ~~Write unit tests for LLM interactions.~~
 
 4. **Prompt Generation:**
-   - Implement `prompts.py` to generate well-formatted prompts for the LLM.
-   - Write unit tests for prompt generation.
+   - ~~Implement `prompts.py` to generate well-formatted prompts for the LLM.~~
+   - ~~Write unit tests for prompt generation.~~
 
 5. **Response Parsing:**
-   - Implement `response_parser.py` to extract grades and feedback from the LLM's responses.
-   - Write unit tests for response parsing.
+   - ~~Implement `response_parser.py` to extract grades and feedback from the LLM's responses.~~
+   - ~~Write unit tests for response parsing.~~
 
 6. **Grading Logic:**
-   - Implement `grader.py` to orchestrate the grading process (loading rubric, loading submissions, generating prompts, interacting with LLM, parsing responses).
-   - Write unit tests for the grading logic.
+   - ~~Implement `grader.py` to orchestrate the grading process (loading rubric, loading submissions, generating prompts, interacting with LLM, parsing responses).~~
+   - ~~Write unit tests for the grading logic.~~
 
 ## Phase 3: Command-Line Interface (CLI)
 
@@ -55,11 +55,11 @@
 
 #### Tasks:
 1. **CLI Implementation:**
-   - Implement `main.py` using `argparse` to handle command-line arguments.
-   - Integrate the CLI with the core grading logic.
+   - ~~Implement `main.py` using `argparse` to handle command-line arguments.~~
+   - ~~Integrate the CLI with the core grading logic.~~
 
 2. **CLI Testing:**
-   - Write tests for the CLI to ensure it handles various user inputs correctly.
+   - ~~Write tests for the CLI to ensure it handles various user inputs correctly.~~
 
 ## Phase 4: Documentation and Examples
 
@@ -67,14 +67,14 @@
 
 #### Tasks:
 1. **User Documentation:**
-   - Create a `docs/` folder.
-   - Write a setup guide (`setup_guide.md`).
-   - Write a user guide (`user_guide.md`).
-   - Provide examples of rubrics, submissions, and LLM prompts.
+   - ~~Create a `docs/` folder.~~
+   - ~~Write a setup guide (`setup_guide.md`).~~
+   - ~~Write a user guide (`user_guide.md`).~~
+   - ~~Provide examples of rubrics, submissions, and LLM prompts.~~
 
 2. **API Documentation:**
-   - Generate API documentation using tools like Sphinx or MkDocs.
-   - Ensure all public methods and classes are well-documented.
+   - ~~Generate API documentation using tools like Sphinx or MkDocs.~~
+   - ~~Ensure all public methods and classes are well-documented.~~
 
 ## Phase 5: Testing and Quality Assurance
 
@@ -82,45 +82,81 @@
 
 #### Tasks:
 1. **Unit Testing:**
-   - Ensure all modules have comprehensive unit tests.
-   - Achieve high code coverage.
+   - ~~Ensure all modules have comprehensive unit tests.~~
+   - ~~Achieve high code coverage.~~
 
 2. **Integration Testing:**
-   - Implement integration tests to verify the end-to-end functionality.
-   - Test the entire grading workflow with sample data.
+   - ~~Implement integration tests to verify the end-to-end functionality.~~
+   - ~~Test the entire grading workflow with sample data.~~
 
 3. **User Acceptance Testing (UAT):**
    - Conduct UAT with a sample group of educators and students.
    - Collect feedback and make necessary improvements.
 
-## Phase 6: Beta Release and Feedback
+## Phase 6: Local LLM Support
 
-**Objective:** Release a beta version of the application to a broader audience for feedback and improvements.
-
-#### Tasks:
-1. **Beta Release:**
-   - Publish the beta version to PyPI.
-   - Announce the beta release to potential users (e.g., educators, institutions).
-
-2. **Feedback Collection:**
-   - Set up a feedback mechanism (e.g., GitHub issues, surveys).
-   - Collect and analyze user feedback.
-   - Identify common issues and feature requests.
-
-## Phase 7: Final Release and Post-Release Support
-
-**Objective:** Release the final version of the application and provide ongoing support and improvements.
+**Objective:** Implement support for local LLM providers to allow cost-effective testing and proof-of-concept validations.
 
 #### Tasks:
-1. **Final Release:**
-   - Address issues and improvements identified during the beta phase.
-   - Publish the final version to PyPI.
-   - Update documentation and examples as needed.
+1. **Local LLM Integration:**
+   - Update `llm_interface.factory` to handle local LLMs.
+   - Create the `LocalLLM` class to interact with the Ollama server.
+   - Write unit tests for Local LLM support.
 
-2. **Post-Release Support:**
-   - Monitor user feedback and issues.
-   - Provide regular updates and bug fixes.
-   - Plan for future enhancements and features based on user feedback.
+2. **Configuration and CLI Enhancements:**
+   - Expand the `config.json` to include more configurable parameters.
+   - Add CLI commands for `/add`, `/exit`, `/model`, `/provider`, `/config`, etc.
+
+## Phase 7: Critique and Moderation
+
+**Objective:** Enhance the grading process by adding a critique and moderation step using a second LLM.
+
+#### Tasks:
+1. **Critique Functionality:**
+   - Implement a second LLM to critique the feedback from the first LLM and potentially update the grade.
+   - Write unit tests for critique functionality.
+
+## Phase 8: Multiple Submissions and Expert Markers
+
+**Objective:** Implement functionality to submit a submission multiple times and take the average of the grades.
+
+#### Tasks:
+1. **Multiple Submissions:**
+   - Update grading logic to handle multiple grading rounds.
+   - Allow configuration of multiple expert markers.
+   - Write unit tests for multiple submissions and expert markers.
+
+## Phase 9: Handle Multiple File Submissions
+
+**Objective:** Implement functionality to handle ZIP files and folders in the submissions directory.
+
+#### Tasks:
+1. **Multiple File Submissions:**
+   - Implement functionality to handle ZIP files.
+   - Implement functionality to handle folders.
+   - Write unit tests for multiple file submissions.
+
+## Phase 10: Develop GUI Interface
+
+**Objective:** Create a simple GUI with Tkinter that includes a JSON editor for configuration.
+
+#### Tasks:
+1. **GUI Development:**
+   - Create a simple GUI with Tkinter.
+   - Add buttons to run the CLI version.
+   - Implement basic file browsing functionality.
+   - Implement functionality to display grading results.
+
+## Phase 11: Additional Features and Refinements
+
+**Objective:** Add more output formats, customization options, and enhance the application.
+
+#### Tasks:
+1. **Additional Features:**
+   - Add more output formats (e.g., CSV, PDF).
+   - Allow customization of output fields and formats.
+   - Add custom prompts functionality.
+   - Write unit tests for new features and refinements.
 
 ## Future Enhancements
 

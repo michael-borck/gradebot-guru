@@ -448,9 +448,9 @@ This update adds comprehensive API documentation for the GradeBot Guru project, 
 - Updated MockLLM class for testing purposes.
 - Added tests for MockLLM to verify the implementation of get_response, generate_text, and get_model_info methods. (c61be26)
 
-## Unreleased
+## [0.5.7] - 2024-06-16
 
-<small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/0.5.6...HEAD)</small>
+<small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/0.5.6...0.5.7)</small>
 
 ### Features
 * feat: Update rubric_loader to handle optional descriptions and corresponding test cases (1fd4f95)
@@ -477,6 +477,7 @@ This update adds comprehensive API documentation for the GradeBot Guru project, 
 - Explained the rationale, implications, and implementation details. (5638e1d)
 
 ### Chores
+* chore: bump version to 0.5.7 and update changelog (abd039d)
 * chore: fixed name of ADR 0014 from llm-infernece to llm-interface (876e283)
 
 ### Refactoring
@@ -487,4 +488,28 @@ This update adds comprehensive API documentation for the GradeBot Guru project, 
 
 - Removed gradebotguru.py as its functionality is covered by other modules.
 - Simplified project structure for better maintainability. (8f87c54)
+
+## Unreleased
+
+<small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/0.5.7...HEAD)</small>
+
+### Features
+* feat: Add support for Ollama LLM with configuration and integration (4f71180)
+* feat: Add script to upload issues to GitHub from JSON file with optional config file
+
+- Implement  to upload issues to GitHub.
+- Support for configuration via  and environment variables.
+- Added example  and  files for demonstration.
+- Allows specifying configuration file and issues file via command-line arguments. (339ff85)
+* feat: Add demo folder with sample config, rubric, and submissions, and update documentation examples (bf439be)
+
+### Documentation
+* docs: Update documentation for testing and add API documentation for all modules (85556f2)
+* docs: Add documentation for admin scripts and update mkdocs configuration (d8e0506)
+* docs: Update ADR 0017 with examples of categorised commit messages (e4c39cd)
+* docs: Add ADR 0016 for standardized rubric schema and update mkdocs.yml (5ac8529)
+
+### Chores
+* chore: Add generate_markdown.py script for generating markdown files from Python docstrings (2d6ef27)
+* chore: organize administrative scripts and files into scripts folder (72c2666)
 
