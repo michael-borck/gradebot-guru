@@ -419,9 +419,9 @@ This update adds comprehensive API documentation for the GradeBot Guru project, 
 - Updated pyproject.toml and poetry.lock to include pypdf as a dependency.
 - Adjusted code to use PdfWriter from pypdf instead of PdfFileWriter. (0729857)
 
-## Unreleased
+## [0.5.6] - 2024-06-15
 
-<small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/0.5.5...HEAD)</small>
+<small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/0.5.5...0.5.6)</small>
 
 ### Documentation
 * docs: Add ADR to organize llm_inference as a sub-package within gradebotguru
@@ -431,6 +431,7 @@ This update adds comprehensive API documentation for the GradeBot Guru project, 
 * docs: Add ADR for adopting function-based design approach (3e9df58)
 
 ### Chores
+* chore: bump version to 0.5.6 and update changelog (1a2312d)
 * chore: deleted api.py functionality provided by factory (39abfed)
 * chore: renamed basellm.py to base_llm.py (2e0a471)
 
@@ -446,4 +447,44 @@ This update adds comprehensive API documentation for the GradeBot Guru project, 
 - Refined BaseLLM abstract class with get_response, generate_text, and get_model_info methods based on a better understanding of the program's architecture.
 - Updated MockLLM class for testing purposes.
 - Added tests for MockLLM to verify the implementation of get_response, generate_text, and get_model_info methods. (c61be26)
+
+## Unreleased
+
+<small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/0.5.6...HEAD)</small>
+
+### Features
+* feat: Update rubric_loader to handle optional descriptions and corresponding test cases (1fd4f95)
+* feat: Refactor core functionality and update main workflow
+
+- Moved core grading logic to core.py for better separation of concerns.
+- Updated main.py to use core functions for processing submissions.
+- Added doctests to core.py to ensure functionality.
+- Updated test_main.py to correctly mock dependencies and test CLI integration.
+- Added test_core.py to test core grading logic independently. (3da5762)
+* feat: Update main workflow and add tests
+
+- Updated factory.py to support the main workflow.
+- Removed unnecessary local_llm.py.
+- Updated openai_llm.py for improved LLM handling.
+- Implemented main.py to handle CLI inputs and process submissions.
+- Enhanced submission_loader.py to load all files in a directory.
+- Added tests for main.py to ensure correct functionality. (adc40c2)
+
+### Documentation
+* docs: Add ADR for adoption of Semantic Versioning
+
+- Documented the decision to adopt Semantic Versioning starting from version 0.5.0.
+- Explained the rationale, implications, and implementation details. (5638e1d)
+
+### Chores
+* chore: fixed name of ADR 0014 from llm-infernece to llm-interface (876e283)
+
+### Refactoring
+* refactor: Extract MockLLM into a separate test utility module
+
+- Moved the MockLLM class to tests/test_utils.py for reuse across multiple test files. (c4e5ab2)
+* refactor: Remove unnecessary gradebotguru.py
+
+- Removed gradebotguru.py as its functionality is covered by other modules.
+- Simplified project structure for better maintainability. (8f87c54)
 
