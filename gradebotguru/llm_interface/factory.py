@@ -1,6 +1,6 @@
 from typing import Any, Dict
-from gradebotguru.llm_inference.base_llm import BaseLLM
-from gradebotguru.llm_inference.openai_llm import OpenAILLM
+from gradebotguru.llm_interface.base_llm import BaseLLM
+from gradebotguru.llm_interface.openai_llm import OpenAILLM
 
 
 def create_llm(config: Dict[str, Any]) -> BaseLLM:

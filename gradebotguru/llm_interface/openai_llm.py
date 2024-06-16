@@ -1,6 +1,6 @@
 import openai
 from typing import Any, Dict
-from gradebotguru.llm_inference.base_llm import BaseLLM
+from gradebotguru.llm_interface.base_llm import BaseLLM
 
 class OpenAILLM(BaseLLM):
     def __init__(self, api_key: str, model: str = "text-davinci-003"):

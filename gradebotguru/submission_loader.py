@@ -1,5 +1,5 @@
 import os
-from typing import Any, Dict
+from typing import Any, Dict, List
 
 
 def load_text(file_path: str) -> str:
@@ -190,3 +190,44 @@ def load_submission(file_path: str) -> str:
         return loader(file_path)
     else:
         raise ValueError(f"Unsupported file format: {file_extension}")
+
+
+def load_submissions(directory: str) -> Dict[str, str]:
+    """
+    Load all submission files in a directory and return their contents as a dictionary.
+
+    Parameters:
+    - directory (str): The path to the directory containing submission files.
+
+    Returns:
+    - dict: A dictionary where the keys are file names and the values are file contents.
+
+    Examples:
+    >>> import os
+    >>> from tempfile import TemporaryDirectory, NamedTemporaryFile
+    >>> with TemporaryDirectory() as temp_dir:
+    ...     file1 = NamedTemporaryFile('w', delete=False, suffix='.txt', dir=temp_dir)
+    ...     file1.write("This is the content of submission 1.")
+    ...     file1.close()
+    ...     file2 = NamedTemporaryFile('w', delete=False, suffix='.md', dir=temp_dir)
+    ...     file2.write("# Submission 2\\nContent of submission 2.")
+    ...     file2.close()
+    ...     submissions = load_submissions(temp_dir)
+    ...     expected = {
+    ...         os.path.basename(file1.name): "This is the content of submission 1.",
+    ...         os.path.basename(file2.name): "# Submission 2\\nContent of submission 2."
+    ...     }
+    ...     assert submissions == expected
+    >>> os.remove(file1.name)
+    >>> os.remove(file2.name)
+    """
+    submissions = {}
+    for filename in os.listdir(directory):
+        file_path = os.path.join(directory, filename)
+        if os.path.isfile(file_path):
+            try:
+                content = load_submission(file_path)
+                submissions[filename] = content
+            except ValueError as e:
+                print(f"Skipping unsupported file: {filename} - {e}")
+    return submissions
