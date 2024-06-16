@@ -1,8 +1,8 @@
 import pytest
 from pytest_mock import MockerFixture
-from gradebotguru.main import main
 import sys
 import os
+from gradebotguru.main import main
 from typing import Any, Dict
 
 
@@ -34,7 +34,7 @@ def mock_submissions() -> Dict[str, str]:
 
 def test_main(mocker: MockerFixture, mock_config: Dict[str, Any], mock_rubric: Dict[str, Dict[str, Any]], mock_submissions: Dict[str, str]) -> None:
     """
-    Test the main function of the CLI application.
+    Integration test for the main function of the CLI application.
 
     This test uses mocking to simulate the configuration loading, LLM initialization,
     rubric loading, and submission loading.
@@ -52,17 +52,22 @@ def test_main(mocker: MockerFixture, mock_config: Dict[str, Any], mock_rubric: D
     mocker.patch('gradebotguru.main.create_llm', return_value=MockLLM())
 
     # Mock the load_rubric function
-    mocker.patch('gradebotguru.main.load_rubric', return_value=mock_rubric)
+    mocker.patch('gradebotguru.core.load_rubric', return_value=mock_rubric)
 
-    # Mock the load_submissions function
-    mocker.patch('gradebotguru.main.load_submissions', return_value=mock_submissions)
+    # Mock the load_submission function
+    def mock_load_submission(file_path: str) -> str:
+        return mock_submissions[os.path.basename(file_path)]
+    mocker.patch('gradebotguru.core.load_submission', side_effect=mock_load_submission)
 
     # Mock the output_results function to capture the outputs
     outputs = []
-
     def mock_output_results(submission_id: str, grade: float, feedback: str) -> None:
         outputs.append((submission_id, grade, feedback))
-    mocker.patch('gradebotguru.main.output_results', side_effect=mock_output_results)
+    mocker.patch('gradebotguru.core.output_results', side_effect=mock_output_results)
+
+    # Mock os.listdir and os.path.isfile
+    mocker.patch('os.listdir', return_value=list(mock_submissions.keys()))
+    mocker.patch('os.path.isfile', return_value=True)
 
     # Run the main function
     main()
