@@ -50,15 +50,15 @@ def load_config(config_file_path: Optional[str] = None) -> Dict[str, Any]:
     return config
 
 
-def create_issue(issue: Dict[str, Any], repo_owner: str, repo_name: str, headers: Dict[str, str]) -> None:
+def create_issue(issue: Dict[str, Any], headers: Dict[str, str], repo_owner: str, repo_name: str) -> None:
     """
-    Create an issue on GitHub.
+    Create an issue in the specified GitHub repository.
 
     Args:
-        issue (Dict[str, Any]): The issue data to create on GitHub.
-        repo_owner (str): The owner of the repository.
-        repo_name (str): The name of the repository.
+        issue (Dict[str, Any]): The issue data to create.
         headers (Dict[str, str]): The headers for the GitHub API request.
+        repo_owner (str): The GitHub repository owner.
+        repo_name (str): The GitHub repository name.
     """
     url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/issues'
     response = requests.post(url, headers=headers, json=issue)
@@ -68,22 +68,22 @@ def create_issue(issue: Dict[str, Any], repo_owner: str, repo_name: str, headers
         print(f'Error creating issue: {issue["title"]}, Status Code: {response.status_code}, Response: {response.json()}')
 
 
-def main(config_path: Optional[str] = None):
+def main(config_file_path: Optional[str], issues_file_path: str) -> None:
     """
-    Main function to load issues from a JSON file and create them on GitHub.
+    Main function to upload issues to GitHub from a JSON file.
 
     Args:
-        config_path (Optional[str]): Path to the configuration file. Defaults to None.
+        config_file_path (Optional[str]): Path to the configuration file.
+        issues_file_path (str): Path to the JSON file containing issues.
     """
-    # Load the configuration
-    config = load_config(config_path)
+    config = load_config(config_file_path)
 
-    github_token = config["GITHUB_TOKEN"]
-    repo_owner = config["REPO_OWNER"]
-    repo_name = config["REPO_NAME"]
+    github_token = config['GITHUB_TOKEN']
+    repo_owner = config['REPO_OWNER']
+    repo_name = config['REPO_NAME']
 
     # Load issues from JSON file
-    with open('scripts/issues.json') as f:
+    with open(issues_file_path) as f:
         issues = json.load(f)
 
     # Create headers for authentication
@@ -94,12 +94,13 @@ def main(config_path: Optional[str] = None):
 
     # Iterate through issues and create them
     for issue in issues:
-        create_issue(issue, repo_owner, repo_name, headers)
+        create_issue(issue, headers, repo_owner, repo_name)
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Upload issues to GitHub from a JSON file.')
-    parser.add_argument('--config', type=str, help='Path to the configuration file')
+    parser.add_argument('--config', type=str, default=None, help='Path to the configuration file.')
+    parser.add_argument('--issues', type=str, required=True, help='Path to the JSON file containing issues.')
     args = parser.parse_args()
 
-    main(config_path=args.config)
+    main(args.config, args.issues)
