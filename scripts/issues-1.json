@@ -1,0 +1,67 @@
+[
+    {
+        "title": "Implement Configuration Loader",
+        "body": "**Task Description**\n\nImplement the function to load configuration settings from `config.py`.\n\n**Steps:**\n- [ ] Define the configuration schema.\n- [ ] Implement the `load_config` function.\n- [ ] Write unit tests for the configuration loader.",
+        "labels": ["development", "configuration"]
+    },
+    {
+        "title": "Set Up Logging Configuration",
+        "body": "**Task Description**\n\nImplement the logging configuration in `logging_config.py`.\n\n**Steps:**\n- [ ] Define logging settings (level, format, handlers).\n- [ ] Implement the `setup_logging` function.\n- [ ] Write unit tests for logging configuration.",
+        "labels": ["development", "logging"]
+    },
+    {
+        "title": "Implement Grader Class",
+        "body": "**Task Description**\n\nDevelop the core grading logic in `grader.py`.\n\n**Steps:**\n- [ ] Define the `Grader` class and its methods.\n- [ ] Implement the `grade` method.\n- [ ] Write unit tests for the `Grader` class.",
+        "labels": ["development", "core"]
+    },
+    {
+        "title": "Implement Rubric Loader",
+        "body": "**Task Description**\n\nImplement the function to load and parse rubrics from `rubric_loader.py`.\n\n**Steps:**\n- [ ] Define the rubric schema.\n- [ ] Implement the `load_rubric` function.\n- [ ] Write unit tests for the rubric loader.",
+        "labels": ["development", "input"]
+    },
+    {
+        "title": "Implement Submission Loader",
+        "body": "**Task Description**\n\nImplement the function to load and parse student submissions from `submission_loader.py`.\n\n**Steps:**\n- [ ] Define the submission schema.\n- [ ] Implement the `load_submissions` function.\n- [ ] Write unit tests for the submission loader.",
+        "labels": ["development", "input"]
+    },
+    {
+        "title": "Implement Base LLM Interface",
+        "body": "**Task Description**\n\nImplement the base LLM interface in `base_llm.py`.\n\n**Steps:**\n- [ ] Define the `BaseLLM` class and its methods.\n- [ ] Implement the `send_prompt` and `parse_response` methods.\n- [ ] Write unit tests for the `BaseLLM` class.",
+        "labels": ["development", "llm"]
+    },
+    {
+        "title": "Implement OpenAI Interface",
+        "body": "**Task Description**\n\nImplement the OpenAI-specific LLM interface in `openai.py`.\n\n**Steps:**\n- [ ] Define the `OpenAILLM` class inheriting from `BaseLLM`.\n- [ ] Implement the `send_prompt` method for OpenAI API.\n- [ ] Implement the `parse_response` method for OpenAI API.\n- [ ] Write unit tests for the `OpenAILLM` class.",
+        "labels": ["development", "llm"]
+    },
+    {
+        "title": "Implement LLM Factory",
+        "body": "**Task Description**\n\nImplement the factory to create LLM instances in `factory.py`.\n\n**Steps:**\n- [ ] Define the `create_llm` function.\n- [ ] Implement logic to create instances of different LLM classes.\n- [ ] Write unit tests for the LLM factory.",
+        "labels": ["development", "llm"]
+    },
+    {
+        "title": "Implement Prompt Generation",
+        "body": "**Task Description**\n\nImplement the function to generate prompts for LLMs in `prompts.py`.\n\n**Steps:**\n- [ ] Define the prompt schema.\n- [ ] Implement the `generate_grading_prompt` function.\n- [ ] Write unit tests for prompt generation.",
+        "labels": ["development", "llm"]
+    },
+    {
+        "title": "Implement Response Parsing",
+        "body": "**Task Description**\n\nImplement the function to parse LLM responses in `response_parser.py`.\n\n**Steps:**\n- [ ] Define the response schema.\n- [ ] Implement the `parse_response` function.\n- [ ] Write unit tests for response parsing.",
+        "labels": ["development", "llm"]
+    },
+    {
+        "title": "Implement Main Application Logic",
+        "body": "**Task Description**\n\nImplement the main application logic in `main.py`.\n\n**Steps:**\n- [ ] Initialize logging.\n- [ ] Load configuration.\n- [ ] Initialize LLM interface.\n- [ ] Load rubric.\n- [ ] Initialize Grader.\n- [ ] Load submissions.\n- [ ] Loop through submissions and grade them.\n- [ ] Output results.\n- [ ] Write integration tests for the main application.",
+        "labels": ["development", "core"]
+    },
+    {
+        "title": "Write Unit Tests for All Modules",
+        "body": "**Task Description**\n\nWrite unit tests for each module as implemented.\n\n**Steps:**\n- [ ] Ensure all core functions and methods have corresponding tests.\n- [ ] Use a testing framework like `pytest`.",
+        "labels": ["testing", "unit tests"]
+    },
+    {
+        "title": "Write Integration Tests",
+        "body": "**Task Description**\n\nWrite integration tests to ensure end-to-end functionality.\n\n**Steps:**\n- [ ] Test the complete grading workflow from loading rubrics and submissions to generating prompts, interacting with the LLM, and parsing responses.\n- [ ] Verify that all components interact correctly.",
+        "labels": ["testing", "integration tests"]
+    }
+]

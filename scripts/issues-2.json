@@ -1,0 +1,37 @@
+[
+    {
+        "title": "Enhance Configuration and CLI Commands",
+        "body": "**Task Description**\n\nExpand the `config.json` to include more configurable parameters (e.g., temperature, top_p, etc.). Allow users to specify multiple LLM models/providers. Add CLI commands for `/add`, `/exit`, `/model`, `/provider`, `/config`, etc.\n\n**Steps:**\n- [ ] Update `config.json` with new fields.\n- [ ] Implement CLI commands.\n- [ ] Write unit tests for new CLI commands.",
+        "labels": ["enhancement", "CLI", "configuration"]
+    },
+    {
+        "title": "Support for Local LLM Providers",
+        "body": "**Task Description**\n\nAdd functionality to support local LLM providers via Ollama server. Allow configuration of the URL to the local/remote Ollama server.\n\n**Steps:**\n- [ ] Update `llm_interface.factory` to handle local LLMs.\n- [ ] Create the `LocalLLM` class to interact with the Ollama server.\n- [ ] Write unit tests for Local LLM support.",
+        "labels": ["enhancement", "LLM", "local LLM"]
+    },
+    {
+        "title": "Critique and Moderation",
+        "body": "**Task Description**\n\nImplement a second LLM to critique the feedback from the first LLM and potentially update the grade.\n\n**Steps:**\n- [ ] Implement functionality to critique feedback.\n- [ ] Write unit tests for critique functionality.",
+        "labels": ["enhancement", "LLM", "critique"]
+    },
+    {
+        "title": "Multiple Submissions and Expert Markers",
+        "body": "**Task Description**\n\nImplement functionality to submit a submission multiple times and take the average of the grades. Allow configuration of multiple expert markers from different providers/models. Implement functionality for each marker to provide a grade and average these grades.\n\n**Steps:**\n- [ ] Update grading logic to handle multiple grading rounds.\n- [ ] Allow configuration of multiple expert markers.\n- [ ] Write unit tests for multiple submissions and expert markers.",
+        "labels": ["enhancement", "grading", "multiple submissions"]
+    },
+    {
+        "title": "Handle Multiple File Submissions",
+        "body": "**Task Description**\n\nImplement functionality to handle ZIP files in the submissions directory. Extract and convert the content of each file in the ZIP to text and combine them. Implement functionality to handle folders in the submissions directory. Combine the content of all files in a folder as one submission.\n\n**Steps:**\n- [ ] Implement functionality to handle ZIP files.\n- [ ] Implement functionality to handle folders.\n- [ ] Write unit tests for multiple file submissions.",
+        "labels": ["enhancement", "submissions", "multiple files"]
+    },
+    {
+        "title": "Develop GUI Interface",
+        "body": "**Task Description**\n\nCreate a simple GUI with Tkinter that includes a JSON editor for configuration. Add buttons to run the CLI version with the provided configuration. Implement basic functionality to browse and select files from the submission directory. Add more advanced features to the GUI, mirroring the CLI commands. Implement functionality to display grading results within the GUI.\n\n**Steps:**\n- [ ] Create a simple GUI with Tkinter.\n- [ ] Add buttons to run the CLI version.\n- [ ] Implement basic file browsing functionality.\n- [ ] Implement functionality to display grading results.",
+        "labels": ["enhancement", "GUI", "interface"]
+    },
+    {
+        "title": "Additional Features and Refinements",
+        "body": "**Task Description**\n\nAdd more output formats (e.g., CSV, PDF). Allow customization of output fields and formats. Add custom prompts functionality for the LLM. Enhance output options and any other refinements.\n\n**Steps:**\n- [ ] Add more output formats.\n- [ ] Allow customization of output fields and formats.\n- [ ] Add custom prompts functionality.\n- [ ] Write unit tests for new features and refinements.",
+        "labels": ["enhancement", "features", "refinements"]
+    }
+]
