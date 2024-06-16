@@ -25,6 +25,7 @@ nav:
       - LLM Interface: adr/0014-llm-interface.md
       - Semantic Versioning: adr/0015-semantic-versioning.md
       - Rubric Schema: adr/0016-rubric-schema.md
+      - Categorised Commit Messages: adr/0017-categorised-commit-messages.md
   - API:
       - Overview: api/overview.md
       - Configuration: api/config.md

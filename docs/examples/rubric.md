@@ -1,9 +1,9 @@
-# Example Rubrics
-
-## Rubric 1
-- Criteria: Clarity
-- Weight: 30%
-
-## Rubric 2
-- Criteria: Accuracy
-- Weight: 40%
+```csv
+criterion,description,max_points
+Content,Quality and relevance of content.,10
+Clarity,Clarity of expression and organization.,5
+Grammar,Proper use of grammar and syntax.,5
+Structure,Logical flow and coherence of arguments.,5
+References,Quality and relevance of references used.,5
+Creativity,Originality and innovation in ideas.,5
+```
