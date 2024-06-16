@@ -53,7 +53,9 @@ def generate_user_prompt(rubric: Dict[str, Dict[str, Any]], submission: str, ass
     prompt = f"Assessment Type: {assessment_type.capitalize()}\n\nUsing the following rubric:\n\n"
 
     for criterion, details in rubric.items():
-        prompt += f"- {criterion}: {details['description']} (Max Points: {details['max_points']})\n"
+        description = details.get('description', '')
+        max_points = details['max_points']
+        prompt += f"- {criterion}: {description} (Max Points: {max_points})\n"
 
     prompt += f"\nEvaluate the following submission:\n\n{submission}\n\nProvide detailed feedback and a grade in the following format:\n"
     prompt += "Grade: <grade>\nFeedback: <feedback>\n"

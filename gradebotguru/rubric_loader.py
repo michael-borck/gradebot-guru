@@ -44,8 +44,8 @@ def load_rubric(file_path: str) -> Dict[str, Dict[str, Any]]:
     with open(file_path, 'r') as file:
         reader = csv.DictReader(file)
         for row in reader:
-            criterion = row['criterion']
-            description = row.get('description', '')  # Handle missing description
-            max_points = int(row['max_points'])
-            rubric[criterion] = {"description": description, "max_points": max_points}
+            criterion = row['criterion'].strip()
+            description = (row.get('description') or '').strip()  # Handle missing description
+            max_points = row['max_points'].strip() if row['max_points'] else None
+            rubric[criterion] = {"description": description, "max_points": int(max_points) if max_points else 0}
     return rubric
