@@ -37,6 +37,9 @@ nav:
       - Rubrics: examples/rubrics.md
       - Submissions: examples/submissions.md
       - Prompts: examples/prompts.md
+  - Admin Scripts:
+      - Release: admin_scripts/release.md
+      - Upload Issues: admin_scripts/upload_issues.md     
   - Project Management: project_management.md
   - Roadmap: roadmap.md
   - Contributing: contributing.md
