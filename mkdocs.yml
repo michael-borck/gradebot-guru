@@ -40,6 +40,7 @@ nav:
       - Prompts: api/prompts.md
       - Rubric Loader: api/rubric_loader.md
       - Submission Loader: api/submission_loader.md
+      - Aggregation Strategies: api/aggregation_strategies.md
   - Examples:
       - Rubrics: examples/rubrics.md
       - Submissions: examples/submissions.md
