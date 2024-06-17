@@ -54,7 +54,8 @@ def grade_submission(
     num_repeats: int,
     repeat_each_provider: bool,
     aggregation_method: str,
-    bias_adjustments: Dict[str, float] = None
+    bias_adjustments: Dict[str, float] = None,
+    summarize_feedback: bool = True
 ) -> Dict[str, Any]:
     """
     Grade a student submission using multiple LLM providers and repeats.
@@ -67,6 +68,7 @@ def grade_submission(
         repeat_each_provider (bool): Whether to repeat grading for each provider.
         aggregation_method (str): The method to aggregate grades.
         bias_adjustments (Dict[str, float]): Bias adjustments for specific providers.
+        summarize_feedback (bool): Whether to summarize the feedback from multiple responses.
 
     Returns:
         Dict[str, Any]: Aggregated grading results.
@@ -74,7 +76,7 @@ def grade_submission(
     Examples:
         >>> class MockLLM(BaseLLM):
         ...     def get_response(self, prompt: str) -> str:
-        ...         return "Grade: 85\nFeedback: Good job!"
+        ...         return "Grade: 85\\nFeedback: Good job!"
         ...     def generate_text(self, prompt: str, **kwargs: Dict[str, Any]) -> str:
         ...         return "Mock response to prompt: " + prompt
         ...     def get_model_info(self) -> Dict[str, Any]:
@@ -91,6 +93,9 @@ def grade_submission(
         85.0
         >>> "Good job!" in result['feedback']
         True
+        >>> result = grade_submission(submission, rubric, [llm], num_repeats=3, repeat_each_provider=True, aggregation_method="simple_average", summarize_feedback=True)
+        >>> result['average_grade']
+        85.0
     """
     all_grades = []
     all_feedback = []
@@ -109,26 +114,34 @@ def grade_submission(
                     provider_info = llm.get_model_info()
                     provider_name = provider_info.get("model_name", "")
                     grade += bias_adjustments.get(provider_name, 0)
-
                 all_grades.append(grade)
+
             all_feedback.append(feedback)
 
-    # Aggregate results
-    if all_grades:  # Check if all_grades is not empty
-        if aggregation_method == "simple_average":
-            average_grade = sum(all_grades) / len(all_grades)
-        elif aggregation_method == "weighted_average":
-            weights = [llm.get_model_info().get('weight', 1.0) for llm in llms for _ in range(num_repeats if repeat_each_provider else 1)]
-            weighted_sum = sum(grade * weight for grade, weight in zip(all_grades, weights))
-            average_grade = weighted_sum / sum(weights)
-        elif aggregation_method == "median":
-            average_grade = median(all_grades)
-        else:
-            raise ValueError(f"Unsupported aggregation method: {aggregation_method}")
+    # Aggregate grades
+    if aggregation_method == "simple_average":
+        average_grade = sum(all_grades) / len(all_grades) if all_grades else None
+    elif aggregation_method == "weighted_average":
+        weights = [llm.get_model_info().get('weight', 1.0) for llm in llms for _ in range(num_repeats if repeat_each_provider else 1)]
+        weighted_sum = sum(grade * weight for grade, weight in zip(all_grades, weights))
+        average_grade = weighted_sum / sum(weights) if weights else None
+    elif aggregation_method == "median":
+        average_grade = median(all_grades) if all_grades else None
+    elif aggregation_method == "bias_adjusted":
+        average_grade = sum(all_grades) / len(all_grades) if all_grades else None
     else:
-        average_grade = None
+        raise ValueError(f"Unsupported aggregation method: {aggregation_method}")
+
+    # Summarize feedback
+    if summarize_feedback:
+        best_llm = max(llms, key=lambda llm: llm.get_model_info().get('weight', 1.0))
+        summary_prompt = f"Summarize the following feedback into a single paragraph: {' '.join(all_feedback)}"
+        summarized_feedback = best_llm.get_response(summary_prompt)
+        feedback = summarized_feedback
+    else:
+        feedback = ' '.join(all_feedback)
 
     return {
         "average_grade": average_grade,
-        "feedback": " ".join(all_feedback)
+        "feedback": feedback
     }
