@@ -72,25 +72,25 @@ def grade_submission(
         Dict[str, Any]: Aggregated grading results.
 
     Examples:
-    >>> class MockLLM(BaseLLM):
-    ...     def get_response(self, prompt: str) -> str:
-    ...         return "Grade: 85\\nFeedback: Good job!"
-    ...     def generate_text(self, prompt: str, **kwargs: Dict[str, Any]) -> str:
-    ...         return "Mock response to prompt: " + prompt
-    ...     def get_model_info(self) -> Dict[str, Any]:
-    ...         return {"model_name": "mock-model", "version": "1.0"}
-    >>> llm = MockLLM()
-    >>> rubric = {
-    ...     "Content": {"description": "Quality and relevance of content.", "max_points": 10},
-    ...     "Clarity": {"description": "Clarity of expression and organization.", "max_points": 5},
-    ...     "Grammar": {"description": "Proper use of grammar and syntax.", "max_points": 5}
-    ... }
-    >>> submission = "This is a sample student submission for testing purposes."
-    >>> result = grade_submission(submission, rubric, [llm], num_repeats=3, repeat_each_provider=True, aggregation_method="simple_average")
-    >>> result['average_grade']
-    85.0
-    >>> "Good job!" in result['feedback']
-    True
+        >>> class MockLLM(BaseLLM):
+        ...     def get_response(self, prompt: str) -> str:
+        ...         return "Grade: 85\nFeedback: Good job!"
+        ...     def generate_text(self, prompt: str, **kwargs: Dict[str, Any]) -> str:
+        ...         return "Mock response to prompt: " + prompt
+        ...     def get_model_info(self) -> Dict[str, Any]:
+        ...         return {"model_name": "mock-model", "version": "1.0"}
+        >>> llm = MockLLM()
+        >>> rubric = {
+        ...     "Content": {"description": "Quality and relevance of content.", "max_points": 10},
+        ...     "Clarity": {"description": "Clarity of expression and organization.", "max_points": 5},
+        ...     "Grammar": {"description": "Proper use of grammar and syntax.", "max_points": 5}
+        ... }
+        >>> submission = "This is a sample student submission for testing purposes."
+        >>> result = grade_submission(submission, rubric, [llm], num_repeats=3, repeat_each_provider=True, aggregation_method="simple_average")
+        >>> result['average_grade']
+        85.0
+        >>> "Good job!" in result['feedback']
+        True
     """
     all_grades = []
     all_feedback = []
@@ -104,28 +104,29 @@ def grade_submission(
             grade = result['grade']
             feedback = result['feedback']
 
-            if aggregation_method == "bias_adjusted" and bias_adjustments:
-                provider_info = llm.get_model_info()
-                provider_name = provider_info.get("model_name", "")
-                grade += bias_adjustments.get(provider_name, 0)
+            if grade is not None:
+                if aggregation_method == "bias_adjusted" and bias_adjustments:
+                    provider_info = llm.get_model_info()
+                    provider_name = provider_info.get("model_name", "")
+                    grade += bias_adjustments.get(provider_name, 0)
 
-            all_grades.append(grade)
+                all_grades.append(grade)
             all_feedback.append(feedback)
 
     # Aggregate results
-    if aggregation_method == "simple_average":
-        average_grade = sum(all_grades) / len(all_grades)
-    elif aggregation_method == "weighted_average":
-        weights = [llm.get_model_info().get('weight', 1.0) for llm in llms for _ in range(num_repeats if repeat_each_provider else 1)]
-        weighted_sum = sum(grade * weight for grade, weight in zip(all_grades, weights))
-        average_grade = weighted_sum / sum(weights)
-    elif aggregation_method == "bias_adjusted":
-        adjusted_grades = [grade - bias_adjustments.get(llm.get_model_info().get("model_name", ""), 0) for grade, llm in zip(all_grades, llms)]
-        average_grade = sum(adjusted_grades) / len(adjusted_grades)
-    elif aggregation_method == "median":
-        average_grade = median(all_grades)
+    if all_grades:  # Check if all_grades is not empty
+        if aggregation_method == "simple_average":
+            average_grade = sum(all_grades) / len(all_grades)
+        elif aggregation_method == "weighted_average":
+            weights = [llm.get_model_info().get('weight', 1.0) for llm in llms for _ in range(num_repeats if repeat_each_provider else 1)]
+            weighted_sum = sum(grade * weight for grade, weight in zip(all_grades, weights))
+            average_grade = weighted_sum / sum(weights)
+        elif aggregation_method == "median":
+            average_grade = median(all_grades)
+        else:
+            raise ValueError(f"Unsupported aggregation method: {aggregation_method}")
     else:
-        raise ValueError(f"Unsupported aggregation method: {aggregation_method}")
+        average_grade = None
 
     return {
         "average_grade": average_grade,
