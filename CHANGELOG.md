@@ -489,9 +489,9 @@ This update adds comprehensive API documentation for the GradeBot Guru project, 
 - Removed gradebotguru.py as its functionality is covered by other modules.
 - Simplified project structure for better maintainability. (8f87c54)
 
-## Unreleased
+## [0.5.8] - 2024-06-17
 
-<small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/0.5.7...HEAD)</small>
+<small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/0.5.7...0.5.8)</small>
 
 ### Features
 * feat: Add support for Ollama LLM with configuration and integration (4f71180)
@@ -510,6 +510,35 @@ This update adds comprehensive API documentation for the GradeBot Guru project, 
 * docs: Add ADR 0016 for standardized rubric schema and update mkdocs.yml (5ac8529)
 
 ### Chores
+* chore: bump version to 0.5.8 and update changelog (a0385cd)
 * chore: Add generate_markdown.py script for generating markdown files from Python docstrings (2d6ef27)
 * chore: organize administrative scripts and files into scripts folder (72c2666)
+
+## Unreleased
+
+<small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/0.5.8...HEAD)</small>
+
+### Features
+* feat: Add multiple aggregation strategies for grading in grader.py
+
+- Updated config.json to include options for different aggregation methods (simple average, weighted average, median, bias-adjusted).
+- Enhanced grade_submission function to support various aggregation methods.
+- Added tests for all aggregation strategies in test_grader.py.
+- Added docstrings and doctests to grader.py. (aa99469)
+* feat: Add support for multiple/expert markers in grading logic
+
+- Updated grade_submission in grader.py to handle multiple LLM providers and repeat grading for variance mitigation.
+- Modified parse_response in response_parser.py to return grade and feedback as a dictionary.
+- Added comprehensive docstrings and doctests to grade_submission in grader.py.
+- Updated test_grader.py with appropriate tests for the new grading logic.
+- Included missing abstract methods in MockLLM for testing. (e03ab1d)
+* feat: Enhance configuration loader with multiple providers and repeat options
+
+- Updated config module to support multiple LLM providers.
+- Added options for number of repeats and whether to repeat each provider.
+- Modified load_config function to handle new configuration structure.
+- Updated tests to cover new configuration options and ensure correct loading from file and environment variables. (2e93c8c)
+
+### Documentation
+* docs: Add ADR for aggregation strategies (bc25154)
 

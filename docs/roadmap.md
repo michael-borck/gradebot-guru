@@ -99,9 +99,9 @@
 
 #### Tasks:
 1. **Local LLM Integration:**
-   - Update `llm_interface.factory` to handle local LLMs.
-   - Create the `LocalLLM` class to interact with the Ollama server.
-   - Write unit tests for Local LLM support.
+   - ~~Update `llm_interface.factory` to handle local LLMs.~~
+   - ~~Create the `LocalLLM` class to interact with the Ollama server.~~
+   - ~~Write unit tests for Local LLM support.~~
 
 2. **Configuration and CLI Enhancements:**
    - Expand the `config.json` to include more configurable parameters.
@@ -121,7 +121,7 @@
 **Objective:** Implement functionality to submit a submission multiple times and take the average of the grades.
 
 #### Tasks:
-1. **Multiple Submissions:**
+1. **Multiple Panel of Markings:**
    - Update grading logic to handle multiple grading rounds.
    - Allow configuration of multiple expert markers.
    - Write unit tests for multiple submissions and expert markers.
