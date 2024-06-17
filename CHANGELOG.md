@@ -514,9 +514,9 @@ This update adds comprehensive API documentation for the GradeBot Guru project, 
 * chore: Add generate_markdown.py script for generating markdown files from Python docstrings (2d6ef27)
 * chore: organize administrative scripts and files into scripts folder (72c2666)
 
-## Unreleased
+## [0.6.0] - 2024-06-17
 
-<small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/0.5.8...HEAD)</small>
+<small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/0.5.8...0.6.0)</small>
 
 ### Features
 * feat: Add multiple aggregation strategies for grading in grader.py
@@ -541,4 +541,66 @@ This update adds comprehensive API documentation for the GradeBot Guru project, 
 
 ### Documentation
 * docs: Add ADR for aggregation strategies (bc25154)
+
+### Chores
+* chore: bump version to 0.6.0 and update changelog (77a4180)
+
+## Unreleased
+
+<small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/0.6.0...HEAD)</small>
+
+### Features
+* feat: Add feedback summarization option to grade_submission
+
+- Added a configuration option 'summarize_feedback' to enable feedback summarization.
+- Updated 'grade_submission' to summarize feedback using the best LLM provider.
+- Updated tests to include feedback summarization.
+- Ensured feedback summarization uses the highest weighted provider or the first provider if no weights are provided.
+- Updated doctests in 'grader.py' to reflect the new functionality. (27607ac)
+* feat: Improve grade aggregation to handle missing grades
+
+- Updated 'grade_submission' function to append grades to 'all_grades' only if they are not None.
+- Ensured average calculation is not affected by missing grades.
+- If no valid grades are present, 'average_grade' is set to None.
+- Updated doctests and examples accordingly. (1b51272)
+* feat: Add multiple aggregation strategies for grading in grader.py
+
+- Updated config.json to include options for different aggregation methods (simple average, weighted average, median, bias-adjusted).
+- Enhanced grade_submission function to support various aggregation methods.
+- Added tests for all aggregation strategies in test_grader.py.
+- Added docstrings and doctests to grader.py. (a689432)
+* feat: Add support for multiple/expert markers in grading logic
+
+- Updated grade_submission in grader.py to handle multiple LLM providers and repeat grading for variance mitigation.
+- Modified parse_response in response_parser.py to return grade and feedback as a dictionary.
+- Added comprehensive docstrings and doctests to grade_submission in grader.py.
+- Updated test_grader.py with appropriate tests for the new grading logic.
+- Included missing abstract methods in MockLLM for testing. (bdc616c)
+* feat: Enhance configuration loader with multiple providers and repeat options
+
+- Updated config module to support multiple LLM providers.
+- Added options for number of repeats and whether to repeat each provider.
+- Modified load_config function to handle new configuration structure.
+- Updated tests to cover new configuration options and ensure correct loading from file and environment variables. (1106f49)
+* feat: Add support for Ollama LLM with configuration and integration (9019f01)
+* feat: Add script to upload issues to GitHub from JSON file with optional config file
+
+- Implement  to upload issues to GitHub.
+- Support for configuration via  and environment variables.
+- Added example  and  files for demonstration.
+- Allows specifying configuration file and issues file via command-line arguments. (7690385)
+* feat: Add demo folder with sample config, rubric, and submissions, and update documentation examples (4f705a7)
+* feat: Add demo folder with sample config, rubric, and submissions (6ef1421)
+
+### Documentation
+* docs: Add ADR for aggregation strategies (5ad0d94)
+* docs: Update documentation for testing and add API documentation for all modules (ccda168)
+* docs: Add documentation for admin scripts and update mkdocs configuration (e228c4e)
+* docs: Update ADR 0017 with examples of categorised commit messages (c71f2d4)
+
+### Chores
+* chore: bump version to 0.6.0 and update changelog (7e4d589)
+* chore: bump version to 0.5.8 and update changelog (6f8e176)
+* chore: Add generate_markdown.py script for generating markdown files from Python docstrings (9c6dd0f)
+* chore: organize administrative scripts and files into scripts folder (21a5d33)
 
