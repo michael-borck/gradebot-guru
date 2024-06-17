@@ -1,6 +1,8 @@
 import openai
+import logging
 from gradebotguru.llm_interface.base_llm import BaseLLM
 from typing import Dict, Any
+
 
 class OllamaLLM(BaseLLM):
     """
@@ -44,7 +46,7 @@ class OllamaLLM(BaseLLM):
         )
         return response['choices'][0]['message']['content']
 
-    def get_response(self, prompt: str) -> str:
+    def get_response(self, prompt: str, **kwargs: Dict[str, Any]) -> str:
         """
         Generate a response using the Ollama LLM.
 
@@ -54,7 +56,13 @@ class OllamaLLM(BaseLLM):
         Returns:
             str: The generated response.
         """
-        return self.generate_text(prompt)
+        try:
+            response = self.generate_text(prompt, **kwargs)
+            logging.debug(f"Response from Ollama: {response}")
+            return response
+        except Exception as e:
+            logging.error(f"Error getting response from Ollama: {e}")
+            raise
 
     def get_model_info(self) -> Dict[str, Any]:
         """
@@ -64,6 +72,7 @@ class OllamaLLM(BaseLLM):
             Dict[str, Any]: A dictionary containing model information.
         """
         return {
+            "provider": "Ollama",
             "model_name": self.model,
             "api_key": self.api_key,
             "server_url": self.server_url

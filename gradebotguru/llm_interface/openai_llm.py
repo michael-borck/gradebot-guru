@@ -1,6 +1,8 @@
 import openai
+import logging
 from gradebotguru.llm_interface.base_llm import BaseLLM
 from typing import Any, Dict
+
 
 class OpenAILLM(BaseLLM):
     def __init__(self, api_key: str, model: str = "gpt-3.5-turbo"):
@@ -52,7 +54,13 @@ class OpenAILLM(BaseLLM):
         Returns:
             str: The generated text.
         """
-        return self.generate_text(prompt, **kwargs)
+        try:
+            response = self.generate_text(prompt, **kwargs)
+            logging.debug(f"Response from OpenAI: {response}")
+            return response
+        except Exception as e:
+            logging.error(f"Error getting response from OpenAI: {e}")
+            raise
 
     def get_model_info(self) -> Dict[str, Any]:
         """
@@ -62,6 +70,7 @@ class OpenAILLM(BaseLLM):
             Dict[str, Any]: A dictionary containing the model name and version.
         """
         return {
+            "provider": "OpenAI",
             "model_name": self.model,
             "version": "1.0"
         }

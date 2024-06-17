@@ -1,10 +1,10 @@
 import logging
+import os
 from typing import Optional
 
 LOGGING_LEVEL = logging.INFO
 LOGGING_FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-LOGGING_FILE = 'gradebotguru.log'
-
+LOGGING_FILE = 'demo/gradebotguru.log'
 
 def setup_logging(level: int = LOGGING_LEVEL, format: str = LOGGING_FORMAT, filename: Optional[str] = LOGGING_FILE) -> None:
     """
@@ -33,14 +33,21 @@ def setup_logging(level: int = LOGGING_LEVEL, format: str = LOGGING_FORMAT, file
     for handler in logging.root.handlers[:]:
         logging.root.removeHandler(handler)
 
-    logging.basicConfig(
-        level=level,
-        format=format,
-        filename=filename,
-        filemode='a'  # Append mode
-    )
-
-    console = logging.StreamHandler()
-    console.setLevel(level)
-    console.setFormatter(logging.Formatter(format))
-    logging.getLogger('').addHandler(console)
+    if filename and os.path.exists(filename):
+        # Configure file handler
+        logging.basicConfig(
+            level=level,
+            format=format,
+            filename=filename,
+            filemode='a'  # Append mode
+        )
+    else:
+        # Configure console handler
+        logging.basicConfig(
+            level=level,
+            format=format
+        )
+        console = logging.StreamHandler()
+        console.setLevel(level)
+        console.setFormatter(logging.Formatter(format))
+        logging.getLogger('').addHandler(console)

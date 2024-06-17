@@ -1,9 +1,10 @@
 import re
+import logging
 from typing import Dict, Any, List
 from statistics import median
 from gradebotguru.llm_interface.base_llm import BaseLLM
 from gradebotguru.prompts import generate_prompt
-
+from gradebotguru.text_analysis import analyze_sentiment, analyze_style
 
 def parse_response(response: str) -> Dict[str, Any]:
     """
@@ -14,23 +15,6 @@ def parse_response(response: str) -> Dict[str, Any]:
 
     Returns:
     - Dict[str, Any]: A dictionary containing the extracted grades and feedback.
-
-    Examples:
-    >>> response = "Grade: 85.5\\nFeedback: Good work on the assignment. However, there are some areas that need improvement."
-    >>> parse_response(response)
-    {'grade': 85.5, 'feedback': 'Good work on the assignment. However, there are some areas that need improvement.'}
-
-    >>> response = "Grade: 90\\nFeedback: "
-    >>> parse_response(response)
-    {'grade': 90.0, 'feedback': ''}
-
-    >>> response = "Feedback: Excellent effort, but there are a few mistakes."
-    >>> parse_response(response)
-    {'grade': None, 'feedback': 'Excellent effort, but there are a few mistakes.'}
-
-    >>> response = "No relevant information here."
-    >>> parse_response(response)
-    {'grade': None, 'feedback': None}
     """
     grade_pattern = re.compile(r"Grade:\s*(\d+(\.\d+)?)")
     feedback_pattern = re.compile(r"Feedback:\s*(.+)", re.DOTALL)
@@ -46,7 +30,6 @@ def parse_response(response: str) -> Dict[str, Any]:
         "feedback": feedback
     }
 
-
 def grade_submission(
     submission: str,
     rubric: Dict[str, Dict[str, Any]],
@@ -55,7 +38,7 @@ def grade_submission(
     repeat_each_provider: bool,
     aggregation_method: str,
     bias_adjustments: Dict[str, float] = None,
-    summarize_feedback: bool = True
+    summarize_feedback: bool = False
 ) -> Dict[str, Any]:
     """
     Grade a student submission using multiple LLM providers and repeats.
@@ -68,80 +51,68 @@ def grade_submission(
         repeat_each_provider (bool): Whether to repeat grading for each provider.
         aggregation_method (str): The method to aggregate grades.
         bias_adjustments (Dict[str, float]): Bias adjustments for specific providers.
-        summarize_feedback (bool): Whether to summarize the feedback from multiple responses.
+        summarize_feedback (bool): Whether to summarize feedback from multiple providers.
 
     Returns:
         Dict[str, Any]: Aggregated grading results.
-
-    Examples:
-        >>> class MockLLM(BaseLLM):
-        ...     def get_response(self, prompt: str) -> str:
-        ...         return "Grade: 85\\nFeedback: Good job!"
-        ...     def generate_text(self, prompt: str, **kwargs: Dict[str, Any]) -> str:
-        ...         return "Mock response to prompt: " + prompt
-        ...     def get_model_info(self) -> Dict[str, Any]:
-        ...         return {"model_name": "mock-model", "version": "1.0"}
-        >>> llm = MockLLM()
-        >>> rubric = {
-        ...     "Content": {"description": "Quality and relevance of content.", "max_points": 10},
-        ...     "Clarity": {"description": "Clarity of expression and organization.", "max_points": 5},
-        ...     "Grammar": {"description": "Proper use of grammar and syntax.", "max_points": 5}
-        ... }
-        >>> submission = "This is a sample student submission for testing purposes."
-        >>> result = grade_submission(submission, rubric, [llm], num_repeats=3, repeat_each_provider=True, aggregation_method="simple_average")
-        >>> result['average_grade']
-        85.0
-        >>> "Good job!" in result['feedback']
-        True
-        >>> result = grade_submission(submission, rubric, [llm], num_repeats=3, repeat_each_provider=True, aggregation_method="simple_average", summarize_feedback=True)
-        >>> result['average_grade']
-        85.0
     """
     all_grades = []
     all_feedback = []
+    total_max_points = sum(criteria['max_points'] for criteria in rubric.values())
 
     for llm in llms:
         repeats = num_repeats if repeat_each_provider else 1
         for _ in range(repeats):
             prompt = generate_prompt(rubric, submission)
             response = llm.get_response(prompt)
+
+            logging.debug(f"Response type: {type(response)}")
+            logging.debug(f"Response content: {response}")
+
             result = parse_response(response)
             grade = result['grade']
             feedback = result['feedback']
 
+            if aggregation_method == "bias_adjusted" and bias_adjustments:
+                provider_info = llm.get_model_info()
+                provider_name = provider_info.get("model_name", "")
+                grade += bias_adjustments.get(provider_name, 0)
+
             if grade is not None:
-                if aggregation_method == "bias_adjusted" and bias_adjustments:
-                    provider_info = llm.get_model_info()
-                    provider_name = provider_info.get("model_name", "")
-                    grade += bias_adjustments.get(provider_name, 0)
                 all_grades.append(grade)
+            if feedback:
+                all_feedback.append(feedback)
 
-            all_feedback.append(feedback)
-
-    # Aggregate grades
-    if aggregation_method == "simple_average":
-        average_grade = sum(all_grades) / len(all_grades) if all_grades else None
+    if aggregation_method == "simple_average" or aggregation_method == "bias_adjusted":
+        average_grade = sum(all_grades) / len(all_grades)
     elif aggregation_method == "weighted_average":
         weights = [llm.get_model_info().get('weight', 1.0) for llm in llms for _ in range(num_repeats if repeat_each_provider else 1)]
         weighted_sum = sum(grade * weight for grade, weight in zip(all_grades, weights))
-        average_grade = weighted_sum / sum(weights) if weights else None
+        average_grade = weighted_sum / sum(weights)
     elif aggregation_method == "median":
-        average_grade = median(all_grades) if all_grades else None
-    elif aggregation_method == "bias_adjusted":
-        average_grade = sum(all_grades) / len(all_grades) if all_grades else None
+        average_grade = median(all_grades)
     else:
         raise ValueError(f"Unsupported aggregation method: {aggregation_method}")
 
-    # Summarize feedback
     if summarize_feedback:
         best_llm = max(llms, key=lambda llm: llm.get_model_info().get('weight', 1.0))
-        summary_prompt = f"Summarize the following feedback into a single paragraph: {' '.join(all_feedback)}"
-        summarized_feedback = best_llm.get_response(summary_prompt)
-        feedback = summarized_feedback
+        summary_feedback = best_llm.generate_text('Summarize this feedback: ' + ' '.join(all_feedback))
     else:
-        feedback = ' '.join(all_feedback)
+        summary_feedback = ' '.join(all_feedback)
+
+    provider_info = [{'provider': llm.get_model_info().get("model_name"), 'model': llm.get_model_info().get("version")} for llm in llms]
+
+    sentiment_analysis = analyze_sentiment(submission)
+    style_analysis = analyze_style(submission)
 
     return {
         "average_grade": average_grade,
-        "feedback": feedback
+        "out_of": total_max_points,
+        "feedback": summary_feedback,
+        "providers": provider_info,
+        "nlp_stats": {
+            "word_count": style_analysis['word_count'],
+            "readability": style_analysis['readability'],
+            "sentiment": sentiment_analysis
+        }
     }

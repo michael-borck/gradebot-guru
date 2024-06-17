@@ -26,6 +26,7 @@ nav:
       - Semantic Versioning: adr/0015-semantic-versioning.md
       - Rubric Schema: adr/0016-rubric-schema.md
       - Categorised Commit Messages: adr/0017-categorised-commit-messages.md
+      -  Aggregation Strategies: adr/0018-aggregation-strategies.md
   - API:
       - Overview: api/overview.md
       - Base LLM: api/base_llm.md
@@ -40,7 +41,7 @@ nav:
       - Prompts: api/prompts.md
       - Rubric Loader: api/rubric_loader.md
       - Submission Loader: api/submission_loader.md
-      - Aggregation Strategies: api/aggregation_strategies.md
+      - Text Analysis: api/text_analysis.md
   - Examples:
       - Rubrics: examples/rubrics.md
       - Submissions: examples/submissions.md
