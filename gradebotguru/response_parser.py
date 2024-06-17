@@ -41,3 +41,7 @@ def parse_response(response: str) -> Dict[str, Any]:
         "grade": grade,
         "feedback": feedback
     }
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()

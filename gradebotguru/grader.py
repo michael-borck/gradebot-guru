@@ -1,77 +1,63 @@
-from typing import Dict, Tuple, Any
+from typing import List, Dict, Any
+from gradebotguru.llm_interface.base_llm import BaseLLM
 from gradebotguru.prompts import generate_prompt
 from gradebotguru.response_parser import parse_response
-from gradebotguru.llm_interface.base_llm import BaseLLM
 
 
-def preprocess_submission(submission: str) -> str:
+def grade_submission(submission: str, rubric: Dict[str, Dict[str, Any]], llms: List[BaseLLM], num_repeats: int, repeat_each_provider: bool) -> Dict[str, Any]:
     """
-    Preprocess the submission before sending it to the LLM.
+    Grade a student submission using multiple LLM providers and repeats.
 
-    Parameters:
-    - submission (str): The original submission text.
+    Args:
+        submission (str): The student submission text.
+        rubric (Dict[str, Dict[str, Any]]): The grading rubric.
+        llms (List[BaseLLM]): List of LLM providers.
+        num_repeats (int): Number of times to repeat the grading process.
+        repeat_each_provider (bool): Whether to repeat grading for each provider.
 
     Returns:
-    - str: The preprocessed submission text.
+        Dict[str, Any]: Aggregated grading results.
 
     Examples:
-    >>> preprocess_submission("This is a test submission.")
-    'This is a test submission.'
+        >>> class MockLLM(BaseLLM):
+        ...     def generate_text(self, prompt: str, **kwargs: Dict[str, Any]) -> str:
+        ...        return "Mock response to prompt: " + prompt
+        ...     def get_model_info(self) -> Dict[str, Any]:
+        ...         return {"model_name": "mock-model", "version": "1.0"}
+        ...     def get_response(self, prompt: str) -> str:
+        ...         return "Grade: 85\\nFeedback: Good work!"
+        >>> llm = MockLLM()
+        >>> rubric = {
+        ...     "Content": {"description": "Quality and relevance of content.", "max_points": 10},
+        ...     "Clarity": {"description": "Clarity of expression and organization.", "max_points": 5},
+        ...     "Grammar": {"description": "Proper use of grammar and syntax.", "max_points": 5}
+        ... }
+        >>> submission = "This is a sample student submission for testing purposes."
+        >>> result = grade_submission(submission, rubric, [llm], num_repeats=3, repeat_each_provider=True)
+        >>> result['average_grade']
+        85.0
+        >>> "Good work!" in result['feedback']
+        True
     """
-    # Placeholder for preprocessing logic
-    return submission
+    all_grades = []
+    all_feedback = []
 
+    for llm in llms:
+        repeats = num_repeats if repeat_each_provider else 1
+        for _ in range(repeats):
+            prompt = generate_prompt(rubric, submission)
+            response = llm.get_response(prompt)
+            parsed_response = parse_response(response)
+            grade = parsed_response.get("grade")
+            feedback = parsed_response.get("feedback")
+            all_grades.append(grade)
+            all_feedback.append(feedback)
 
-def postprocess_results(grade: float, feedback: str) -> Tuple[float, str]:
-    """
-    Postprocess the results obtained from the LLM.
+    # Aggregate results
+    average_grade = sum(filter(None, all_grades)) / len(all_grades)
+    aggregated_feedback = " ".join(filter(None, all_feedback))
 
-    Parameters:
-    - grade (float): The grade received from the LLM.
-    - feedback (str): The feedback received from the LLM.
-
-    Returns:
-    - tuple: The postprocessed grade and feedback.
-
-    Examples:
-    >>> postprocess_results(85.0, "Good job!")
-    (85.0, 'Good job!')
-    """
-    # Placeholder for postprocessing logic
-    return grade, feedback
-
-
-def grade_submission(submission: str, rubric: Dict[str, Dict[str, Any]], llm_interface: BaseLLM) -> Tuple[float, str]:
-    """
-    Grade a single submission based on the provided rubric.
-
-    Parameters:
-    - submission (str): The student's submission.
-    - rubric (dict): The grading rubric.
-    - llm_interface (BaseLLM): The LLM interface to generate responses.
-
-    Returns:
-    - tuple: The grade and feedback for the submission.
-
-    Examples:
-    >>> class MockLLM(BaseLLM):
-    ...     def get_response(self, prompt: str) -> str:
-    ...         return "Grade: 85\\nFeedback: Good job!"
-    ...     def generate_text(self, prompt: str, **kwargs: Dict[str, Any]) -> str:
-    ...         return "Mocked text"
-    ...     def get_model_info(self) -> Dict[str, Any]:
-    ...         return {"model_name": "mock-model"}
-    >>> rubric = {
-    ...     "Content": {"description": "Quality and relevance of content.", "max_points": 10},
-    ...     "Clarity": {"description": "Clarity of expression and organization.", "max_points": 5},
-    ...     "Grammar": {"description": "Proper use of grammar and syntax.", "max_points": 5}
-    ... }
-    >>> grade_submission("This is a test submission.", rubric, MockLLM())
-    (85.0, 'Good job!')
-    """
-    preprocessed_submission = preprocess_submission(submission)
-    prompt = generate_prompt(rubric, preprocessed_submission)
-    response = llm_interface.get_response(prompt)
-    result = parse_response(response)
-    postprocessed_grade, postprocessed_feedback = postprocess_results(result['grade'], result['feedback'])
-    return postprocessed_grade, postprocessed_feedback
+    return {
+        "average_grade": average_grade,
+        "feedback": aggregated_feedback
+    }
