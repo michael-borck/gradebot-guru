@@ -1,81 +1,73 @@
 import re
-from typing import Dict, Any
+from typing import List, Dict, Any, Tuple
 
-
-def clean_grades(grades_dict):
+def parse_response(text: str) -> Tuple[List[Dict[str, Any]], Dict[str, str]]:
     """
-    Cleans a dictionary of grades by replacing 'N/A' with 0 and extracting the first number from fraction-like strings.
-
-    Args:
-        grades_dict: A dictionary containing grade values (int, float, str).
-
-    Returns:
-        A new dictionary with cleaned grade values.
-    """
-
-    cleaned_grades = {}
-    for course, grade in grades_dict.items():
-        if grade == 'N/A':
-            cleaned_grades[course] = 0
-        elif isinstance(grade, str) and '/' in grade:  # Handle '5/7' like cases
-            cleaned_grades[course] = int(grade.split('/')[0]) 
-        else:
-            cleaned_grades[course] = grade
-
-    return cleaned_grades
-
-
-def parse_response(response: str) -> Dict[str, Any]:
-    """
-    Parse the response from the LLM to extract grades and feedback.
+    Parse the response from the LLM to extract criteria and overall feedback.
 
     Parameters:
-    - response (str): The response string from the LLM.
+    - text (str): The response string from the LLM.
 
     Returns:
-    - Dict[str, Any]: A dictionary containing the extracted grades, feedback, total score, and max score.
-
-    Examples:
-    >>> response = "Criterion: Content\\nGrade: 9/10\\nFeedback: Strong focus on LLMs.\\nTotal Score: 23/25"
-    >>> parse_response(response)
-    {'grades': {'Content': 9}, 'feedback': {'Content': 'Strong focus on LLMs.'}, 'total_score': 23, 'max_score': 25}
-
-    >>> response = "Criterion: Grammar\\nGrade: 4.5/5\\nFeedback: Minor errors.\\nTotal Score: 23.5/25"
-    >>> parse_response(response)
-    {'grades': {'Grammar': 4.5}, 'feedback': {'Grammar': 'Minor errors.'}, 'total_score': 23.5, 'max_score': 25}
-
-    >>> response = "Feedback: Excellent effort, but there are a few mistakes."
-    >>> parse_response(response)
-    {'grades': {}, 'feedback': {'General': 'Excellent effort, but there are a few mistakes.'}, 'total_score': None, 'max_score': None}
-
-    >>> response = "No relevant information here."
-    >>> parse_response(response)
-    {'grades': {}, 'feedback': {}, 'total_score': None, 'max_score': None}
+    - Tuple: A tuple containing:
+        - List[Dict[str, Any]]: A list of dictionaries for each criterion with keys 'name', 'grade', and 'feedback'.
+        - Dict[str, str]: A dictionary with the overall feedback.
     """
-    grades_pattern = re.compile(r"Criterion:\s*(.+?)\s*Grade:\s*(\d+(?:\.\d+)?)(?:\/\d+)?\s*Feedback:\s*(.+?)(?=\nCriterion:|$)", re.DOTALL)
-    overall_feedback_pattern = re.compile(r"Overall:\s*(.+)", re.DOTALL)
+    # Define regex patterns for criterion, grade, feedback, and overall sections
+    criterion_pattern = re.compile(r'Criterion:\s*(.*)')
+    grade_pattern = re.compile(r'Grade:\s*(\d+)')
+    feedback_pattern = re.compile(r'Feedback:\s*(.*)', re.DOTALL)
+    overall_pattern = re.compile(r'Overall:\s*(.*)', re.DOTALL)
 
-    grades_matches = grades_pattern.findall(response)
-    overall_feedback_match = overall_feedback_pattern.search(response)
+    # Split the text into lines
+    original_lines = text.split('\n')
+    lines = [line.strip() for line in original_lines]
 
-    grades = {}
-    feedback = {}
-    for match in grades_matches:
-        criterion, grade, fb = match
-        grades[criterion.strip()] = float(grade)
-        feedback[criterion.strip()] = fb.strip()
+    criteria = []
+    overall = ''
+    current_criterion = {}
+    collecting_feedback = False
+    overall_found = False  # Flag to track if overall has been processed
 
-    if grades:
-        grades = clean_grades(grades)
-        total_score = sum(grades.values())
-    else:
-        total_score = 0
+    for i, line in enumerate(lines):
+        criterion_match = criterion_pattern.match(line)
+        grade_match = grade_pattern.match(line)
+        feedback_match = feedback_pattern.match(line)
+        overall_match = overall_pattern.match(line)
 
-    overall_feedback = overall_feedback_match.group(1).strip() if overall_feedback_match else None
+        if criterion_match:
+            if current_criterion:
+                criteria.append(current_criterion)
+                current_criterion = {}
+            current_criterion['name'] = criterion_match.group(1).strip()
+            collecting_feedback = False
+        elif grade_match:
+            current_criterion['grade'] = int(grade_match.group(1))
+            collecting_feedback = False
+        elif feedback_match:
+            current_criterion['feedback'] = feedback_match.group(1).strip()
+            collecting_feedback = True
+        elif overall_match and not overall_found:  # Process overall only once
+            if current_criterion:
+                criteria.append(current_criterion)
+                current_criterion = {}
+            overall = overall_match.group(1).strip()
+            overall_index = i + 1
+            for next_line in original_lines[overall_index:]:
+                overall += " " + next_line.strip()
+            overall_found = True  # Set flag to indicate overall has been processed
+            break  # No need to continue after processing overall
+        elif collecting_feedback:
+            current_criterion['feedback'] += " " + line.strip()
 
-    return {
-        "breakdown": grades,
-        "criterion_feedback": feedback,
-        "total_score": total_score,
-        "overall_feedback": overall_feedback
-    }
+    if current_criterion:
+        criteria.append(current_criterion)
+
+    for criterion in criteria:
+        if 'grade' not in criterion or not isinstance(criterion['grade'], int):
+            criterion['grade'] = 0
+
+    # Save the overall feedback
+    overall_feedback = {'overall': overall.strip()}
+
+    return criteria, overall_feedback

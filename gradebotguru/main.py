@@ -1,6 +1,7 @@
-# main.py
 import argparse
 import logging
+import json
+import pprint
 from gradebotguru.config import load_config
 from gradebotguru.rubric_loader import load_rubric
 from gradebotguru.submission_loader import load_submissions
@@ -23,6 +24,7 @@ def main():
     rubric = load_rubric(config['rubric_path'])
     submissions = load_submissions(args.submissions)
     logging.info("Submissions loaded successfully.")
+
     for submission_id, submission_text in submissions.items():
         result = grade_submission(
             submission=submission_text,
@@ -35,10 +37,8 @@ def main():
             prompt_template=config['llm_prompt_template'],
             summarize_feedback=config.get('summarize_feedback', True)
         )
-        import json
 
         print(f"Submission ID: {submission_id}, Result:")
-        import pprint
         pprint.pprint(result.pop('criteria_feedback'))
         pprint.pprint(result)
 

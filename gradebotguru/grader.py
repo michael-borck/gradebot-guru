@@ -8,6 +8,34 @@ from gradebotguru.text_analysis import analyze_sentiment, analyze_style
 from gradebotguru.response_parser import parse_response
 
 
+def process_evaluation(text: str) -> Tuple[List[Dict[str, Any]], Dict[str, int], Dict[str, str], Dict[str, str], int]:
+    """
+    Process the evaluation by parsing the response and calculating grades.
+
+    Parameters:
+    - text (str): The response string from the LLM.
+
+    Returns:
+    - Tuple: A tuple containing:
+        - List[Dict[str, Any]]: A list of dictionaries for each criterion with keys 'name', 'grade', and 'feedback'.
+        - Dict[str, int]: A dictionary with criterion names as keys and grades as values.
+        - Dict[str, str]: A dictionary with criterion names as keys and feedback as values.
+        - Dict[str, str]: A dictionary with the overall feedback.
+        - int: The total grade.
+    """
+    criteria, overall_feedback = parse_response(text)
+
+    # Extracting criterion grades
+    criterion_grades = {criterion['name']: criterion['grade'] for criterion in criteria}
+
+    # Calculate total grade
+    total_grade = sum(criterion_grades.values())
+
+    # Extracting criterion feedback
+    criterion_feedback = {criterion['name']: criterion['feedback'] for criterion in criteria}
+
+    return criteria, criterion_grades, criterion_feedback, overall_feedback, total_grade
+
 def grade_submission(
     submission: str,
     rubric: Dict[str, Dict[str, Any]],
@@ -36,115 +64,108 @@ def grade_submission(
     Returns:
         Dict[str, Any]: Aggregated grading results.
     """
-    # Keep track of individual grades and feedback for each LLM
-    llm_all_grades = []
-    llm_all_criterion = []
-    llm_all_overall = []
-    llm_all_breakdown = []
+    llm_all_grades, llm_all_criterion_feedback, llm_all_overall_feedback = [], [], []
+    providers_info = set()
 
     for llm in llms:
-        # Keep track of individual grades and feedback for each 'repeat' of the grading process
-        all_grades = []
-        all_criterion = []
-        all_overall = []
-        all_breakdown = []
-        provider_info = set()
+        all_grades, all_criterion_feedback, all_overall_feedback = run_evaluations(
+            llm, submission, rubric, num_repeats, repeat_each_provider, prompt_template, aggregation_method, bias_adjustments
+        )
 
-        repeats = num_repeats if repeat_each_provider else 1
-        for _ in range(repeats):
-            prompt = generate_prompt(rubric, submission, prompt_template)
-            response = llm.get_response(prompt)
-            print(response)
-            print('\n\n\n')
-            result = parse_response(response)
-            breakdown = result.get('breakdown')
-            criterion_feedback = result.get('criterion_feedback')
-            overall_feedback = result.get('overall_feedback')
-            grade = result.get('total_score')
+        aggregate_and_store_results(
+            all_grades, all_criterion_feedback, all_overall_feedback, llm_all_grades, llm_all_criterion_feedback, llm_all_overall_feedback
+        )
 
-            if aggregation_method == "bias_adjusted" and bias_adjustments:
-                llm_info = llm.get_model_info()
-                provider_name = llm_info.get("model_name", "")
-                grade = (grade or 0) + bias_adjustments.get(provider_name, 0)
+        providers_info.add(" ".join([str(v) for v in llm.get_model_info().values()]))
 
-            if breakdown:
-                all_breakdown.append(breakdown)
-            if grade:
-                all_grades.append(grade)
-            if criterion_feedback:
-                all_criterion.append(criterion_feedback)
-            if overall_feedback:
-                all_overall.append(overall_feedback)
+    llm_average_grade, llm_criterion_feedback_summary, llm_overall_feedback_summary = finalize_aggregations(
+        llms, llm_all_grades, llm_all_criterion_feedback, llm_all_overall_feedback, aggregation_method, num_repeats, repeat_each_provider
+    )
 
-        if repeats > 1:
-            all_average_grade = aggregate_results(aggregation_method, all_grades, llms, num_repeats, repeat_each_provider)
-            # average_criterion = aggregate_criterion(aggregation_method, all_criterion, llms, num_repeats, repeat_each_provider)
-            all_criterion_summary, llm_overall_summary = aggregate_feedback(all_criterion, all_overall, llms)
-        else:
-            all_average_grade = all_grades[0] if all_grades else None
-            all_criterion_summary = all_criterion[0] if all_criterion else None
-            all_overall_summary = all_overall[0] if all_overall else None
-            # average_criterion = all_criterion[0] if all_criterion else None
+    return create_result_dict(submission, rubric, llm_average_grade, llm_criterion_feedback_summary, llm_overall_feedback_summary, providers_info)
 
-        if all_average_grade:
-            llm_all_grades.append(all_average_grade)
-        if all_criterion_summary:
-            llm_all_criterion.append(all_criterion_summary)
-        if all_overall_summary:
-            llm_all_overall.append(all_overall_summary)
 
-        provider_info.add(" ".join([str(v) for v in llm.get_model_info().values()]))
+def run_evaluations(
+    llm: BaseLLM, submission: str, rubric: Dict[str, Any], num_repeats: int, repeat_each_provider: bool, prompt_template: str, aggregation_method: str, bias_adjustments: Optional[Dict[str, float]]
+) -> Tuple[List[float], List[Dict[str, str]], List[Dict[str, str]]]:
+    all_grades, all_criterion_feedback, all_overall_feedback = [], [], []
+    repeats = num_repeats if repeat_each_provider else 1
 
+    for _ in range(repeats):
+        prompt = generate_prompt(rubric, submission, prompt_template)
+        response = llm.get_response(prompt)
+        criteria, criterion_grades, criterion_feedback, overall_feedback, total_grade = process_evaluation(response)
+
+        if aggregation_method == "bias_adjusted" and bias_adjustments:
+            llm_info = llm.get_model_info()
+            provider_name = llm_info.get("model_name", "")
+            total_grade += bias_adjustments.get(provider_name, 0)
+
+        all_grades.append(total_grade)
+        all_criterion_feedback.append(criterion_feedback)
+        all_overall_feedback.append(overall_feedback)
+
+    return all_grades, all_criterion_feedback, all_overall_feedback
+
+
+def aggregate_and_store_results(
+    all_grades: List[float], all_criterion_feedback: List[Dict[str, str]], all_overall_feedback: List[Dict[str, str]],
+    llm_all_grades: List[float], llm_all_criterion_feedback: List[Dict[str, str]], llm_all_overall_feedback: List[Dict[str, str]]
+):
+    average_grade = aggregate_results("simple_average", all_grades)  # Using simple average as an example
+    criterion_feedback_summary, overall_feedback_summary = aggregate_feedback(all_criterion_feedback, all_overall_feedback)
+
+    llm_all_grades.append(average_grade)
+    llm_all_criterion_feedback.append(criterion_feedback_summary)
+    llm_all_overall_feedback.append(overall_feedback_summary)
+
+
+def finalize_aggregations(
+    llms: List[BaseLLM], llm_all_grades: List[float], llm_all_criterion_feedback: List[Dict[str, str]], llm_all_overall_feedback: List[Dict[str, str]],
+    aggregation_method: str, num_repeats: int, repeat_each_provider: bool
+) -> Tuple[float, Dict[str, str], str]:
     if len(llms) > 1:
         llm_average_grade = aggregate_results(aggregation_method, llm_all_grades, llms, num_repeats, repeat_each_provider)
-        llm_criterion_summary, llm_overall_summary = aggregate_feedback(llm_all_criterion, llm_all_overall, llms)
+        llm_criterion_feedback_summary, llm_overall_feedback_summary = aggregate_feedback(llm_all_criterion_feedback, llm_all_overall_feedback, llms)
     else:
         llm_average_grade = llm_all_grades[0] if llm_all_grades else None
-        llm_criterion_summary = llm_all_criterion[0] if llm_all_criterion else None
-        llm_overall_summary = llm_all_overall[0] if llm_all_overall else None
+        llm_criterion_feedback_summary = llm_all_criterion_feedback[0] if llm_all_criterion_feedback else None
+        llm_overall_feedback_summary = llm_all_overall_feedback[0] if llm_all_overall_feedback else None
 
+    return llm_average_grade, llm_criterion_feedback_summary, llm_overall_feedback_summary
+
+
+def create_result_dict(
+    submission: str, rubric: Dict[str, Any], llm_average_grade: float, llm_criterion_feedback_summary: Dict[str, str], llm_overall_feedback_summary: str, providers_info: set
+) -> Dict[str, Any]:
     sentiment_analysis = analyze_sentiment(submission)
     style = analyze_style(submission)
 
     return {
-        "providers": provider_info,
+        "providers": list(providers_info),
         "word_count": style['word_count'],
         "readability": style['readability'],
         "sentiment": sentiment_analysis,
         "grade": round(llm_average_grade * 2) / 2 if llm_average_grade else 0,  # Round to nearest 0.5
         "out_of": sum(details["max_points"] for details in rubric.values()),
-        "breakdown": llm_all_grades,
-        "criteria_feedback": llm_criterion_summary,
-        "feedback": llm_overall_summary,
+        "criteria_feedback": llm_criterion_feedback_summary,
+        "feedback": llm_overall_feedback_summary,
     }
 
 
 def aggregate_results(
     aggregation_method: str,
     all_grades: List[float],
-    llms: List[BaseLLM],
-    num_repeats: int,
-    repeat_each_provider: bool
+    llms: Optional[List[BaseLLM]] = None,
+    num_repeats: Optional[int] = None,
+    repeat_each_provider: Optional[bool] = None
 ) -> Optional[float]:
-    """
-    Aggregate grading results based on the specified aggregation method.
-
-    Args:
-        aggregation_method (str): The method to aggregate grades.
-        all_grades (List[float]): List of grades.
-        llms (List[BaseLLM]): List of LLM providers.
-        num_repeats (int): Number of times to repeat the grading process.
-        repeat_each_provider (bool): Whether to repeat grading for each provider.
-
-    Returns:
-        Optional[float]: The aggregated grade.
-    """
     if not all_grades:
         return None
 
     if aggregation_method == "simple_average":
         return sum(all_grades) / len(all_grades)
-    elif aggregation_method == "weighted_average":
+    elif aggregation_method == "weighted_average" and llms:
         weights = [llm.get_model_info().get('weight', 1.0) for llm in llms for _ in range(num_repeats if repeat_each_provider else 1)]
         weighted_sum = sum(grade * weight for grade, weight in zip(all_grades, weights))
         return weighted_sum / sum(weights) if weights else None
@@ -157,40 +178,24 @@ def aggregate_results(
 
 
 def aggregate_feedback(
-    all_feedback: List[str],
-    all_overall_feedback: List[str],
-    llms: List[BaseLLM]
-) -> Tuple[str, str]:
-    """
-    Aggregate feedback from multiple LLMs.
+    all_criterion_feedback: List[Dict[str, str]],
+    all_overall_feedback: List[Dict[str, str]],
+    llms: Optional[List[BaseLLM]] = None
+) -> Tuple[Dict[str, str], str]:
+    aggregated_criterion_feedback = {}
+    aggregated_overall_feedback = ""
 
-    Args:
-        all_feedback (List[str]): List of feedback.
-        all_overall_feedback (List[str]): List of overall feedback.
-        llms (List[BaseLLM]): List of LLM providers.
+    for feedback in all_criterion_feedback:
+        for key, value in feedback.items():
+            if key not in aggregated_criterion_feedback:
+                aggregated_criterion_feedback[key] = []
+            aggregated_criterion_feedback[key].append(value)
 
-    Returns:
-        Tuple[str, str]: Aggregated feedback summary and overall feedback summary.
-    """
-    best_llm = sorted(llms, key=lambda llm: llm.get_model_info().get('weight', 1.0), reverse=True)[0]
-    feedback_summary = summarize(all_feedback, best_llm) if all_feedback else ''
-    overall_feedback_summary = summarize(all_overall_feedback, best_llm) if all_overall_feedback else ''
+    for key, feedbacks in aggregated_criterion_feedback.items():
+        aggregated_criterion_feedback[key] = " ".join(feedbacks)
 
-    return feedback_summary, overall_feedback_summary
+    aggregated_overall_feedback = " ".join(
+        feedback["overall"] for feedback in all_overall_feedback if "overall" in feedback
+    )
 
-
-def summarize(feedback: List[str], llm: BaseLLM) -> str:
-    """
-    Summarize feedback using the best LLM provider.
-
-    Args:
-        feedback (List[str]): List of feedback.
-        llm (BaseLLM): The best LLM provider.
-
-    Returns:
-        str: Summarized feedback.
-    """
-    feedback_summary = ' '.join(feedback)
-    summary_prompt = f'Summarize this feedback as if you are talking directly to the student, so use "you" instead of "the student": {feedback_summary}'
-    summary = llm.generate_text(summary_prompt, max_length=200)
-    return summary
+    return aggregated_criterion_feedback, aggregated_overall_feedback
