@@ -545,9 +545,9 @@ This update adds comprehensive API documentation for the GradeBot Guru project, 
 ### Chores
 * chore: bump version to 0.6.0 and update changelog (77a4180)
 
-## Unreleased
+## [0.6.1] - 2024-06-17
 
-<small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/0.6.0...HEAD)</small>
+<small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/0.6.0...0.6.1)</small>
 
 ### Features
 * feat: Add feedback summarization option to grade_submission
@@ -599,8 +599,42 @@ This update adds comprehensive API documentation for the GradeBot Guru project, 
 * docs: Update ADR 0017 with examples of categorised commit messages (c71f2d4)
 
 ### Chores
+* chore: bump version to 0.6.1 and update changelog (b8d4dcd)
 * chore: bump version to 0.6.0 and update changelog (7e4d589)
 * chore: bump version to 0.5.8 and update changelog (6f8e176)
 * chore: Add generate_markdown.py script for generating markdown files from Python docstrings (9c6dd0f)
 * chore: organize administrative scripts and files into scripts folder (21a5d33)
+
+## Unreleased
+
+<small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/0.6.1...HEAD)</small>
+
+### Features
+* feat: Enhance grading system with improved configuration, response parsing, and feedback aggregation
+
+- Added support for additional configuration options including custom prompts, temperature settings, output formats, and paths.
+- Implemented advanced response parsing to accurately extract grades, feedback, and overall feedback from LLM responses.
+- Enhanced feedback aggregation with methods to handle bias-adjusted, weighted average, and median aggregation.
+- Added functionality to generate comprehensive NLP statistics including sentiment analysis, word count, and readability for submissions.
+- Incorporated summarization of feedback using the best LLM provider for more concise and student-friendly feedback.
+- Improved error handling and logging to ensure robustness and traceability of the grading process.
+- Refactored :
+  - Broke down large functions into smaller, focused functions for better readability and maintainability.
+  - Added type hints and docstrings for all functions.
+  - Enhanced  and  functions.
+- Updated  to include instructions for LLMs on how to format the total score and feedback.
+- Fixed issues with doctests and pytest to ensure all tests pass successfully.
+- Enhanced the  function in  to better handle varied LLM responses.
+- Updated test files to reflect new configurations and ensure comprehensive test coverage.
+- Included detailed docstrings and examples for new and modified functions to aid in understanding and usage.
+
+This commit significantly improves the flexibility, accuracy, and user-friendliness of the grading system by leveraging advanced LLM capabilities and robust error handling. (aab7cc4)
+* feat: Add sentiment analysis and style metrics to grading process
+
+- Integrated sentiment analysis using nltk's SentimentIntensityAnalyzer.
+- Added style metrics for sentence variability and vocabulary richness.
+- Implemented logic to log LLM responses and analyze submissions.
+- Updated grade_submission to include sentiment and style analysis in the output.
+- Modified tests to reflect new functionality.
+- Ensured consistent handling of missing grades and summarization of feedback. (c8fa04b)
 
