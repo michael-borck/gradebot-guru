@@ -4,6 +4,7 @@ nav:
   - Installation: installation.md
   - User Guide: user_guide.md
   - Developer Guide: developer_guide.md
+  - Configuration: configuration.md
   - Architecture: architecture.md
   - SRS: srs.md
   - ADRs:

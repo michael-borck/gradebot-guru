@@ -19,10 +19,11 @@ class OllamaLLM(BaseLLM):
         model (str): The model to use for generating responses.
     """
 
-    def __init__(self, api_key: str, server_url: str, model: str = 'llama3') -> None:
+    def __init__(self, api_key: str, server_url: str, model: str = 'llama3', weight: float = 1.0) -> None:
         self.api_key = api_key
         self.server_url = server_url
         self.model = model
+        self.weight = weight
         openai.api_key = api_key
         openai.api_base = server_url
 
@@ -74,6 +75,6 @@ class OllamaLLM(BaseLLM):
         return {
             "provider": "Ollama",
             "model_name": self.model,
-            "api_key": self.api_key,
+            "weight": self.weight,
             "server_url": self.server_url
         }

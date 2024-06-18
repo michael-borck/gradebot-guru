@@ -5,16 +5,18 @@ from typing import Any, Dict
 
 
 class OpenAILLM(BaseLLM):
-    def __init__(self, api_key: str, model: str = "gpt-3.5-turbo"):
+    def __init__(self, api_key: str, model: str = "gpt-3.5-turbo-0125", temperature: float = 0.7 , weight: float = 1.0):
         """
         Initialize the OpenAILLM class with the provided API key and model.
 
         Args:
             api_key (str): The API key for accessing the OpenAI API.
-            model (str): The model to use for generating text. Default is "gpt-3.5-turbo".
+            model (str): The model to use for generating text. Default is "gpt-3.5-turbo-0125".
         """
         self.api_key = api_key
         self.model = model
+        self.weight = weight
+        self.temperature = temperature
         openai.api_key = self.api_key
 
     def generate_text(self, prompt: str, **kwargs: Dict[str, Any]) -> str:
@@ -72,5 +74,6 @@ class OpenAILLM(BaseLLM):
         return {
             "provider": "OpenAI",
             "model_name": self.model,
+            "weight": self.weight,
             "version": "1.0"
         }

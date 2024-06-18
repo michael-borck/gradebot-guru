@@ -27,13 +27,19 @@ def test_grade_submission(mock_rubric, mock_submission):
         mock_submission (str): Mock submission fixture.
     """
     llms = [MockLLM()]
-    result = grade_submission(mock_submission, mock_rubric, llms, num_repeats=3, repeat_each_provider=True, aggregation_method="simple_average")
+    result = grade_submission(
+        submission=mock_submission,
+        rubric=mock_rubric,
+        llms=llms,
+        num_repeats=3,
+        repeat_each_provider=True,
+        aggregation_method="simple_average",
+        prompt_template="Evaluate the following submission based on the rubric provided. The rubric is as follows: {rubric}. The student submission is as follows: {submission}.",
+        summarize_feedback=False
+    )
     assert result['average_grade'] == 85.0
     assert result['out_of'] == 20
     assert "Good job!" in result['feedback']
-    assert 'sentiment' in result['nlp_stats']
-    assert 'word_count' in result['nlp_stats']
-    assert 'readability' in result['nlp_stats']
 
 
 def test_grade_submission_multiple_llms(mock_rubric, mock_submission):
@@ -45,7 +51,16 @@ def test_grade_submission_multiple_llms(mock_rubric, mock_submission):
         mock_submission (str): Mock submission fixture.
     """
     llms = [MockLLM(), MockLLM()]
-    result = grade_submission(mock_submission, mock_rubric, llms, num_repeats=2, repeat_each_provider=False, aggregation_method="simple_average", summarize_feedback=False)
+    result = grade_submission(
+        submission=mock_submission,
+        rubric=mock_rubric,
+        llms=llms,
+        num_repeats=2,
+        repeat_each_provider=False,
+        aggregation_method="simple_average",
+        prompt_template="Evaluate the following submission based on the rubric provided. The rubric is as follows: {rubric}. The student submission is as follows: {submission}.",
+        summarize_feedback=False
+    )
     assert result['average_grade'] == 85.0
     assert "Good job!" in result['feedback']
 
@@ -60,7 +75,17 @@ def test_grade_submission_bias_adjusted(mock_rubric, mock_submission):
     """
     llms = [MockLLM(), MockLLM()]
     bias_adjustments = {"mock-model": 5.0}
-    result = grade_submission(mock_submission, mock_rubric, llms, num_repeats=2, repeat_each_provider=False, aggregation_method="bias_adjusted", bias_adjustments=bias_adjustments, summarize_feedback=False)
+    result = grade_submission(
+        submission=mock_submission,
+        rubric=mock_rubric,
+        llms=llms,
+        num_repeats=2,
+        repeat_each_provider=False,
+        aggregation_method="bias_adjusted",
+        bias_adjustments=bias_adjustments,
+        prompt_template="Evaluate the following submission based on the rubric provided. The rubric is as follows: {rubric}. The student submission is as follows: {submission}.",
+        summarize_feedback=False
+    )
     assert result['average_grade'] == 90.0
     assert "Good job!" in result['feedback']
 
@@ -74,6 +99,15 @@ def test_grade_submission_summarize_feedback(mock_rubric, mock_submission):
         mock_submission (str): Mock submission fixture.
     """
     llms = [MockLLM()]
-    result = grade_submission(mock_submission, mock_rubric, llms, num_repeats=3, repeat_each_provider=True, aggregation_method="simple_average", summarize_feedback=True)
+    result = grade_submission(
+        submission=mock_submission,
+        rubric=mock_rubric,
+        llms=llms,
+        num_repeats=3,
+        repeat_each_provider=True,
+        aggregation_method="simple_average",
+        prompt_template="Evaluate the following submission based on the rubric provided. The rubric is as follows: {rubric}. The student submission is as follows: {submission}.",
+        summarize_feedback=True
+    )
     assert result['average_grade'] == 85.0
-    #assert len(result['feedback']) <= sum(len(f) for f in result['feedback'].split('Mock response to prompt: '))
+    

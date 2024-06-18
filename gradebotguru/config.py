@@ -3,12 +3,20 @@ import os
 from typing import Dict, Any, Optional
 
 CONFIG_SCHEMA: Dict[str, Any] = {
-    'llm_providers': [],
+    'llm_providers': [
+        {'provider': 'openai', 'api_key': 'your_openai_api_key', 'model': 'gpt-3-turbo', 'temperature': 0.7}
+    ],
     'number_of_repeats': 1,
     'repeat_each_provider': False,
+    'aggregation_method': 'simple_average',
+    'bias_adjustments': {},
     'rubric_path': 'path/to/rubric.csv',
     'submission_path': 'path/to/submissions',
-    'logging_level': 'INFO'
+    'logging_level': 'INFO',
+    'output_format': 'json',
+    'output_path': 'path/to/output',
+    'output_fields': ['student_id', 'grade', 'feedback', 'sentiment', 'style'],
+    'llm_prompt_template': 'Grade the following student submission based on the rubric provided. The rubric is as follows: {rubric}. The student submission is as follows: {submission}.'
 }
 
 
@@ -94,11 +102,6 @@ def load_config(config_file_path: Optional[str] = None) -> Dict[str, Any]:
     for key in config.keys():
         env_value = os.getenv(key.upper())
         if env_value:
-            if isinstance(config[key], bool):
-                config[key] = env_value.lower() in ['true', '1', 'yes']
-            elif isinstance(config[key], int):
-                config[key] = int(env_value)
-            else:
-                config[key] = env_value
+            config[key] = env_value
 
     return config
