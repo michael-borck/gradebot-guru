@@ -605,9 +605,9 @@ This update adds comprehensive API documentation for the GradeBot Guru project, 
 * chore: Add generate_markdown.py script for generating markdown files from Python docstrings (9c6dd0f)
 * chore: organize administrative scripts and files into scripts folder (21a5d33)
 
-## Unreleased
+## [0.6.2] - 2024-06-18
 
-<small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/0.6.1...HEAD)</small>
+<small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/0.6.1...0.6.2)</small>
 
 ### Features
 * feat: Enhance grading system with improved configuration, response parsing, and feedback aggregation
@@ -637,4 +637,138 @@ This commit significantly improves the flexibility, accuracy, and user-friendlin
 - Updated grade_submission to include sentiment and style analysis in the output.
 - Modified tests to reflect new functionality.
 - Ensured consistent handling of missing grades and summarization of feedback. (c8fa04b)
+
+### Chores
+* chore: bump version to 0.6.2 and update changelog (3063de9)
+
+## Unreleased
+
+<small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/0.6.2...HEAD)</small>
+
+### Features
+* feat: enhance grading system with improved configuration, response parsing, and feedback aggregation
+
+- Added support for additional configuration options including custom prompts, temperature settings, output formats, and paths.
+- Implemented advanced response parsing to accurately extract grades, feedback, and overall feedback from LLM responses.
+- Enhanced feedback aggregation with methods to handle bias-adjusted, weighted average, and median aggregation.
+- Added functionality to generate comprehensive NLP statistics including sentiment analysis, word count, and readability for submissions.
+- Incorporated summarization of feedback using the best LLM provider for more concise and student-friendly feedback.
+- Improved error handling and logging to ensure robustness and traceability of the grading process.
+- Refactored :
+  - Broke down large functions into smaller, focused functions for better readability and maintainability.
+  - Added type hints and docstrings for all functions.
+  - Enhanced  and  functions.
+- Updated  to include instructions for LLMs on how to format the total score and feedback.
+- Fixed issues with doctests and pytest to ensure all tests pass successfully.
+- Enhanced the  function in  to better handle varied LLM responses.
+- Updated test files to reflect new configurations and ensure comprehensive test coverage.
+- Included detailed docstrings and examples for new and modified functions to aid in understanding and usage.
+
+This commit significantly improves the flexibility, accuracy, and user-friendliness of the grading system by leveraging advanced LLM capabilities and robust error handling. (f34af35)
+
+### Chores
+* chore: bump version to 0.6.2 and update changelog (6ea7501)
+
+### Refactoring
+* refactor: grader.py to aggregate provider info and feedback, and rewrite OllamaLLM class
+
+Changes:
+- Updated grade_submission function to aggregate provider information by converting the provider info dictionary to a string and adding it to a set.
+- Modified run_evaluations function to append individual responses and their total grades to respective lists.
+- Updated aggregate_responses function:
+  - Aggregated criteria and overall feedback from individual responses.
+  - Extracted provider information and added it to a set to avoid duplicates.
+  - Converted the provider info dictionary to a string before adding it to the set.
+  - Converted the set of aggregated provider information to a list when returning the aggregated response.
+- Simplified aggregate_grades function to handle different aggregation methods: simple average, weighted average, and median.
+- Removed bias_adjusted logic for simplicity and consistency.
+- Modified create_result_dict function to create the final result dictionary including submission ID, word count, readability, sentiment, grade, aggregated response, and individual responses.
+- Added detailed docstrings and type hints to all functions for better readability and maintainability.
+- Ensured that the code meets flake8 linter standards.
+- Rewrote OllamaLLM class to use a custom client for interacting with the Ollama server:
+  - Initialized the custom Client with the server URL provided.
+  - Used the custom client to send chat requests to the Ollama server in the generate_text method.
+  - Removed the dependency on global OpenAI settings to avoid conflicts with other LLM providers. (1244604)
+* refactor: grader.py to improve readability and add docstrings
+
+Changes:
+- Updated grade_submission function to simplify the overall grading process and ensure correct aggregation of individual responses and grades.
+- Modified run_evaluations function to directly use parse_response for evaluating criteria and overall feedback, and to append individual responses and their total grades to respective lists.
+- Updated aggregate_responses function to aggregate criteria and overall feedback from individual responses, ensuring the criteria and overall feedback are correctly aggregated and returned in the expected format.
+- Simplified aggregate_grades function to handle different aggregation methods: simple average, weighted average, and median, and removed the bias_adjusted logic for simplicity and consistency.
+- Modified create_result_dict function to create the final result dictionary including submission ID, word count, readability, sentiment, grade, aggregated response, and individual responses.
+- Added detailed docstrings and type hints to all functions for better readability and maintainability.
+- Ensured that the code meets flake8 linter standards. (b46244e)
+* refactor: handle response aggregation and update to return dictionaries
+
+Changes:
+- Updated grade_submission function:
+  - Simplified the overall grading process.
+  - Ensured that individual responses and their grades are aggregated correctly.
+  - Included the overall feedback extraction and handling in the aggregation process.
+
+- Modified run_evaluations function:
+  - Simplified the logic for running evaluations.
+  - Directly called process_evaluation to get criteria and overall feedback.
+  - Appended individual responses and their total grades to respective lists.
+  - Included the correct structure for overall feedback.
+
+- Updated aggregate_responses function:
+  - Aggregated criteria and overall feedback from individual responses.
+  - Extracted string values from the overall feedback dictionaries.
+  - Ensured that the criteria and overall feedback are correctly aggregated and returned in the expected format.
+  - Used aggregate_grades to handle different aggregation methods for grades.
+
+- Simplified aggregate_grades function:
+  - Handled different methods for grade aggregation: simple average and median.
+  - Raised a ValueError for unsupported aggregation methods.
+
+- Modified create_result_dict function:
+  - Created the final result dictionary including submission ID, word count, readability, sentiment, grade, aggregated response, and individual responses.
+
+- Updated process_evaluation function:
+  - Simplified to return criteria and overall feedback as a dictionary.
+  - Handled errors during response parsing and logged them.
+
+- Removed unnecessary helper functions and streamlined the code.
+
+- Ensured that the structure of the aggregated response matches that of individual responses.
+
+The refactoring ensures a consistent structure throughout the grading and aggregation process, handling overall feedback correctly and improving code readability and maintainability. (cb4756c)
+* refactor: refactor and Improve Grading Functionality in Grader Module
+
+1. Refactor grade_submission function:
+    - Broke down the grade_submission function into smaller, more manageable helper functions to improve readability and maintainability.
+    - Added helper functions:
+        - run_evaluations: Handles the evaluation logic for each LLM and repeat iterations.
+        - aggregate_and_store_results: Aggregates and stores results from multiple evaluations.
+        - finalize_aggregations: Finalizes the aggregation process across multiple LLMs.
+        - create_result_dict: Creates the final result dictionary with all required details.
+    - Simplified the main logic in grade_submission to improve clarity.
+
+2. Update main.py to use refactored grade_submission:
+    - Ensured compatibility with the new structure of grade_submission.
+    - Kept the functionality for loading configuration, submissions, and rubric intact.
+    - Handled grading for each submission and printed the results clearly.
+
+3. Improve modularity and maintainability:
+    - Improved code modularity by dividing responsibilities among multiple functions.
+    - Enhanced readability by reducing the complexity of individual functions.
+    - Made future maintenance and enhancements easier by adopting a clearer structure.
+
+4. Ensure compatibility with existing functionality:
+    - Verified that all existing parameters and configurations are supported in the refactored functions.
+    - Ensured the main script handles configuration loading, submission loading, and grading each submission with the specified parameters.
+
+5. Documentation and Logging:
+    - Updated docstrings to reflect the changes in function signatures and responsibilities.
+    - Maintained logging for important steps to ensure traceability and debugging support.
+
+6. Example usage and testing:
+    - Provided an example usage section in grader.py for testing the refactored functions.
+    - Ensured that the example usage aligns with the actual function signatures and expected behavior.
+
+7. Code Clean-up:
+    - Removed redundant code and ensured all imports are correctly placed.
+    - Ensured consistent formatting and style across the updated functions. (49d6d1f)
 

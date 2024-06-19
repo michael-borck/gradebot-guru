@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "gradebotguru"
-version = "0.6.2"
+version = "0.6.3"
 description = "AI-powered grading assistant for fast, accurate, and insightful feedback on student work."
 authors = [ "Michael Borck <michael@borck.me>",]
 readme = "README.md"
@@ -44,3 +44,4 @@ mkdocstrings-python = "^1.10.0"
 black = "^23.3.0"
 coverage = "^6.5.0"
 pytest-mock = "^3.14.0"
+gitpython = "^3.1.43"
