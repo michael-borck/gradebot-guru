@@ -39,7 +39,9 @@ def main():
             summarize_feedback=config.get('summarize_feedback', True)
         )
 
-        pprint.pprint(result)
+        print(f"{result['grade']}")
+        pprint.pprint(result['aggregated_response'])
+
 
 if __name__ == "__main__":
     main()

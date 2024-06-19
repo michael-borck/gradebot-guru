@@ -103,6 +103,7 @@ def generate_prompt(rubric: Dict[str, Dict[str, Any]], submission: str, assessme
     user_prompt += "\nPlease provide detailed feedback and a grade for each criterion in the following format:\n\n"
     user_prompt += "Criterion: <criterion_name>\nGrade: <grade>\nFeedback: <feedback>\n\n"
     user_prompt += "\nIf the submission is missing a criterion, please provide a 0 for the grade and 'N/A' for feedback for that criterion.\n\n"
+    # user_prompt += "\nOnly use the criterion in the rubric, do not make up additional criteria or reword or re-wirte the existing criteria.\n\n"
     # user_prompt += "Provide the total score in the format: Total Score: <total_score>/<max_score>"
     user_prompt += "\nAt the very end of response provide one paragraph of overall feedback for the submission in the format: Overall: .\n\n"
     user_prompt += "\n Do not include a final grade, overall grade, overall score, final score or total score in the output"
@@ -114,4 +115,5 @@ def generate_prompt(rubric: Dict[str, Dict[str, Any]], submission: str, assessme
     # user_prompt += "Follow these instructions  and do not include any additional information in the output"
     # user_prompt += "Do not make anything up or include any additional information in the output"
     # user_prompt += "Please take you time and think step by step to provide the best feedback"
+
     return f"{system_prompt}\n\n{user_prompt}"
