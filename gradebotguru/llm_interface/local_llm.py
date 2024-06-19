@@ -4,6 +4,11 @@ from gradebotguru.llm_interface.base_llm import BaseLLM
 from typing import Dict, Any
 
 
+import logging
+from typing import Dict, Any
+from ollama import Client
+from gradebotguru.llm_interface.base_llm import BaseLLM
+
 class OllamaLLM(BaseLLM):
     """
     Ollama LLM class for interacting with the Ollama server.
@@ -17,6 +22,7 @@ class OllamaLLM(BaseLLM):
         api_key (str): The API key for authentication.
         server_url (str): The URL of the Ollama server.
         model (str): The model to use for generating responses.
+        client (Client): The custom client for interacting with the Ollama server.
     """
 
     def __init__(self, api_key: str, server_url: str, model: str = 'llama3', weight: float = 1.0) -> None:
@@ -24,8 +30,7 @@ class OllamaLLM(BaseLLM):
         self.server_url = server_url
         self.model = model
         self.weight = weight
-        openai.api_key = api_key
-        openai.api_base = server_url
+        self.client = Client(host=server_url)
 
     def generate_text(self, prompt: str, **kwargs: Dict[str, Any]) -> str:
         """
@@ -38,14 +43,14 @@ class OllamaLLM(BaseLLM):
         Returns:
             str: The generated text response.
         """
-        response = openai.ChatCompletion.create(
+        response = self.client.chat(
             model=self.model,
             messages=[
                 {"role": "user", "content": prompt}
             ],
             **kwargs
         )
-        return response['choices'][0]['message']['content']
+        return response['message']['content']
 
     def get_response(self, prompt: str, **kwargs: Dict[str, Any]) -> str:
         """

@@ -1,3 +1,4 @@
+import logging
 from typing import Dict, Any, List, Tuple, Optional
 from statistics import median
 from gradebotguru.llm_interface.base_llm import BaseLLM
@@ -46,7 +47,9 @@ def grade_submission(
         )
         all_individual_responses.extend(individual_responses)
         all_grades.extend(provider_grades)
-        providers_info.add(" ".join([str(v) for v in llm.get_model_info().values()]))
+        for response in individual_responses:
+            provider_info_str = " ".join(f"{k}: {v}" for k, v in response["provider_info"].items())
+            providers_info.add(provider_info_str)
 
     aggregated_response = aggregate_responses(
         all_individual_responses, aggregation_method, llms, num_repeats, repeat_each_provider
@@ -125,6 +128,7 @@ def aggregate_responses(
     """
     criteria_by_name = {}
     all_overall_feedbacks = []
+    aggregated_provider_info = set()
 
     for response in responses:
         all_overall_feedbacks.append(response['overall_feedback']['overall'])
@@ -136,6 +140,8 @@ def aggregate_responses(
                 criteria_by_name[name] = {'feedbacks': [], 'grades': []}
             criteria_by_name[name]['feedbacks'].append(feedback)
             criteria_by_name[name]['grades'].append(grade)
+        provider_info_str = " ".join(f"{k}: {v}" for k, v in response["provider_info"].items())
+        aggregated_provider_info.add(provider_info_str)
 
     aggregated_criteria = []
     for name, feedbacks_grades in criteria_by_name.items():
@@ -150,7 +156,7 @@ def aggregate_responses(
     return {
         "criteria": aggregated_criteria,
         "overall_feedback": aggregated_overall_feedback,
-        "provider_info": "Aggregated",
+        "provider_info": list(aggregated_provider_info),
         "iteration": len(responses)
     }
 
