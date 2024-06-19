@@ -1,11 +1,10 @@
-import re
-import logging
 from typing import Dict, Any, List, Tuple, Optional
 from statistics import median
 from gradebotguru.llm_interface.base_llm import BaseLLM
 from gradebotguru.prompts import generate_prompt
 from gradebotguru.text_analysis import analyze_sentiment, analyze_style
 from gradebotguru.response_parser import parse_response
+
 
 def grade_submission(
     submission_id: str,
@@ -43,20 +42,46 @@ def grade_submission(
 
     for llm in llms:
         individual_responses, provider_grades = run_evaluations(
-            llm, submission, rubric, num_repeats, repeat_each_provider, prompt_template, aggregation_method, bias_adjustments
+            llm, submission, rubric, num_repeats, repeat_each_provider, prompt_template, bias_adjustments
         )
         all_individual_responses.extend(individual_responses)
         all_grades.extend(provider_grades)
         providers_info.add(" ".join([str(v) for v in llm.get_model_info().values()]))
 
-    aggregated_response = aggregate_responses(all_individual_responses, aggregation_method)
+    aggregated_response = aggregate_responses(
+        all_individual_responses, aggregation_method, llms, num_repeats, repeat_each_provider
+    )
     overall_grade = sum(criterion['grade'] for criterion in aggregated_response['criteria'])
 
-    return create_result_dict(submission_id, submission, rubric, overall_grade, aggregated_response, providers_info, all_individual_responses)
+    return create_result_dict(
+        submission_id, submission, rubric, overall_grade, aggregated_response, providers_info, all_individual_responses
+    )
+
 
 def run_evaluations(
-    llm: BaseLLM, submission: str, rubric: Dict[str, Any], num_repeats: int, repeat_each_provider: bool, prompt_template: str, aggregation_method: str, bias_adjustments: Optional[Dict[str, float]]
+    llm: BaseLLM,
+    submission: str,
+    rubric: Dict[str, Any],
+    num_repeats: int,
+    repeat_each_provider: bool,
+    prompt_template: str,
+    bias_adjustments: Optional[Dict[str, float]]
 ) -> Tuple[List[Dict[str, Any]], List[float]]:
+    """
+    Run evaluations for a given LLM.
+
+    Args:
+        llm (BaseLLM): The LLM provider.
+        submission (str): The student submission text.
+        rubric (Dict[str, Any]): The grading rubric.
+        num_repeats (int): Number of times to repeat the grading process.
+        repeat_each_provider (bool): Whether to repeat grading for each provider.
+        prompt_template (str): Custom prompt template for LLMs.
+        bias_adjustments (Optional[Dict[str, float]]): Bias adjustments for specific providers.
+
+    Returns:
+        Tuple[List[Dict[str, Any]], List[float]]: List of individual responses and their grades.
+    """
     individual_responses = []
     provider_grades = []
     repeats = num_repeats if repeat_each_provider else 1
@@ -66,11 +91,6 @@ def run_evaluations(
         response = llm.get_response(prompt)
         criteria, overall_feedback = parse_response(response)
         total_grade = sum(criterion['grade'] for criterion in criteria)
-
-        if aggregation_method == "bias_adjusted" and bias_adjustments:
-            llm_info = llm.get_model_info()
-            provider_name = llm_info.get("model_name", "")
-            total_grade += bias_adjustments.get(provider_name, 0)
 
         individual_responses.append({
             "criteria": criteria,
@@ -82,9 +102,27 @@ def run_evaluations(
 
     return individual_responses, provider_grades
 
+
 def aggregate_responses(
-    responses: List[Dict[str, Any]], aggregation_method: str
+    responses: List[Dict[str, Any]],
+    aggregation_method: str,
+    llms: List[BaseLLM],
+    num_repeats: int,
+    repeat_each_provider: bool
 ) -> Dict[str, Any]:
+    """
+    Aggregate responses from multiple evaluations.
+
+    Args:
+        responses (List[Dict[str, Any]]): List of individual responses.
+        aggregation_method (str): The method to aggregate grades.
+        llms (List[BaseLLM]): List of LLM providers.
+        num_repeats (int): Number of times to repeat the grading process.
+        repeat_each_provider (bool): Whether to repeat grading for each provider.
+
+    Returns:
+        Dict[str, Any]: Aggregated response.
+    """
     criteria_by_name = {}
     all_overall_feedbacks = []
 
@@ -102,7 +140,9 @@ def aggregate_responses(
     aggregated_criteria = []
     for name, feedbacks_grades in criteria_by_name.items():
         aggregated_feedback = " ".join(feedbacks_grades['feedbacks'])
-        aggregated_grade = aggregate_grades(aggregation_method, feedbacks_grades['grades'])
+        aggregated_grade = aggregate_grades(
+            aggregation_method, feedbacks_grades['grades'], llms, num_repeats, repeat_each_provider
+        )
         aggregated_criteria.append({'name': name, 'feedback': aggregated_feedback, 'grade': aggregated_grade})
 
     aggregated_overall_feedback = " ".join(all_overall_feedbacks)
@@ -114,25 +154,66 @@ def aggregate_responses(
         "iteration": len(responses)
     }
 
-def aggregate_grades(aggregation_method: str, grades: List[float]) -> float:
+
+def aggregate_grades(
+    aggregation_method: str,
+    grades: List[float],
+    llms: List[BaseLLM],
+    num_repeats: int,
+    repeat_each_provider: bool
+) -> float:
+    """
+    Aggregate grades based on the specified method.
+
+    Args:
+        aggregation_method (str): The method to aggregate grades.
+        grades (List[float]): List of grades.
+        llms (List[BaseLLM]): List of LLM providers.
+        num_repeats (int): Number of times to repeat the grading process.
+        repeat_each_provider (bool): Whether to repeat grading for each provider.
+
+    Returns:
+        float: The aggregated grade.
+    """
     if not grades:
         return 0.0
 
-    if aggregation_method == "simple_average":
+    if aggregation_method in ["simple_average", "bias_adjusted"]:
         return sum(grades) / len(grades)
+    elif aggregation_method == "weighted_average":
+        weights = [llm.get_model_info().get('weight', 1.0) for llm in llms for _ in range(num_repeats if repeat_each_provider else 1)]
+        weighted_sum = sum(grade * weight for grade, weight in zip(grades, weights))
+        return weighted_sum / sum(weights) if weights else None
     elif aggregation_method == "median":
-        sorted_grades = sorted(grades)
-        n = len(sorted_grades)
-        if n % 2 == 0:
-            return (sorted_grades[n // 2 - 1] + sorted_grades[n // 2]) / 2
-        else:
-            return sorted_grades[n // 2]
+        return median(grades)
     else:
         raise ValueError(f"Unsupported aggregation method: {aggregation_method}")
 
+
 def create_result_dict(
-    submission_id: str, submission: str, rubric: Dict[str, Any], overall_grade: float, aggregated_response: Dict[str, Any], providers_info: set, individual_responses: List[Dict[str, Any]]
+    submission_id: str,
+    submission: str,
+    rubric: Dict[str, Any],
+    overall_grade: float,
+    aggregated_response: Dict[str, Any],
+    providers_info: set,
+    individual_responses: List[Dict[str, Any]]
 ) -> Dict[str, Any]:
+    """
+    Create the final result dictionary with all relevant information.
+
+    Args:
+        submission_id (str): The ID of the student submission.
+        submission (str): The student submission text.
+        rubric (Dict[str, Any]): The grading rubric.
+        overall_grade (float): The overall grade for the submission.
+        aggregated_response (Dict[str, Any]): The aggregated response.
+        providers_info (set): Information about the providers.
+        individual_responses (List[Dict[str, Any]]): List of individual responses.
+
+    Returns:
+        Dict[str, Any]: The final result dictionary.
+    """
     sentiment_analysis = analyze_sentiment(submission)
     style = analyze_style(submission)
 
