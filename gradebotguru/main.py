@@ -27,6 +27,7 @@ def main():
 
     for submission_id, submission_text in submissions.items():
         result = grade_submission(
+            submission_id=submission_id,
             submission=submission_text,
             rubric=rubric,
             llms=llms,
@@ -38,8 +39,6 @@ def main():
             summarize_feedback=config.get('summarize_feedback', True)
         )
 
-        print(f"Submission ID: {submission_id}, Result:")
-        pprint.pprint(result.pop('criteria_feedback'))
         pprint.pprint(result)
 
 if __name__ == "__main__":

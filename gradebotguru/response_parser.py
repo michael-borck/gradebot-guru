@@ -69,5 +69,5 @@ def parse_response(text: str) -> Tuple[List[Dict[str, Any]], Dict[str, str]]:
 
     # Save the overall feedback
     overall_feedback = {'overall': overall.strip()}
-
+    
     return criteria, overall_feedback
