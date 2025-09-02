@@ -48,7 +48,7 @@ class OpenAILLM(BaseLLM):
                 ],
                 temperature=self.temperature,
             )
-            
+
             if response.choices and response.choices[0].message.content:
                 content = response.choices[0].message.content
                 return content.strip()

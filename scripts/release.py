@@ -133,8 +133,6 @@ def commit_changes(version: str) -> None:
     repo.create_tag(version)
 
 
-
-
 def copy_files() -> None:
     """
     Copies specific markdown files from the root folder to the docs folder,

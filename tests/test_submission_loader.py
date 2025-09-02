@@ -153,7 +153,7 @@ def test_load_submissions(mocker: MockerFixture) -> None:
     def mock_isfile(path: str) -> bool:
         return path.split(os.sep)[-1] in mock_files
 
-    def mock_open_func(filepath: str, mode: str = "r", encoding: str = None):
+    def mock_open_func(filepath: str, mode: str = "r", encoding: str | None = None) -> Any:
         filename = filepath.split(os.sep)[-1]
         if filename in mock_files:
             return mocker.mock_open(read_data=mock_files[filename]).return_value

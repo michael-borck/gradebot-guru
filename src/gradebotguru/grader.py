@@ -247,8 +247,10 @@ def aggregate_grades(
             for llm in llms
             for _ in range(num_repeats if repeat_each_provider else 1)
         ]
-        weighted_sum = sum(grade * weight for grade, weight in zip(grades, weights, strict=False))
-        result = (weighted_sum / sum(weights))
+        weighted_sum = sum(
+            grade * weight for grade, weight in zip(grades, weights, strict=False)
+        )
+        result = weighted_sum / sum(weights)
         return float(round(result * 2) / 2)  # Round to nearest 0.5
     elif aggregation_method == "median":
         return float(median(grades))

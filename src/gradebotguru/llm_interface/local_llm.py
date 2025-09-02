@@ -43,13 +43,10 @@ class OllamaLLM(BaseLLM):
             str: The generated text response.
         """
         messages = [{"role": "user", "content": prompt}]
-        response = self.client.chat(
-            model=self.model, 
-            messages=messages
-        )
-        
+        response = self.client.chat(model=self.model, messages=messages)
+
         # Handle the response structure properly - Ollama returns a ChatResponse object
-        if hasattr(response, 'message') and hasattr(response.message, 'content'):
+        if hasattr(response, "message") and hasattr(response.message, "content"):
             return str(response.message.content)
         else:
             # Fallback for any unexpected response format

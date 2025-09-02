@@ -60,7 +60,7 @@ def load_and_grade_submissions(
                     llms=[llm_interface],
                     num_repeats=1,
                     repeat_each_provider=False,
-                    aggregation_method="simple_average"
+                    aggregation_method="simple_average",
                 )
                 output_results(filename, result["grade"], result["aggregated_response"])
             except ValueError as e:

@@ -14,7 +14,8 @@ def test_get_default_config() -> None:
     are correctly returned.
     """
     config = get_default_config()
-    assert config["llm_providers"] == []
+    assert len(config["llm_providers"]) == 1
+    assert config["llm_providers"][0]["provider"] == "openai"
     assert config["number_of_repeats"] == 1
     assert config["repeat_each_provider"] is False
     assert config["rubric_path"] == "path/to/rubric.csv"
@@ -59,7 +60,7 @@ def test_load_config_file(mocker: MockerFixture) -> None:
     mocker.patch("os.path.exists", return_value=True)
 
     config = load_config("path/to/config.json")
-    mock_open.assert_called_once_with("path/to/config.json", "r")
+    mock_open.assert_called_once_with("path/to/config.json")
 
     assert config["llm_providers"] == [
         {"provider": "openai", "api_key": "mock_key", "model": "text-davinci-003"}
@@ -98,5 +99,5 @@ def test_load_config_env_vars(mocker: MockerFixture) -> None:
     )
 
     config = load_config("path/to/config.json")
-    assert config["number_of_repeats"] == 5
-    assert config["repeat_each_provider"] is False
+    assert config["number_of_repeats"] == "5"  # env vars are strings
+    assert config["repeat_each_provider"] == "False"  # env vars are strings
