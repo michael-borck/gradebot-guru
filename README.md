@@ -1,4 +1,4 @@
-# GradeBot Guru: Your AI Grading Assistant ��‍♂️🤖
+# GradeBot Guru: Your AI Grading Assistant 👨‍🏫🤖
 
 [![PyPI Version](https://img.shields.io/pypi/v/gradebot-guru?color=blue)](https://pypi.org/project/gradebot-guru/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
@@ -7,7 +7,7 @@ GradeBot Guru is your friendly AI-powered grading assistant, designed to automat
 
 ## Table of Contents
 
-- [GradeBot Guru: Your AI Grading Assistant ��‍♂️🤖](#gradebot-guru-your-ai-grading-assistant-️)
+- [GradeBot Guru: Your AI Grading Assistant 👨‍🏫🤖](#gradebot-guru-your-ai-grading-assistant-)
   - [Table of Contents](#table-of-contents)
   - [Features ✨](#features-)
   - [Installation 🛠️](#installation-️)
