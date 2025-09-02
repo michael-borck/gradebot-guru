@@ -1,5 +1,6 @@
 # tests/test_utils.py
-from typing import Any, Dict
+from typing import Any
+
 from gradebotguru.llm_interface.base_llm import BaseLLM
 
 
@@ -22,7 +23,7 @@ class MockLLM(BaseLLM):
         """
         return "Grade: 85\nFeedback: Good job!"
 
-    def generate_text(self, prompt: str, **kwargs: Dict[str, Any]) -> str:
+    def generate_text(self, prompt: str, **kwargs: dict[str, Any]) -> str:
         """
         Simulate generating text based on the provided prompt.
 
@@ -35,7 +36,7 @@ class MockLLM(BaseLLM):
         """
         return f"Mock response to prompt: {prompt}"
 
-    def get_model_info(self) -> Dict[str, Any]:
+    def get_model_info(self) -> dict[str, Any]:
         """
         Get mock model information.
 

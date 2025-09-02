@@ -1,8 +1,9 @@
-import os
 import json
-import pytest
+import os
+
 from pytest_mock import MockerFixture
-from gradebotguru.config import load_config, get_default_config
+
+from gradebotguru.config import get_default_config, load_config
 
 
 def test_get_default_config() -> None:
@@ -13,12 +14,12 @@ def test_get_default_config() -> None:
     are correctly returned.
     """
     config = get_default_config()
-    assert config['llm_providers'] == []
-    assert config['number_of_repeats'] == 1
-    assert config['repeat_each_provider'] is False
-    assert config['rubric_path'] == 'path/to/rubric.csv'
-    assert config['submission_path'] == 'path/to/submissions'
-    assert config['logging_level'] == 'INFO'
+    assert config["llm_providers"] == []
+    assert config["number_of_repeats"] == 1
+    assert config["repeat_each_provider"] is False
+    assert config["rubric_path"] == "path/to/rubric.csv"
+    assert config["submission_path"] == "path/to/submissions"
+    assert config["logging_level"] == "INFO"
 
 
 def test_load_config_defaults() -> None:
@@ -48,22 +49,26 @@ def test_load_config_file(mocker: MockerFixture) -> None:
         "repeat_each_provider": True,
         "rubric_path": "custom/rubric.csv",
         "submission_path": "custom/submissions",
-        "logging_level": "DEBUG"
+        "logging_level": "DEBUG",
     }
 
     # Mock the open function within the load_config context
-    mock_open = mocker.patch('builtins.open', mocker.mock_open(read_data=json.dumps(mock_config_content)))
-    mocker.patch('os.path.exists', return_value=True)
+    mock_open = mocker.patch(
+        "builtins.open", mocker.mock_open(read_data=json.dumps(mock_config_content))
+    )
+    mocker.patch("os.path.exists", return_value=True)
 
-    config = load_config('path/to/config.json')
-    mock_open.assert_called_once_with('path/to/config.json', 'r')
+    config = load_config("path/to/config.json")
+    mock_open.assert_called_once_with("path/to/config.json", "r")
 
-    assert config['llm_providers'] == [{"provider": "openai", "api_key": "mock_key", "model": "text-davinci-003"}]
-    assert config['number_of_repeats'] == 3
-    assert config['repeat_each_provider'] is True
-    assert config['rubric_path'] == 'custom/rubric.csv'
-    assert config['submission_path'] == 'custom/submissions'
-    assert config['logging_level'] == 'DEBUG'
+    assert config["llm_providers"] == [
+        {"provider": "openai", "api_key": "mock_key", "model": "text-davinci-003"}
+    ]
+    assert config["number_of_repeats"] == 3
+    assert config["repeat_each_provider"] is True
+    assert config["rubric_path"] == "custom/rubric.csv"
+    assert config["submission_path"] == "custom/submissions"
+    assert config["logging_level"] == "DEBUG"
 
 
 def test_load_config_env_vars(mocker: MockerFixture) -> None:
@@ -81,13 +86,17 @@ def test_load_config_env_vars(mocker: MockerFixture) -> None:
         "repeat_each_provider": True,
         "rubric_path": "custom/rubric.csv",
         "submission_path": "custom/submissions",
-        "logging_level": "DEBUG"
+        "logging_level": "DEBUG",
     }
 
-    mocker.patch('builtins.open', mocker.mock_open(read_data=json.dumps(mock_config_content)))
-    mocker.patch('os.path.exists', return_value=True)
-    mocker.patch.dict(os.environ, {"NUMBER_OF_REPEATS": "5", "REPEAT_EACH_PROVIDER": "False"})
+    mocker.patch(
+        "builtins.open", mocker.mock_open(read_data=json.dumps(mock_config_content))
+    )
+    mocker.patch("os.path.exists", return_value=True)
+    mocker.patch.dict(
+        os.environ, {"NUMBER_OF_REPEATS": "5", "REPEAT_EACH_PROVIDER": "False"}
+    )
 
-    config = load_config('path/to/config.json')
-    assert config['number_of_repeats'] == 5
-    assert config['repeat_each_provider'] is False
+    config = load_config("path/to/config.json")
+    assert config["number_of_repeats"] == 5
+    assert config["repeat_each_provider"] is False

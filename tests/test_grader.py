@@ -1,15 +1,26 @@
+from typing import Any
+
 import pytest
-from typing import Dict, Any
+
 from gradebotguru.grader import grade_submission
 from tests.test_utils import MockLLM
 
 
 @pytest.fixture
-def mock_rubric() -> Dict[str, Dict[str, Any]]:
+def mock_rubric() -> dict[str, dict[str, Any]]:
     return {
-        "Content": {"description": "Quality and relevance of content.", "max_points": 10},
-        "Clarity": {"description": "Clarity of expression and organization.", "max_points": 5},
-        "Grammar": {"description": "Proper use of grammar and syntax.", "max_points": 5}
+        "Content": {
+            "description": "Quality and relevance of content.",
+            "max_points": 10,
+        },
+        "Clarity": {
+            "description": "Clarity of expression and organization.",
+            "max_points": 5,
+        },
+        "Grammar": {
+            "description": "Proper use of grammar and syntax.",
+            "max_points": 5,
+        },
     }
 
 
@@ -35,11 +46,11 @@ def test_grade_submission(mock_rubric, mock_submission):
         repeat_each_provider=True,
         aggregation_method="simple_average",
         prompt_template="Evaluate the following submission based on the rubric provided. The rubric is as follows: {rubric}. The student submission is as follows: {submission}.",
-        summarize_feedback=False
+        summarize_feedback=False,
     )
-    assert result['average_grade'] == 85.0
-    assert result['out_of'] == 20
-    assert "Good job!" in result['feedback']
+    assert result["average_grade"] == 85.0
+    assert result["out_of"] == 20
+    assert "Good job!" in result["feedback"]
 
 
 def test_grade_submission_multiple_llms(mock_rubric, mock_submission):
@@ -59,10 +70,10 @@ def test_grade_submission_multiple_llms(mock_rubric, mock_submission):
         repeat_each_provider=False,
         aggregation_method="simple_average",
         prompt_template="Evaluate the following submission based on the rubric provided. The rubric is as follows: {rubric}. The student submission is as follows: {submission}.",
-        summarize_feedback=False
+        summarize_feedback=False,
     )
-    assert result['average_grade'] == 85.0
-    assert "Good job!" in result['feedback']
+    assert result["average_grade"] == 85.0
+    assert "Good job!" in result["feedback"]
 
 
 def test_grade_submission_bias_adjusted(mock_rubric, mock_submission):
@@ -84,10 +95,10 @@ def test_grade_submission_bias_adjusted(mock_rubric, mock_submission):
         aggregation_method="bias_adjusted",
         bias_adjustments=bias_adjustments,
         prompt_template="Evaluate the following submission based on the rubric provided. The rubric is as follows: {rubric}. The student submission is as follows: {submission}.",
-        summarize_feedback=False
+        summarize_feedback=False,
     )
-    assert result['average_grade'] == 90.0
-    assert "Good job!" in result['feedback']
+    assert result["average_grade"] == 90.0
+    assert "Good job!" in result["feedback"]
 
 
 def test_grade_submission_summarize_feedback(mock_rubric, mock_submission):
@@ -107,7 +118,6 @@ def test_grade_submission_summarize_feedback(mock_rubric, mock_submission):
         repeat_each_provider=True,
         aggregation_method="simple_average",
         prompt_template="Evaluate the following submission based on the rubric provided. The rubric is as follows: {rubric}. The student submission is as follows: {submission}.",
-        summarize_feedback=True
+        summarize_feedback=True,
     )
-    assert result['average_grade'] == 85.0
-    
+    assert result["average_grade"] == 85.0

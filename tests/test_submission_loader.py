@@ -1,8 +1,17 @@
 import os
+from typing import Any
+
 import pytest
 from pytest_mock import MockerFixture
-from typing import List, Dict, Any
-from gradebotguru.submission_loader import load_submission, load_text, load_markdown, load_pdf, load_docx, load_code
+
+from gradebotguru.submission_loader import (
+    load_code,
+    load_docx,
+    load_markdown,
+    load_pdf,
+    load_submission,
+    load_text,
+)
 
 
 def test_load_text(tmp_path: Any) -> None:
@@ -43,10 +52,11 @@ def test_load_pdf(tmp_path: Any) -> None:
     Asserts that the content of the PDF file is correctly read.
     """
     from pypdf import PdfWriter
+
     pdf_file = tmp_path / "test.pdf"
     writer = PdfWriter()
     writer.add_blank_page(width=72, height=72)
-    with open(pdf_file, 'wb') as f:
+    with open(pdf_file, "wb") as f:
         writer.write(f)
     assert load_pdf(str(pdf_file)) == ""
 
@@ -61,6 +71,7 @@ def test_load_docx(tmp_path: Any) -> None:
     Asserts that the content of the DOCX file is correctly read.
     """
     import docx
+
     docx_file = tmp_path / "test.docx"
     doc = docx.Document()
     doc.add_paragraph("This is a test DOCX file.")
@@ -100,14 +111,16 @@ def test_load_submission(tmp_path: Any) -> None:
     assert load_submission(str(md_file)) == "# Test\nThis is a test markdown file."
 
     from pypdf import PdfWriter
+
     pdf_file = tmp_path / "test.pdf"
     writer = PdfWriter()
     writer.add_blank_page(width=72, height=72)
-    with open(pdf_file, 'wb') as f:
+    with open(pdf_file, "wb") as f:
         writer.write(f)
     assert load_submission(str(pdf_file)) == ""
 
     import docx
+
     docx_file = tmp_path / "test.docx"
     doc = docx.Document()
     doc.add_paragraph("This is a test DOCX file.")
@@ -129,28 +142,31 @@ def test_load_submissions(mocker: MockerFixture) -> None:
     Parameters:
     - mocker (MockerFixture): A pytest fixture for mocking.
     """
-    mock_files: Dict[str, str] = {
-        'submission1.txt': 'This is the content of submission 1.',
-        'submission2.txt': 'This is the content of submission 2.'
+    mock_files: dict[str, str] = {
+        "submission1.txt": "This is the content of submission 1.",
+        "submission2.txt": "This is the content of submission 2.",
     }
 
-    def mock_listdir(directory: str) -> List[str]:
+    def mock_listdir(directory: str) -> list[str]:
         return list(mock_files.keys())
 
     def mock_isfile(path: str) -> bool:
         return path.split(os.sep)[-1] in mock_files
 
-    def mock_open_func(filepath: str, mode: str = 'r', encoding: str = None):
+    def mock_open_func(filepath: str, mode: str = "r", encoding: str = None):
         filename = filepath.split(os.sep)[-1]
         if filename in mock_files:
             return mocker.mock_open(read_data=mock_files[filename]).return_value
         raise FileNotFoundError
 
-    mocker.patch('os.listdir', mock_listdir)
-    mocker.patch('os.path.isfile', mock_isfile)
-    mocker.patch('builtins.open', mock_open_func)
+    mocker.patch("os.listdir", mock_listdir)
+    mocker.patch("os.path.isfile", mock_isfile)
+    mocker.patch("builtins.open", mock_open_func)
 
-    submissions = {file: load_submission(f'path/to/submissions/{file}') for file in mock_listdir('path/to/submissions')}
+    submissions = {
+        file: load_submission(f"path/to/submissions/{file}")
+        for file in mock_listdir("path/to/submissions")
+    }
     assert submissions == mock_files
 
 

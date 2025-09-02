@@ -40,17 +40,17 @@ GradeBot Guru is your friendly AI-powered grading assistant, designed to automat
    ```bash
    git clone https://github.com/teaching-repositories/gradebot-guru.git
    cd gradebot-guru
-   poetry install
+   uv sync --all-extras --dev
    ```
 
 ## Usage 🚀
 
 ```bash
-gradebot-guru <submissions_dir> --rubric <rubric_path>
+gradebot-guru --config <config_path> --submissions <submissions_dir>
 ```
 
+* `<config_path>`: Path to the configuration file (JSON format with LLM settings and rubric path).
 * `<submissions_dir>`: The path to the directory containing student submissions (e.g., essays, code).
-* `<rubric_path>`: The path to the grading rubric file (e.g., CSV, JSON).
 
 ## Configuration ⚙️
 
@@ -59,7 +59,11 @@ gradebot-guru <submissions_dir> --rubric <rubric_path>
 ## Examples 📚
 
 ```bash
-gradebot-guru assignments/ --rubric rubrics/essay_rubric.csv
+# Basic usage with demo configuration
+gradebot-guru --config demo/config.json --submissions demo/text-submissions
+
+# Using custom configuration
+gradebot-guru --config my-config.json --submissions ./student-essays
 ```
 
 ## Development 👩‍💻
@@ -67,25 +71,26 @@ gradebot-guru assignments/ --rubric rubrics/essay_rubric.csv
 1. **Running Tests:**
 
    ```bash
-   poetry run pytest
+   uv run pytest
    ```
 
-2. **Code Formatting:**
+2. **Code Formatting and Linting:**
 
    ```bash
-   poetry run black .
+   uv run ruff format .
+   uv run ruff check .
    ```
 
 3. **Type Checking:**
 
    ```bash
-   poetry run mypy .
+   uv run mypy .
    ```
 
 4. **Building Documentation:**
 
    ```bash
-   poetry run mkdocs serve
+   uv run mkdocs serve
    ```
 
 ## Contributing 🙌

@@ -1,4 +1,5 @@
 import pytest
+
 from gradebotguru.llm_interface.local_llm import OllamaLLM
 
 
@@ -10,7 +11,9 @@ def mock_ollama_llm():
     Returns:
         OllamaLLM: An instance of OllamaLLM with mock configuration.
     """
-    return OllamaLLM(api_key="test_key", server_url="http://localhost:11434/v1", model="llama3")
+    return OllamaLLM(
+        api_key="test_key", server_url="http://localhost:11434/v1", model="llama3"
+    )
 
 
 def test_generate_text(mock_ollama_llm, mocker):
@@ -24,14 +27,12 @@ def test_generate_text(mock_ollama_llm, mocker):
     Asserts:
         The response from generate_text matches the expected mock response.
     """
-    mock_response = {
-        'choices': [{'message': {'content': 'This is a test response.'}}]
-    }
-    mocker.patch('openai.ChatCompletion.create', return_value=mock_response)
+    mock_response = {"choices": [{"message": {"content": "This is a test response."}}]}
+    mocker.patch("openai.ChatCompletion.create", return_value=mock_response)
 
     prompt = "Test prompt"
     response = mock_ollama_llm.generate_text(prompt)
-    assert response == 'This is a test response.'
+    assert response == "This is a test response."
 
 
 def test_get_response(mock_ollama_llm, mocker):
@@ -45,14 +46,12 @@ def test_get_response(mock_ollama_llm, mocker):
     Asserts:
         The response from get_response matches the expected mock response.
     """
-    mock_response = {
-        'choices': [{'message': {'content': 'This is a test response.'}}]
-    }
-    mocker.patch('openai.ChatCompletion.create', return_value=mock_response)
+    mock_response = {"choices": [{"message": {"content": "This is a test response."}}]}
+    mocker.patch("openai.ChatCompletion.create", return_value=mock_response)
 
     prompt = "Test prompt"
     response = mock_ollama_llm.get_response(prompt)
-    assert response == 'This is a test response.'
+    assert response == "This is a test response."
 
 
 def test_get_model_info(mock_ollama_llm):
@@ -66,6 +65,6 @@ def test_get_model_info(mock_ollama_llm):
         The model information returned by get_model_info matches the expected values.
     """
     info = mock_ollama_llm.get_model_info()
-    assert info['model_name'] == 'llama3'
-    assert info['api_key'] == 'test_key'
-    assert info['server_url'] == 'http://localhost:11434/v1'
+    assert info["model_name"] == "llama3"
+    assert info["api_key"] == "test_key"
+    assert info["server_url"] == "http://localhost:11434/v1"

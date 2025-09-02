@@ -1,10 +1,9 @@
 import argparse
-import subprocess
-import git
-import toml
 import os
 import shutil
-from typing import Optional
+
+import git
+import toml
 
 
 def bump_version(bump_type: str) -> str:
@@ -17,28 +16,28 @@ def bump_version(bump_type: str) -> str:
     Returns:
         str: The new version.
     """
-    with open('pyproject.toml', 'r') as file:
+    with open("pyproject.toml") as file:
         config = toml.load(file)
 
-    version = config['tool']['poetry']['version']
-    major, minor, patch = map(int, version.split('.'))
+    version = config["tool"]["poetry"]["version"]
+    major, minor, patch = map(int, version.split("."))
 
-    if bump_type == 'major':
+    if bump_type == "major":
         major += 1
         minor = 0
         patch = 0
-    elif bump_type == 'minor':
+    elif bump_type == "minor":
         minor += 1
         patch = 0
-    elif bump_type == 'patch':
+    elif bump_type == "patch":
         patch += 1
     else:
         raise ValueError(f"Unknown bump type: {bump_type}")
 
     new_version = f"{major}.{minor}.{patch}"
-    config['tool']['poetry']['version'] = new_version
+    config["tool"]["poetry"]["version"] = new_version
 
-    with open('pyproject.toml', 'w') as file:
+    with open("pyproject.toml", "w") as file:
         toml.dump(config, file)
 
     return new_version
@@ -48,26 +47,28 @@ def generate_changelog() -> None:
     """
     Generates or updates the changelog file (CHANGELOG.md) with categorized commit messages.
     """
-    repo = git.Repo('.')
+    repo = git.Repo(".")
     tags = sorted(repo.tags, key=lambda t: t.commit.committed_datetime)
 
     changelog_content = "# Changelog\n\nAll notable changes to this project will be documented in this file.\n\n"
     changelog_content += "The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)\n"
     changelog_content += "and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).\n\n"
 
-    previous_tag: Optional[git.TagReference] = None
+    previous_tag: git.TagReference | None = None
     for tag in tags:
         if previous_tag:
             changelog_content += generate_section(repo, previous_tag, tag)
         previous_tag = tag
 
-    changelog_content += generate_section(repo, previous_tag, 'HEAD', unreleased=True)
+    changelog_content += generate_section(repo, previous_tag, "HEAD", unreleased=True)
 
-    with open('CHANGELOG.md', 'w') as file:
+    with open("CHANGELOG.md", "w") as file:
         file.write(changelog_content)
 
 
-def generate_section(repo: git.Repo, from_ref: str, to_ref: str, unreleased: bool = False) -> str:
+def generate_section(
+    repo: git.Repo, from_ref: str, to_ref: str, unreleased: bool = False
+) -> str:
     """
     Generates a section of the changelog for the specified range of commits.
 
@@ -80,7 +81,11 @@ def generate_section(repo: git.Repo, from_ref: str, to_ref: str, unreleased: boo
     Returns:
         str: The generated changelog section content.
     """
-    section_title = f"## Unreleased\n" if unreleased else f"## [{to_ref}] - {to_ref.commit.committed_datetime.date()}\n"
+    section_title = (
+        "## Unreleased\n"
+        if unreleased
+        else f"## [{to_ref}] - {to_ref.commit.committed_datetime.date()}\n"
+    )
     compare_link = f"<small>[Compare with latest](https://github.com/BARG-Curtin-University/gradebotguru/compare/{from_ref}...{to_ref})</small>\n"
     section_content = f"{section_title}\n{compare_link}\n"
 
@@ -93,7 +98,7 @@ def generate_section(repo: git.Repo, from_ref: str, to_ref: str, unreleased: boo
         "Features": "feat:",
         "Documentation": "docs:",
         "Chores": "chore:",
-        "Refactoring": "refactor:"
+        "Refactoring": "refactor:",
     }
     categorized_commits = {category: [] for category in categories}
 
@@ -120,24 +125,23 @@ def commit_changes(version: str) -> None:
     Args:
         version (str): The new version to tag.
     """
-    repo = git.Repo('.')
-    repo.git.add('pyproject.toml')
-    repo.git.add('CHANGELOG.md')
-    repo.git.add('docs/')  # Add any other necessary files or directories
+    repo = git.Repo(".")
+    repo.git.add("pyproject.toml")
+    repo.git.add("CHANGELOG.md")
+    repo.git.add("docs/")  # Add any other necessary files or directories
     repo.index.commit(f"chore: bump version to {version} and update changelog")
     repo.create_tag(version)
 
 
-import os
-import shutil
+
 
 def copy_files() -> None:
     """
     Copies specific markdown files from the root folder to the docs folder,
     converting the file names to lowercase.
     """
-    files_to_copy = ['ROADMAP.md', 'CONTRIBUTING.md', 'CODE_OF_CONDUCT.md']
-    dest_dir = 'docs/'
+    files_to_copy = ["ROADMAP.md", "CONTRIBUTING.md", "CODE_OF_CONDUCT.md"]
+    dest_dir = "docs/"
     os.makedirs(dest_dir, exist_ok=True)
 
     for file in files_to_copy:
@@ -150,14 +154,14 @@ def push_changes() -> None:
     """
     Pushes the commits and tags to the remote repository.
     """
-    repo = git.Repo('.')
-    origin = repo.remote(name='origin')
+    repo = git.Repo(".")
+    origin = repo.remote(name="origin")
 
     current_branch = repo.active_branch
     try:
         origin.push()
     except git.exc.GitCommandError as e:
-        if 'fatal: The current branch' in str(e) and 'has no upstream branch' in str(e):
+        if "fatal: The current branch" in str(e) and "has no upstream branch" in str(e):
             print(f"Setting upstream for branch {current_branch}")
             origin.push(set_upstream=True)
         else:
@@ -182,7 +186,11 @@ def main(bump_type: str) -> None:
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Automate the release process.')
-    parser.add_argument('bump_type', choices=['major', 'minor', 'patch'], help='Type of version bump (major, minor, patch)')
+    parser = argparse.ArgumentParser(description="Automate the release process.")
+    parser.add_argument(
+        "bump_type",
+        choices=["major", "minor", "patch"],
+        help="Type of version bump (major, minor, patch)",
+    )
     args = parser.parse_args()
     main(args.bump_type)

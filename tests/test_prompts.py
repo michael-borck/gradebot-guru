@@ -1,10 +1,16 @@
+from typing import Any
+
 import pytest
-from gradebotguru.prompts import generate_prompt, generate_system_prompt, generate_user_prompt
-from typing import Dict, Any
+
+from gradebotguru.prompts import (
+    generate_prompt,
+    generate_system_prompt,
+    generate_user_prompt,
+)
 
 
 @pytest.fixture
-def rubric() -> Dict[str, Dict[str, Any]]:
+def rubric() -> dict[str, dict[str, Any]]:
     """
     Fixture to provide a sample grading rubric.
 
@@ -14,16 +20,16 @@ def rubric() -> Dict[str, Dict[str, Any]]:
     return {
         "Content": {
             "description": "Quality and relevance of content.",
-            "max_points": 10
+            "max_points": 10,
         },
         "Clarity": {
             "description": "Clarity of expression and organization.",
-            "max_points": 5
+            "max_points": 5,
         },
         "Grammar": {
             "description": "Proper use of grammar and syntax.",
-            "max_points": 5
-        }
+            "max_points": 5,
+        },
     }
 
 
@@ -49,7 +55,9 @@ def test_generate_system_prompt() -> None:
     assert actual_prompt == expected_prompt
 
 
-def test_generate_user_prompt(rubric: Dict[str, Dict[str, Any]], submission: str) -> None:
+def test_generate_user_prompt(
+    rubric: dict[str, dict[str, Any]], submission: str
+) -> None:
     """
     Test the generation of the user prompt for essay assessment.
 
@@ -72,7 +80,7 @@ def test_generate_user_prompt(rubric: Dict[str, Dict[str, Any]], submission: str
     assert actual_prompt == expected_prompt
 
 
-def test_generate_prompt(rubric: Dict[str, Dict[str, Any]], submission: str) -> None:
+def test_generate_prompt(rubric: dict[str, dict[str, Any]], submission: str) -> None:
     """
     Test the generation of the full prompt for essay assessment.
 
@@ -96,7 +104,9 @@ def test_generate_prompt(rubric: Dict[str, Dict[str, Any]], submission: str) -> 
     assert actual_prompt == expected_prompt
 
 
-def test_generate_user_prompt_with_code(rubric: Dict[str, Dict[str, Any]], submission: str) -> None:
+def test_generate_user_prompt_with_code(
+    rubric: dict[str, dict[str, Any]], submission: str
+) -> None:
     """
     Test the generation of the user prompt for code assessment.
 
@@ -119,7 +129,9 @@ def test_generate_user_prompt_with_code(rubric: Dict[str, Dict[str, Any]], submi
     assert actual_prompt == expected_prompt
 
 
-def test_generate_prompt_with_code(rubric: Dict[str, Dict[str, Any]], submission: str) -> None:
+def test_generate_prompt_with_code(
+    rubric: dict[str, dict[str, Any]], submission: str
+) -> None:
     """
     Test the generation of the full prompt for code assessment.
 

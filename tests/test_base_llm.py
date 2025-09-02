@@ -1,6 +1,4 @@
-import pytest
 from tests.test_utils import MockLLM
-from typing import Any, Dict
 
 
 def test_generate_text() -> None:

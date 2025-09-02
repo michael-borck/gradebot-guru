@@ -1,4 +1,5 @@
 import pytest
+
 from gradebotguru.response_parser import parse_response
 
 
@@ -9,7 +10,7 @@ def test_parse_response_with_valid_data() -> None:
     response = "Grade: 85.5\nFeedback: Good work on the assignment. However, there are some areas that need improvement."
     expected_result = {
         "grade": 85.5,
-        "feedback": "Good work on the assignment. However, there are some areas that need improvement."
+        "feedback": "Good work on the assignment. However, there are some areas that need improvement.",
     }
     actual_result = parse_response(response)
     assert actual_result == expected_result
@@ -20,10 +21,7 @@ def test_parse_response_without_feedback() -> None:
     Test parsing a response with grade but no feedback.
     """
     response = "Grade: 90\nFeedback: "
-    expected_result = {
-        "grade": 90.0,
-        "feedback": ""
-    }
+    expected_result = {"grade": 90.0, "feedback": ""}
     actual_result = parse_response(response)
     assert actual_result == expected_result
 
@@ -35,7 +33,7 @@ def test_parse_response_without_grade() -> None:
     response = "Feedback: Excellent effort, but there are a few mistakes."
     expected_result = {
         "grade": None,
-        "feedback": "Excellent effort, but there are a few mistakes."
+        "feedback": "Excellent effort, but there are a few mistakes.",
     }
     actual_result = parse_response(response)
     assert actual_result == expected_result
@@ -46,10 +44,7 @@ def test_parse_response_with_no_matching_patterns() -> None:
     Test parsing a response with no matching grade or feedback patterns.
     """
     response = "No relevant information here."
-    expected_result = {
-        "grade": None,
-        "feedback": None
-    }
+    expected_result = {"grade": None, "feedback": None}
     actual_result = parse_response(response)
     assert actual_result == expected_result
 
@@ -61,7 +56,7 @@ def test_parse_response_with_partial_grade() -> None:
     response = "Grade: 75\nFeedback: Satisfactory performance, but there is room for improvement."
     expected_result = {
         "grade": 75.0,
-        "feedback": "Satisfactory performance, but there is room for improvement."
+        "feedback": "Satisfactory performance, but there is room for improvement.",
     }
     actual_result = parse_response(response)
     assert actual_result == expected_result

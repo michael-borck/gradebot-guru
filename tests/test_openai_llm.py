@@ -1,7 +1,8 @@
+
 import pytest
 from pytest_mock import MockerFixture
+
 from gradebotguru.llm_interface.openai_llm import OpenAILLM
-from typing import Any, Dict
 
 
 @pytest.fixture
@@ -18,9 +19,10 @@ def mock_openai(mocker: MockerFixture) -> None:
     Returns:
         None
     """
-    mocker.patch("openai.Completion.create", return_value={
-        "choices": [{"text": "Mock response"}]
-    })
+    mocker.patch(
+        "openai.Completion.create",
+        return_value={"choices": [{"text": "Mock response"}]},
+    )
 
 
 def test_generate_text(mock_openai: None) -> None:

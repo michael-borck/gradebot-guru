@@ -1,47 +1,143 @@
 [build-system]
-requires = [ "poetry-core",]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
 
-[tool.poetry]
+[project]
 name = "gradebotguru"
 version = "0.6.3"
 description = "AI-powered grading assistant for fast, accurate, and insightful feedback on student work."
-authors = [ "Michael Borck <michael@borck.me>",]
+authors = [
+    {name = "Michael Borck", email = "michael@borck.me"},
+]
 readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Education",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
 
-[tool.poetry.dependencies]
-python = "^3.10"
-numpy = "^1.26.4"
-pymdown-extensions = "^10.8.1"
-pycparser = "^2.22"
-poetry-plugin-export = "^1.7.1"
-openai = "^0.27.0"
-pandas = "^1.5.0"
-pypdf2 = "^3.0.1"
-python-docx = "^1.1.2"
-pypdf = "^4.2.0"
-gitpython = "^3.1.43"
-toml = "^0.10.2"
-pytest-mock = "^3.14.0"
-ollama = "^0.2.1"
-textstat = "^0.7.3"
-gensim = "^4.3.2"
-nltk = "^3.8.1"
+dependencies = [
+    "numpy>=1.26.4",
+    "pymdown-extensions>=10.8.1",
+    "pycparser>=2.22",
+    "openai>=0.27.0",
+    "pandas>=1.5.0",
+    "pypdf2>=3.0.1",
+    "python-docx>=1.1.2",
+    "pypdf>=4.2.0",
+    "gitpython>=3.1.43",
+    "toml>=0.10.2",
+    "ollama>=0.2.1",
+    "textstat>=0.7.3",
+    "gensim>=4.3.2",
+    "nltk>=3.8.1",
+]
 
-[tool.poetry.urls]
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.2.0",
+    "pytest-mock>=3.14.0",
+    "mypy>=1.10.0",
+    "ruff>=0.1.0",
+    "coverage>=6.5.0",
+]
+docs = [
+    "mkdocs>=1.6.0",
+    "mkdocstrings>=0.25.0",
+    "mkdocs-material>=9.5.20",
+    "mkdocstrings-python>=1.10.0",
+]
+
+[project.scripts]
+gradebot-guru = "gradebotguru.main:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.urls]
 Homepage = "http://yourhomepage.com"
 Documentation = "https://teaching-repositories.github.io/gradebotguru/"
 Repository = "https://github.com/teaching-repositories/gradebotguru"
 
-[tool.poetry.group.dev.dependencies]
-pytest = "^8.2.0"
-mkdocs = "^1.6.0"
-mkdocstrings = "^0.25.0"
-mypy = "^1.10.0"
-flake8 = "^7.0.0"
-mkdocs-material = "^9.5.20"
-mkdocstrings-python = "^1.10.0"
-black = "^23.3.0"
-coverage = "^6.5.0"
-pytest-mock = "^3.14.0"
-gitpython = "^3.1.43"
+[tool.ruff]
+target-version = "py310"
+line-length = 88
+
+[tool.ruff.lint]
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "B",  # flake8-bugbear
+    "C4", # flake8-comprehensions
+    "UP", # pyupgrade
+]
+ignore = [
+    "E501",  # line too long, handled by black
+    "B008",  # do not perform function calls in argument defaults
+    "C901",  # too complex
+    "B904",  # raise from err - will fix separately
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q --strict-markers"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+
+[tool.coverage.run]
+source = ["src/gradebotguru"]
+omit = ["*/tests/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.17.1",
+    "pytest>=8.4.1",
+    "pytest-mock>=3.14.1",
+    "ruff>=0.12.11",
+]
