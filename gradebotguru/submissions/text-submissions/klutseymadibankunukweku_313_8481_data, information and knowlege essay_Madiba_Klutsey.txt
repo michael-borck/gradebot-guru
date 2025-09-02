@@ -1,0 +1,144 @@
+Data, Information, And Knowledge in The Context of 
+Information Security and Risk Management . 
+ 
+Data and intelligence have been used interchangeable to the point where we associate them as 
+being the same,  but they are just related so we associate them as being the same. With data and 
+information,  we gain knowledge to help us in our daily lives. In this essay we will discuss how 
+data, information and knowledge is used in a finance organisation to help with security and risk 
+management.  
+ Data can be defined as a raw, unprocessed facts and figures that re quire processing to acquire 
+meaning from them. For example, numbers, names or dates.  To relate it to a finance organisation 
+data will be account numbers, credit card details and transaction amounts.  Following this is 
+information which is processed or interpreted data that is organised and structured to provide 
+context and meaning to the data. For example, the names and dates of students who borrowed 
+books from the library. In a finance set ting information will be ‘$500 withdrawn on September 
+1st’. Finally, knowledge is what you gain when you combine information with human experiences 
+and the more information the more the knowledge evolves. For example, understanding a clients  
+behaviour based on their withdrawal  trends  and knowing what they are withdrawing the money 
+for. The finance industry’s most crucial component out of data, information and knowledge is 
+data. This is because data is the only piece of information that is valuable to cybercriminals and 
+hackers. Data such as account numbers, transacti on records and credit card details are only a few 
+of the many raw data that is extremely valuable to potential threat actors.  These data can be used 
+to access bank accounts, make unauthorised purchases and this data can be sold to the highest 
+bidder for their personal use. Let's say for instance there is a cyberattack to a bank. The potential 
+threats are ransomware where they hold data and requesting a ransom for its release.  This could 
+be caused by a malicious software on that an employee mistakenly opened or a hacker sent into 
+the system.  Another threat that could have caused the caused the cyberattack is by social 
+engineering where  the cybercriminal sends a phishing  email impersonating  a higher up in the 
+company. All these attacks could be effective because of some vulnerabilities in the system such 
+as, inadequate encryption  and insufficient monitoring and loggings. If the encryption on sensitive 
+data is weak it provides  cybercriminals the opportunity to find a crack in the encryption and gain 
+access to the system and attack it.  Insufficient  loggings and monito ring will give a rise to insider 
+attacks since they think more often than not  it will be overlooked as an error and not be 
+investigated . This potential  could be prevented or mitigated with information security standards 
+and a risk management plan.  
+An information security standard is a set of policies provided to a business to help them prevent 
+or mitigate cyberattacks, breaches and potential risk to the organisation . The bank could use the 
+“National Institute Standards and Technolo gy Cybersecurity Framework ”. NIST cybersecurity 
+framework is a widely known framework or standard that has a set of guidelines, best practices, and standards that help organizations manage and reduce cybersecurity risks. Its components are 
+identity, protect, detect, respond and recover. Identify involves creating a thorough risk 
+assessment to identify the potential and vulnerabilities to the financial data. For example, going 
+through the systems that store sensitive customer information and assessing the risks associated 
+with those systems. Protect deals with contr olling who can and cannot access the data and also 
+provides m multi factor authentication for extra protection. Detect component involves using an 
+Intrusion detection system to detect and alert the system on potential threats or unauthorised 
+access to the data.  After this is respond wh ich involves creating an Incident response plan and to 
+maintain and update the IRP on data breaches and cyberattacks. So that when a breach occurs 
+there's a ready plan to mitigate the breach and notify any parties involved in an appropriate time. 
+Lastly, recover which is simply Backing up data and business continuity planning  which 
+incorporate cybersecurity into the organisation continuity plan so that they can still provide 
+services in a cybersecurity crisis.  
+A management strategy to minimise risk associated with data in the finance organisation will 
+involve technical and non -technical measures . The technical  measures should include multifactor 
+authentication to improve the confidentiality of accessing the account. It should also include 
+strong encryption of the data for instance the data is encrypted at the start and en d point to assure 
+a secure transit. Intrusion detection and prevention systems that monitor network traffic for signs 
+of malicious activity.  Now for the non -technical measures, w e can include, data classification, 
+incidence response plan  and employee training in cybersecurity. Classifying financial data by 
+sensitivity and the severity if it was accessed by the wrong person  and implement measures to 
+secure that that does not happen. Creating an incidence response plan will help the organisation 
+review their steps to dealing with the attacks  and a ny ways they can update it to improve their 
+response to the incident.  Finally, all employees need to be well trained in cybersecurity to be able 
+to identify phishing messages and emails. This will help the organisation to reduce preventable 
+data breaches that were caused by uneducated and uninformed employees and save the 
+organisations data and also a lot of money.  
+Considering the potential risk that were identifie d in the earlier paragraph we can use 
+governance, assurance and control mechanism to manage these finance data breaches . If we 
+consider the risk of a phishing attack on a banks confidential data, a way to manage it with 
+governance is to establish a thorough security governance framework that aligns with the 
+organization's business objectives and regulatory requirements.  The bank can implement 
+Information security policies that describe the organisations approach to managing cybersecurity 
+risk such as cybercriminals, phishing attacks and insider threats.  An assurance mechanism for the 
+bank facing a risk of cyberattacks  such as phishing and insider threats is to provide independent 
+verification that security controls are useful.  This can be achieved by having regular  audits both 
+internal and external. Internal being a regular audit inside the bank. The external audit involves 
+giving your organisat ions online activity logs to a third party like a cybersecurity specialist to 
+double check your audit to make sure you didn’t miss anything. Another way to implement this 
+is to create a “Security Information and Event Management (SIEM) ”. The SIEM systems  will 
+aggregate and analyse security events in real time. This will improve the detection of suspicious activity  on the network of the bank and have a fast and efficient way to manage it. The control 
+mechanism involves controlling the financial sensi tive data and controlling who is granted access 
+to them too. Some ways to control this is to control Encryption at both ends of transit. At the 
+start and end point to assure a secure transit. It protects from scammers  and hackers trying to 
+copy or access the data . Data loss prevention  will be implemented to mitigate the loss of 
+sensitive financial data. Finally, Physical security, such as storing the data is a well -protected and 
+well monitored  facility in the bank and can only be accessed by biometrics such as fingerprint , 
+facial recognition  or even voice activation .  
+In summary, data is raw unprocessed facts and figures that are well processed and organised to 
+provide information for users to use to gain knowledge about the data and use it in their various 
+organisations. The finance industry most crucial or valuable component  out of these three is their 
+data. Their data can be used to access users accounts make withdrawals or deposits  and that data 
+is valuable as i t can be sold to the highest bidder. Luckily risk management plans can be 
+implemented to this organisation to be able to protect the data from malicious activity, 
+cyber criminals  and social engineering attacks such as phishing and impersonation messages. 
+Some of the data breaches can simply be prevented by employees being well trained in 
+cybersecurity to be able to detect phishing emails which are the most common form of 
+cyberattacks. Some incidences need further help and that is why an incidence response plan and 
+having information security standards for your organisation is crucial in managing all the 
+growing cyber threats that the finance industry f ace all the time. Having a policy to govern your 
+data management, the assurance that the policy will be implemented and the controls to secure 
+all that data is always protected it enough to be able to manage any potential risk and threats 
+towards the data.  
+ 
+ 
+ 
+ 
+ 
+Gen AI usage  
+For the prompt below I asked chat gpt to further the explain the assignment and the requirements 
+and this is what I g ot. I used this to define data, information and knowledge. Which i 
+paraphrased.   
+ 
+ 
+ 
+ 
+After I got what I needed for the assignment because it gave me a general response. I chose to 
+talk about the finance industry in my e ssay, I asked for examples specifically related to the 
+finance industry and this is what I got, and I paraphrased most of the information I got from this. 
+I paraphrase most of the content but kept the names of each dot point.   
+ 
+ 
+ 
+ 
+ 
+I asked chat gpt for the information security standards that the bank could implement for the risk 
+of potential threats that they could face and to relate it to the finance industry and this is what I 
+got in response  
+ 
+ 
+ 
+ 
+ 
+I used the chat gpt to get information about the assurance, governance and control. Since I asked 
+it to provide me with a lot of  information about it. Including their definitions and their purpose 
+and a variety of options to choose from for this . I chose a few and paraphrased them to my 
+understanding of them.  
+ 
+ 
+Reflective paragraph  
+Using GenAI for the assignment proved easy in my opinion and It made this assignment easy for 
+me to complete as a whole. It provided we with definitions and key words that related to the 
+subject matter of this essay which was data, information and knowledg e and their relation to the 
+finance industry and risk management strategies to use to manage any form of cyberattacks. I 
+found that if you do not specify what you want you will be provided with a vague response that 
+might sound reasonable to you at the tim e but upon further research you will receive an better 
+answer.  

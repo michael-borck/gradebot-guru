@@ -1,0 +1,194 @@
+Data, Information and Knowledge.  
+Executive Summary  
+The rapid growth of the global population, along with the increasing adoption of the internet and cloud 
+services has led to an extraordinary  amount of data and are generat ing every second. Raw and 
+unstructured data processed to become meaningful information. Once interpreted and understood by 
+humans, this information contributes to the accumulation of knowledge.  
+Understanding the relationship between data, information, and knowledge is crucial in today’s data-
+driven world. As data becomes more  exposed, it also becomes increasingly vulnerable to misuse by 
+malicious actors. The importance of securing data and information grows daily, especially given the 
+rising number of threats and cyberattacks. One of the most effective ways to mitigate these risks is by 
+educating individuals about the significance of data and the necessity of its protection.  
+Threat actors often target the healthcare and financial sectors due to the critical and sensitive nature 
+of the data stored in these environments. A cyberattack on a healthcare organization can lead to data 
+breaches, disruptions in patient care, and financial losses. An attack on the healthcare sector  can 
+have immediate and severe consequences. The high value of this data on the black market, coupled 
+with a general lack of cyber awareness in these sectors, makes them attractive targets for 
+cybercriminals. By understanding the potential threats and identify ing the primary threat actors, 
+organisation’s can proactively update their policies and strategies to prevent attacks or minimise their 
+impact . Data, Information and Knowledge and their Relationship  
+Data is raw, unfiltered, and unstructured information that can take various forms, including text, 
+images, audio, video, numbers, or any other type of input lacking inherent meaning. Data is collected 
+through methods such as surveys, observations, data ent ry, social media platforms, websites, and 
+sensors. Once collected, data is processed, analysed, structured, and refined to produce information that is accurate and contextually meaningful. Information provides insights and knowledge to inform 
+decisions and enhance understanding.  
+People store data and information in both traditional and digital formats. Historically, paper was the 
+primary medium for storage. In the modern digital era, data is  stored on devices such as hard- disk 
+drives (HDDs) and solid- state drives (SSDs) by individuals and organizations. Cloud- based storage 
+solutions have also become increasingly popular.  
+Knowledge is the understanding gained through experience, learning, and problem- solving. It involves 
+analysing and applying information to make informed choices, solve problems, and generate ideas. 
+Unlike raw data or information, knowledge reflects a deeper comprehension that helps individuals and 
+organizations effectively manage and respond to various situations.  
+In organizational contexts, data, information, and knowledge are organized in a hierarchical yet interconnected manner. Understanding these relationships is crucial for optimal resource 
+management and utilization within organizations. Recognizing how data evolves into information and 
+knowledge allows companies to effectively harness these assets to drive informed decision- making, 
+stimulate innovation, and achieve a competitive advantage in their respective sectors.  
+Out of many industries, health sectors or departments  are favour ed by threat actors and data are the 
+most vulnerable or exposed to get exploited compared to information and knowledge. Data at hospitals is particularly vulnerable to cyber -attacks for a variety of reasons. It is high and 
+unprocessed, making it a tempting target for criminals to take and exploit. This raw information is 
+frequently stored in databases or online storage that may lac k sufficient protection, raising the risk of 
+security breaches.  
+Furthermore, data often transfers across systems, increasing the attack s during transmission. 
+Because of the volume of data collected, numerous people and systems can get access to it, 
+providing more weak points for attackers. Unlike processed information and specialist knowledge, 
+which require context and a deeper understanding to be successful, raw data may be abused by a 
+wider  range  of attackers with less skill.   
+Risk Assessment  
+Risk assessment is crucial for all the industries and very much needed in the health departm ent 
+because of the severity of the damage or hit the health department takes if there is any. Risk Assessment should be con ducted in regular basis and following systematic process which helps to 
+keep monitoring threats, updating and evaluating policies and procedures.   
+Because of its high value on the black market, healthcare data is vulnerable to serious security vulnerabilities. Cybercriminals have their sights set on electronic health records, insurance claims, 
+and clinical trial data. The extensive usage of antiquate d technologies devoid of contemporary 
+security measures, intricate networks with many entry points, and human mistake are among the 
+main weaknesses.  
+Because of phishing attacks and careless handling, staff members may accidentally disclose data, and signi ficant employee turnover makes it difficult to maintain constant security awareness. Additional risks are introduced by third- party vendors since data from several businesses may be 
+compromised by a breach at a single provider.  
+In addition, Although IoT device growth in healthcare benefits patients, insufficient built -in security 
+protections are creating new security issues. Because healthcare institutions are more willing to pay 
+ransoms due to the crucial nature of their data, r ansomware assaults have become more common.  
+Healthcare institutions need to put thorough security plans into place to reduce these threats. They 
+consist of consistent security audits, employee training initiatives, strict access limits, and data 
+encryptio n. To tackle the intricate threat landscape, using a zero- trust security approach that involves 
+constant verification of all users and devices might be beneficial.  
+Updating outdated technologies, putting robust vendor management procedures in place, and 
+creating routinely tested incident response plans should all be top priorities for organizations. These 
+steps may improve  data security, reduce the likelihood of breaches, and preserve patient and 
+corporate privacy.  
+Security Standards and Frameworks  
+In the healthcare industry, ISO 27001 is crucial for data security and regulatory compliance. A complete guide for putting in place an Information Security Management System (ISMS) customized 
+to the requirements  of healthcare institutions is offered by this globally recognized standard. 
+Healthcare providers can manage sensitive patient data in a variety of ways by implementing ISO 
+27001 standards.  
+By using a risk -based approach, the standard enables companies to recognize and address security  
+risks that ar e particular to patient data. Encouraging compliance with requirements such as HIPAA  
+(Health Insurance Portability and Accountability ) and GDPR( General Data Protection Regulation), it 
+enforces controls for data availability, integrity, and confidentiality. Healthcare companies that comply to ISO 27001 criteria may create strong security policies, carry out frequent audits, and keep the 
+paperwork required by regulatory agencies updated.  
+A commitment to data security is demonstrated by obtaining ISO 27001 accreditation, which builds 
+confidence among stakeholders and patients. Additionally, it offers useful proof of compliance for 
+audits. The framework places a strong emphasis on ongoing development, which aids businesses in 
+staying ahead of changing legal requirements and security threats.  
+Although ISO 27001 provides a strong basis for data protection, for more thorough coverage, it can 
+be supplemented with additional standards tailored to  the healthcare industry. All things considered, 
+ISO 27001 is an essential tool for healthcare businesses trying to protect sensitive information and handle the challenges of regulatory compliance in the modern digital environment.  
+Management Strategies to mi tigate risks  
+Organizations should implement a thorough risk management strategy to protect important assets. This approach starts with a careful evaluation of the risks, ranking the threats according to their 
+consequences . Then, it combines essential non- technical components like specific security rules and 
+frequent staff training with strong technical measures like encryption and advanced access 
+restrictions. Periodic evaluations and ongoing monitoring guarantee that security precautions continue 
+to be effective against new and emerging threats. This multi -layered protection is completed by an 
+incident response plan that is well -developed and regularly evaluated, allowing for prompt action in 
+the event of a breach. Risk as sessment, technical and non- technical safeguards, continuous 
+monitoring, and incident preparation are essential elements that organizations should integrate to 
+improve their capacity to safeguard vital assets and sustain operational resilience in the face of 
+dynamic security threats.  Organizations should first evaluate their current governance structures and identify any gaps before 
+modifying governance frameworks to meet specific business objectives. By matching governance 
+targets with overall business objectives, the framework is guaranteed to support important plans. 
+During the design phase, it is  critical to consider  elements including the organization's size, industry, 
+regulatory environment, and risk profile.  
+ 
+Involving appropriate stakeholders from all areas of the company is cr ucial for obtaining feedback and 
+guaranteeing support. Accountability is improved by precisely outlining roles, duties, and decision-
+making authority in accordance with the organizational structure.  
+Prioritizing important governance requirements is made possible by the framework's phased 
+implementation, and its flexibility guarantees adaptability as the company demands change.   
+Effectiveness can be increased by utilizing the right tools and technologies that work with the current 
+systems. Lastly, ensuring consistency with evolving business demands will be facilitated by setting up 
+metrics to assess the framework's effectiveness and iteratively improving it in response to feedback . 
+These stages can help businesses design a governance structure that works for them and is specific 
+to their goals and context.  
+ 
+References:  
+- Spilker, J. (2023).  Data vs Information vs Knowledge: What Are The Differences?  [online] 
+Tettra.  
+- Available at: https://tettra.com/article/data- information- knowledge/.  
+ - Liew, A. (2007).  Journal of Knowledge Management Practice,  [online] Tlainc.com. Available 
+at: http://www.tlainc.com/articl134.htm . 
+ 
+- knokcare. (2023).  What is the ISO 27001 and why it is so important in healthcare: our 
+certification story . [online] Available at: https://knokcare.com/what -is-the-iso-27001 -
+certification -and-why-it-is-valued/ [Accessed 30 Aug. 2024].  
+- Vicente, V. (2023).  10 Types of Risk Management Strategies to Follow . [online] 
+www.auditboard.com. Available at: https://www.auditboard.com/blog/10- risk-management -
+strategies/ . 
+- Broadleaf.com.au. (2022).  Governance assurance and oversight –  Broadleaf . [online] 
+Available at: https://broadleaf.com.au/resource- material/categories/governance- assurance-
+and-oversight/ [Accessed 30 Aug. 2024].  
+Use of Gen erative AI tools  
+ During my Researc h I used three AI tools,  and they are Chat GPT, Gemini and C opilot . 
+ During my rese arch I found  following  differences , 
+Chat GPT  Gemini  Copilot  
+It is user friendly and gave 
+the best answers.  It gave me answers with 
+reference link.  It gave me short ans wers not 
+enough to understand.  
+I used for proof reading.  I asked all the question that 
+I wanted to research.  I used for getting points of 
+some questions.  Has certain time limitation.  I did not face any time 
+limitation.  Cannot use for long time, 
+and I preferred Gemini and 
+Chat GP T more.  
+ 
+ Generative tools are  very fun and fri endly to use. Since the new development of AI features 
+and version, AI tools are giving more accurate answers . It depends on the user how  it is being 
+used. For me personally, I used AI look my personal tutor  by asking all the questions I  do not 
+understand or just r andom questions . My favourite AI  tool is Chat GPT but sinc e it has t he 
+time limitations  in free version,  I prefer Gemini from google. There are some draw backs using 
+them, sometimes  it does  not explain , use similar words and way of writing sentences, cannot 
+provide references and  has few more disadvantages. However, If we can use proper way we 
+defini tely can get lots of benefits.  
+ When I was using AI tools  I asked following questions,  
+- Prompted How ISO27001 is working to protect the data in health sector  
+- Prompted which standard is more important to protect data in health sector between 
+ISO270001 and NIST security framework and H...  
+- Prompted Can yo tell me how HITRUST CSF works to protect the data in the health 
+department? 
+- Prompted what are the regulations and standard used to secure the data in Hospital sectors  
+- Prompted how is risk assessment conducted? 
+- Prompted what is risk assessment of data in health departments  
+- Prompted can you proof read this paragraph, Out of many industries, health sectors or 
+departments are favoured by threat actor...  - Prompted Can you explain how data are most vulnerable in health sectors and exposed to 
+threat actors  
+- Prompted okey, i think the same. But how can I justify ? 
+- Prompted which is more vulnerable in health sectors from data, information and knowledge? 
+- Prompted Data is raw, unfiltered, and unstructured information that can take various forms, 
+including text, images, audio, vid...  
+- Prompted proofread the given paragraph 
+- Prompted ok  
+- Prompted Can you proofread my document in which i am still working on 
+- Prompted Can you define information? 
+- Prompted Do you think data should be secured while collecting? 
+- Prompted How is data stored?  
+- Prompted I want to understand data properly, what are the things about data i should learn 
+or study?  
+- Prompted who controls the data? 
+- Prompted how is data collected? 
+- Prompted Can you explain data in 100 words? 
+- Prompted what is data? 
+- Prompted Hi  
+I understand  that AI tools can help you in many ways and it can guide you for m ost of the questions 
+and it also gives you a plan and blueprint  how we can write essay or any report. I asked the question 
+and read and understand the answer  and write it down by paraphrasing and adding my thoughts, 
+after that , I give my updated answers to AI tool to proofread  to find any mistakes . The AI tool was able to show any mistakes as well as gave hints and suggesti ons to improve . In this wa y, we can use 
+AI tools and use it for ou r study purposes.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

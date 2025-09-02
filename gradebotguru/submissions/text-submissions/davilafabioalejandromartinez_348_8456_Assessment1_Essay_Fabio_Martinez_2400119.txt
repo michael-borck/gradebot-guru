@@ -1,0 +1,169 @@
+HUMAN KNOWLEDGE AND ITS INFLUENCE ON ORGANIZATIONS: A VISION ON 
+INFORMATION SECURITY IN THE FINANCIAL SECTOR THROUGH (ISO) 27001  
+Fabio Martinez - 2400119  
+ 
+ 
+Nowadays our world has been evolving in technological development, where every context of our 
+lives has been highly influenced by technology and its advances, making us increasingly dependent 
+on it, but by believing that we are people "outside" an unreal world, we almost never ask ourselves 
+about the possible risks to which we can expose ourselves when interacting with new technologies 
+and their continuous development.  
+ 
+As a natural part of our essence, human beings capture what happens around us through our 
+senses (smell, touch, sight, taste and hearing) in order to function in everyday life, identifying 
+necessary components for our development and survival itself; Many times these senses can be 
+altered or manipulated by other human beings, nature itself or technology to modify our behavior 
+patterns, alter the perception of the world and influence our decision making; as humans we are 
+vulnerable to this type of stimuli th at can be external or internal, likewise companies as 
+organizations created by humans have the same characteristics of vulnerability in their own 
+components.  
+ 
+In order to understand a little better what I mean, it is necessary to understand some key concepts, 
+the human being stores "data" in his brain from what his senses manage to perceive, by analyzing 
+this data he generates new "information" that will be usef ul for himself and by putting this 
+information into practice out of curiosity in his environment he obtains new "knowledge" through his 
+experience. This process can also be applied or reflected in organizations, in an organizational 
+context, these componen ts are interrelated and can be seen when the data is collected and stored; 
+information is generated when the data is processed and organized; and knowledge is created 
+when the information is interpreted and used for decision making. The importance of these  
+components lies in the fact that each one contributes to the organization's ability to operate 
+efficiently, its capacity for innovation, and its process of creating differential factors compared to 
+other organizations. Therefore, it can be concluded that without accurate data, information will be 
+incomplete; without relevant or important information, knowledge will be limited; and without 
+knowledge, decisions will not have a major impact on organizational development.  
+ 
+Through this introduction to the primary components that are part of human and organizational 
+knowledge, it must be taken into account that, as I mentioned above, these same components can 
+be vulnerable to various types of threats. At an organizational lev el, from my point of view, the 
+financial sector is one of the most vulnerable sectors within the general development of society, 
+since its information is the most valuable component for potential malicious actors; this is because 
+the information stored by financial entities is highly sensitive, as an example of this we find the 
+customer database, financial transfer data, bank account details, market strategies, in short, a 
+variety of processes that require essential information for each of their executions.  All this 
+information, being an important part of the operational development of financial organizations, is 
+also a type of information sought to commit criminal acts or manipulate the market in general; it 
+must be taken into account that almost the entire  human population is involved or has a relationship 
+with the financial sector, either through a private or governmental entity.  
+ 
+Because information is a vital component within financial organizations when handling large 
+volumes of sensitive information, there are international standards that provide general control 
+standards for organizations, helping in the control and management of information. As an example 
+of these standards (ISO), ISO 27001 can be referenced, which provides guidelines for security 
+management, including policies, procedures and controls designed to protect confidential 
+information.  
+ 
+According to a conversation with ChatGPT (OpenAI, 2024), in how the ISO27001 standard can help 
+protect information in financial organizations, the following ways were identified:   
+1. Threat and Vulnerabilities Identification:  The standard requires a thorough risk assessment, 
+allowing financial organizations to identify specific threats and vulnerabilities related to their 
+critical information.  
+ 
+2. Comprehensive Protection:  In addition to protecting digital information, ISO 27001 also 
+addresses physical and organizational aspects of security, ensuring that all aspects of 
+information, from storage to transmission, are protected.  
+ 
+3. Effective Security Controls:  ISO 27001 provides a set of security controls and measures that 
+organizations can apply to protect information. These controls range from access management 
+and encryption to protection against cyber attacks.  
+ 
+Based on the result of the information obtained, I will illustrate a simple information risk assessment 
+analysis in the financial sector, consolidating some possible threats in contrast to the vulnerabilities 
+that may be present in an organization in gener al and how these can be managed through technical 
+and non -technical prevention strategies to minimize the risks:  
+ 
+THREATS  VULNERABILITIES  
+• Cyberattacks: Attempts to access financial 
+systems to steal sensitive information.  
+ 
+• Phishing: Means of deceiving employees to 
+obtain confidential information.  
+ 
+ 
+• Internal leaks: Disgruntled or malicious 
+employees who could leak critical 
+information.  • Outdated systems: Lack of software updates 
+can make systems vulnerable to attacks.  
+ 
+• Training deficiencies: Lack of cybersecurity 
+training can increase the likelihood of falling 
+victim to phishing attacks.  
+ 
+• Weak access controls: Lack of adequate 
+measures to restrict access to sensitive 
+information.  
+TECHNICAL MEASURES  NON -TECHNICAL MEASURES  
+• Data encryption: Protect information from 
+access by unauthorized persons or entities.  
+ 
+ 
+ 
+• Authentication: Require some form of 
+authentication (facial reader, fingerprint 
+reader, variable passwords, etc.) to access 
+vital systems and sensitive data.  
+ 
+• Monitoring: Use monitoring systems to 
+detect suspicious activity and potential 
+security breaches.  • Continuous training: Ensure that all 
+employees receive regular and up -to-date 
+training in information security so that 
+attacks can be prevented in practice.  
+ 
+• Clear policies and procedures: Establish 
+and communicate clear policies on 
+information management so that you know 
+how to act in the event of potential incidents.  
+ 
+• Security culture: Promote an organizational 
+culture that values information security and 
+data protection.  
+ 
+Furthermore, as a result of research on international standards and by analyzing the information 
+provided by artificial intelligence (AI), the need to frame the generalities of the ISO standard within 
+some basic principles is reflected, among them it shoul d be mentioned that within a governance 
+mechanism it is necessary to implement policies that help to supervise information security and that 
+said policies are periodically reviewed for more effective update processes in terms of prevention 
+and action again st possible new threats; establish guarantee mechanisms which evaluate 
+compliance with the policies and ensure compliance with the standards of each of the standards 
+that ensure the protection of information; and establish control mechanisms which allow id entifying 
+new vulnerabilities in information systems, contingency measures can be established and 
+responsibility is assigned to each of the actors involved.  
+ Even though today, human beings depend on technology, we must take advantage of tools such as 
+AI in research work, since these provide, from their programming, well -founded ideas to be taken 
+into account in the process of knowledge reinforcement. However, their use must be restricted, 
+since the objective of each investigation is to be able to find gaps in which the human mind can 
+investigate and make decisions in organizational instances. For example, when using AI in this 
+essay, I was able to realize that its use is beneficial when clear research parameters are provided, 
+otherwise it can only provide general data that can simply be found in other research sources 
+(articles, standards, procedures).  
+ 
+In conclusion, understanding human and organizational interactions through the relationships 
+between data, information, and knowledge is essential to effectively manage information security in 
+any organization. In the financial sector, information is the m ost valuable asset for threat actors, 
+which requires a comprehensive security strategy. Organizations must implement standards such 
+as ISO 27001 and apply protective measures (technical and non -technical) as vital strategies to 
+mitigate or eliminate risks.  In addition, the strategic use of tools such as AI can significantly improve 
+information security management in financial organizations.  
+ 
+ 
+ 
+ 
+ 
+REFERENCES:  
+ 
+ 
+• (No date) ISO/IEC 27001:2022 compliance - amazon web services (AWS). Available at: 
+https://aws.amazon.com/compliance/iso -27001 -faqs/ (Accessed: 26 August 2024).  
+ 
+• ISO27001 Security Information (no date) DNV. Available at: https://www.dnv.com/ar/services/iso -
+27001 -sistema -de-gestion -de-security -de-la-informacion -3327/ (Accessed: 27 August 2024).  
+ 
+• ChatGPT. How does ISO 27001 help protect information in financial organizations? Available 
+from: https://www.chatgpt.com/. [Accessed Aug 26, 2024].  
+ 
+• Olavsrud, T. (2023) What is data governance? Best Practices for the Management of These 
+Assets, CIO. Available at: https://www.cio.com/article/2066024/what -is-data-governance -good -
+practices -for-management - of-these -assets.html (Accessed: 31 August 2024).  
+ 
+• Google, 2024. Google Translate, [online] 1 September 2024. Available at: 
+https://translate.google.com  [Accessed 1 September 2024].  

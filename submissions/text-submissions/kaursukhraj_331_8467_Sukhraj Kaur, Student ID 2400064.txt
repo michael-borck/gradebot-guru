@@ -1,0 +1,157 @@
+                                                          Data , Information, and Knowledge  
+Introduction = In the modern era, companies depend on data, information, and knowledge for making 
+decisions and reach their goals in this world. However, if these are not protected and handled in a better way, 
+they can also pose a significant risk. This essay will discuss  how data, information, and knowledge relate to 
+each other and evaluate  their importance in maintaining information security and recommend  solutions for 
+successful risk mitigation.  
+Definition and interrelationship of Data, Information, and Knowledge  
+Data = Data is defined as unprocessed information in the form of numbers and raw facts, which do not have 
+any meaning or context by themselves.  
+Information = Information is data that has been arranged and explained to give index and meaning.  
+Knowledge = Knowledge is the result of defining data, recognizing trends, and utilizing skills. Such as, a 
+doctor’s use their medical training to examine normal blood pressure reading and determine appropriate  
+treatment to show their knowledge and skills.  
+Interrelationship = In an organization, data is a base level, information   add index and meaning, and 
+knowledge is the key to making good and smart decisions. It is crucial to manage the flow of data, 
+information, and knowledge to make decisions better and improve how things are done in an effective way.  
+Valuable component in Healthcare Industry  
+In the healthcare sector Data, Information, and Knowledge are important components. However, according 
+to me information is most valuable in the healthcare field as compared to Data, and Knowledge. This is due 
+to the important nature of healthcare informat ion and its potential threats by unauthorized individuals.  
+ 1. Actionable nature =  Even though raw medical data can be hard to examine, and specialized 
+expertise may be difficult to apply directly, information achieves a balance by being both meaningful and 
+easy to use.  
+ 2. Regulatory focus =  Healthcare regulations such as HIPAA solely focus on safe patient information, 
+highlighting its important value and privacy.  
+ 3. Diverse applications  = Medical information can be used for various things, like committing 
+insurance fraud, blackmail, making it more attractive for a wide range of threat actors.  
+Risk Assessment for Healthcare Information  
+Potential threats  
+1. Cyberattacks are like phishing and ransomware attacks=  These are common  attacks which are 
+facing by healthcare sector  
+2. Insider threats include malicious and accidental = These threats occur due to some employees 
+because they are not well trained and aware.  (Lee, 2022)  3. Physical theft of devices containing patient information =  This is very crucial due to the excessive 
+use of mobile and portable devices in the healthcare field.  
+4. Third party vendor  breaches =  When healthcare organizations exchange information with their 
+collaborators and use external services, it creates many chances for risks to occur.  
+      Key Vulnerabilities in healthcare organization  
+1. Insufficient access controls and authentication measures = Most of the time organizations 
+face risks due to weak passwords and lack of multi -factor authentication, so that’s why companies 
+need to involve a strong password to keep it secure.  
+2. Inadequa te employee training on information security = Healthcare faces a challenge due 
+to many employees leaving their jobs frequently and the staff is made up from other  backgrounds, 
+and they have not much awareness about this field.  
+3. Outdated  systems with unpatched security issues  = Some healthcare companies depend on 
+old technology that could contain many weaknesses. Due to these outdated technologies 
+organizations face security related problems.  
+4. Data is not protected with encryption when it is being stored or while it is being transferred, it  is vital 
+to protect patient valuable information  as it moves in between systems and organizations.  
+  NIST Cybersecurity Framework  
+The NIST Cybersecurity framework offers the best way to handle information security risks in the healthcare 
+field. Its five most crucial functions  can be used in the following way . (Kandasamy et al., 2022)  
+1.  Identify = It is important to check all systems and devices that have patient information. Assign 
+someone to lead each one.  
+2. Protect = Put strong security measures, like access controls and data encryption, and provide 
+regular training to all staff to stay safe online.  
+3. Detect = It is crucial to set up intrusion detection systems, to monitor logs, and create protocols to 
+find unusual activity linked to accessing or sharing patient information.  
+4. Respond = Create and frequently evaluate a plan for responding to incidents that are designed to 
+handle breaches of patient information.  
+5. Recover = Develop strong backup and recovery plans for patient information systems and set up 
+best ways to handle the consequences of a data breach, such as informing patients and managing 
+the organization’s reputation.  
+ 
+Risk Mangement Strategies  
+To mitigate the potential risks related to healthcare data, it is suggested that organizations need to 
+use various kinds of methods that include both technical and non -technical strategies.  
+ 
+Technical Strategies:  
+1. Use end to end encryption to protect all patient information  
+2. Use advanced firewalls and systems to prevent unauthorized access and attacks.  
+3. Implement multi -factor authentication for every user account.  
+4. Make sure to update and patch all systems and software daily.                           Non -Technical Strategies:  
+               1. Create and implement thorough rules for keeping information safe  
+                   2. Regularly perform risk assessments and penetration testing.  
+                   3. Create easy to understand plans for how to respond to emergencies and keep your business 
+running smoothly.  
+                   4. Implement employee training daily for information security.  
+Governance, Assurance, and Control Mechanisms  
+            Effective governance of healthcare information risks requires:  
+1. Consistently giving updates on crucial risk factors for security measures.  
+2. Having a well -defined role and duties to secure information.  
+3. Precisely outlined duties and roles pertaining to safe information security  
+4. Board level watch and involvement in cybersecurity matters.  
+ 
+Assurance mechanisms should include:  
+1. Regular checks are done on both the inside and outside to ensure information security controls 
+are working properly.  
+2. Evaluations of potential risks from outside sources for vendors who can see patient data.  
+                  3. Evaluating whether rules like HIPAA are being followed.  
+                  4. It is important to penetrate testing vulnerability assessments.  
+               Control mechanisms to consider:  
+1. Regularly checking and updating access rights and permissions.  
+2.  Using the principle of least privilege means giving users only the access they need.  
+3.  By using DLP tools to find and stop unauthorized sharing of essential information . 
+ 
+By using these strategies and mechanism healthcare organizations can mitigate the risks and they 
+can keep safe and secure patient information.  
+ 
+Gen AI Usage Guidelines  
+Prompt 1. “Describe the difference between data, information, and knowledge in the context  of 
+information secur ity.”  
+Rationale:  This prompt was created to find definitions of data, information, and knowledge, also to 
+understand the re lationship of these components with each other.  
+Prompt 2. What are the most  common threats  and vulnerabilities to healthcare information 
+systems?  
+Rationale: This prompt was created to make a list of certain risks that are crucial in chosen industry 
+like  healthca re organization. T hese threats can be looked at carefully and discussed further.  
+Prompt 3. Explain the vital parts of the NIST Cybersecurity framework and how they help to keep 
+healthcare information safe.  Rationale: This prompt was used to obtain an idea of a security framework that could be a good  
+starting point for fu rther and following analysis.  
+ 
+AI Content Evalution  
+The AI content gave the best formats and helpful ideas for the essay. Howe ver, it needed to be 
+checked and added to. For example, the risks and some weaknesses mentioned were too general 
+and  should be more focused on healthcare situations. M oreover, the AI may oversimplify  crucial 
+details in its explanations, need to add additio nal research to provide correct and detailed 
+information.  
+ 
+AI As Collaborative Tool  
+AI helped to create basic summaries and highlight the context, which were then demonstrated with 
+extra  research and detailed analysis. For instance, information about NIST Cybersecurity was 
+improved by best practices in industry  
+ 
+Reflection on AI Usage  
+Using AI in writing was found to be useful and difficult. It was good at giving basic outlines and 
+suggesting topics to write about. But it also showed how crucial it is to know a lot about the think 
+critically. T he AI answers need to be checked for accuracy and  elaborated on to match the  level of 
+detail needed for a work.  
+This experience showed how AI can be helpful when working together with humans instead of taking 
+over their work. It made t he first steps of research and idea generation easier, but also demonstrated 
+the importance of asking the right questions to get helpful answers. In the future I will use AI in 
+academic writing to get innovative ideas  and organ ize my thoughts, while still doing my own research 
+and thinking critically.  
+ 
+ 
+Reference  
+1 Lee, I. (2022). Analysis of Insider Threats in the Healthcare Industry: A Text Mining 
+Approach. Information , 13(9), p.404. Doi: HTTPs ://doi.org/10.3390/info13090404.  
+ 
+2. Kandasamy, K., Srinivas, S., Achuthan, K. and Rangan, V.P. (2022). Digital 
+Healthcare - Cyberattacks in Asian Organizations: An Analysis of Vulnerabilities, Risks, 
+NIST perspectives, and Recommendations. IEEE Access , 10, pp.1 –1. Doi: 
+HTTPs://doi.org/10.1109/access.2022.3145372.  
+ 
+ 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

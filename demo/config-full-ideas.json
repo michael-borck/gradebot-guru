@@ -1,0 +1,48 @@
+{
+    "llm_provider": "openai",
+    "llm_model": "gpt-3.5-turbo",
+    "api_key": "your_api_key",
+    "llm_fields": {
+        "prompt": "Grade the following student submission based on the rubric provided. The rubric is as follows: {rubric}. The student submission is as follows: {submission}.",
+        "max_tokens": 150,
+        "temperature": 0.7,
+        "top_p": 1.0,
+        "frequency_penalty": 0.0,
+        "presence_penalty": 0.0,
+        "stop": null
+    },
+    "rubric_path": "demo/rubric.csv",
+    "submission_path": "demo/submissions",
+    "logging_level": "INFO",
+    "output_path": "demo/output",
+    "output_format": "json",
+    "output_filename": "output.json",
+    "output_mode": "overwrite",
+    "output_fields": [
+        "student_id",
+        "grade",
+        "feedback"
+    ],
+    "multiple_grading": {
+        "enabled": true,
+        "num_rounds": 3
+    },
+    "expert_markers": [
+        {
+            "provider": "openai",
+            "model": "gpt-3.5-turbo",
+            "api_key": "expert_marker_api_key"
+        },
+        {
+            "provider": "ollama",
+            "model": "local-model",
+            "url": "http://localhost:8000"
+        }
+    ],
+    "critique_mode": {
+        "enabled": true,
+        "provider": "openai",
+        "model": "gpt-4",
+        "api_key": "critique_api_key"
+    }
+}

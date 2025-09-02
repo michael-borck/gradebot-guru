@@ -1,0 +1,104 @@
+Information, ri sk and s ecurity  – Assessment 1 
+Data refers to unorgani zed facts and figures about various subjects or objects that can be qualitative 
+(described by words) or quantitative (numbers, amounts). It can be easily modified and processed to 
+get the useful information like reports and supports in decision -making process , identifying trends 
+and measuring organization’s performance. In financial context, data can be of different types like 
+income statements, stock prices , sales, investments , customer feedback etc., which is further used in 
+identifying and managing risk, analyzing, and making plans for future.  
+Information is a subset of processed, organi zed and interpreted  data  to get some relevant meaning 
+and context.  It needs human involvement and can be affected by personal experiences, thinking 
+abilities and situations. Humans get raw data, gather useful points from it, think about it and apply 
+their understanding and experience to turn data into something fruitful and interesting. For example, 
+if a chart showing customer feedback, it is unuseful until a person (employee or leader) will not 
+review it and unde rstand the reason about feedback s. Information is very crucial in making 
+important decision,  strategic planning, problem -solving and risk management.  
+Knowledge is a sum of human experiences, personal views, education we gained and culture we 
+came from. It depends on context and applied on every situation in a different way. As the problem 
+changes, new information comes into existence which leads to the updation and expansion of 
+knowledge world. So, knowledge is dynamic and ever -evolving. That’s why knowledge helps in better 
+understanding, supports effective problem mitigating methods and keep pace with innovations and 
+improvements. Following  the above ex ample, data chosen was customer feedback, filterize and 
+observing  of feedbacks gives us information a bout customers’ opinion and by understanding the 
+good and bad reviews, the institute can work on it and can get more customers and a faithful 
+reputation.  
+So, it can be stated that data is raw and unprocessed details, information is processed data and 
+knowledge is relevant and actionable information. Therefore, knowledge is actionable data.  
+In context to a finance industry, data is the most valuable component  to a potential threat actor  
+because of its high sensitivity. Financial data like bank account numbers of customers, their credit 
+card details, personal identification information should be private. If this kind of data is stolen or 
+gained by unauthorised institutes or individuals th en it can lead to financial loss, identity theft and 
+loss of trust. Threat actors can check the account history, their spendings and interests, can make 
+purcha ses illegally and can make a wealthy person fall in debt. For example, if a person is spending a 
+large sum of his income on medicines and his bank details are accessed by hackers then this 
+information can become a vulnerability and can be easily targeted by potential threat act or. At last, 
+leads to financial loss to individual and institution.  Moreover, stolen financial data can be shared 
+publicly, used to bully a person or a company and can be sold to other cybercriminals at a very high 
+value. Every indivi dual wants privacy of their data and even every organisation is practising under 
+some legal rules and regulations.  They have to follow stringent security protocols and if they break 
+the regulations that can result in paying high amount of fines and some legal actions.  In addition, 
+Cybercriminals can encrypt financial data, demand for ransom payments and affecting transaction 
+processes and other operations. According to  ASD Cyber Threat Report (2022 -23), As data breaches 
+is not a small loss, it can effect the trust and expectations of customers and resulting in a bad 
+reputation in the market.  
+- https://www.accc.gov.au/media -release/hsbc -pays -penalties -for-alleged -breaches -of-
+consumer -data -right -rules   
+Every organization should conduct a risk assessment involved in every functioning so that it can be 
+easily managed and mitigated. Data is found as the most important component in finance industry 
+because it needs to be private, and only authorised persons can retrieve it. In risk assessment, first 
+there is an identification of potential threats and weaknesses which are combined with critical data 
+and further is the evaluation of impact on the organization. In a financial institute, the potential 
+threats can  be cyber attacks like phishing, ransomware and data breaches. Cybercriminals use 
+deceptive emails or messages, malware that make data inaccessible for personal interests or money -
+purposes and get unauthorised gain to systems to expose the data and sharing  on dark web. 
+Furthermore, threats can be from inside of an organization who can misuse the sensitive data for 
+personal revenge, greed or damage to organization, these are known as malicious insiders. 
+Sometimes, threat actor arise accidently as some employ ees lack training and they, by mistake, 
+compromise the data security by falling in trap of scams and reckless actions. There can exist some 
+tangible threats such as losing of systems or storage media containing data and some technical 
+threats such as corru ption of data due to weak software. Diving deeply, vulnerabilities in third -party 
+services can attract hackers to access the financial data of a reputed organization.  
+Cybercriminals attacks because of the existing vulnerabilities. A finance company has several areas of 
+vulnerabilities. First of all, the weak authentication methods and insufficient encryption are the 
+methods of easily accessing the data by unauthorized p arties. There should be multi -factor 
+authentication and fully protected encryption for every crucial dataset. Secondly, employees can be a 
+vulnerability if they are not trained with updated techniques as they can be baited by attackers 
+through phishing and  hence expose private data accidently. Others can do so to take some revenge 
+from leaders or specific individuals. Last but not least, inadequate recovery  backups are the 
+vulnerabilities in case of a disaster and operation disruption.  
+ISO, the International Organization for Standardization publish international standards to make lives 
+easier, safer and better. ISO 27001 is a type of a standard mainly designed  for information security 
+management systems (ISMS). It provides all companies and every sector a standard  to establish , 
+implement , maintain  an ISMS. It helps organizations to become risk -aware and identify weakness 
+related to the security of data stored by the company. It helps companies to maintain data integrity, 
+confidentiality and availability, organization -wide protection and preparedness  for new -threats. 
+Three important principles in ISO 27001, also known as CIA triad helps to protect data in companies. 
+Confidentiality allows only authorised people to access the important data to prevent cybercriminals 
+to gain it. Integrity maintains the data an organization holds for its services is reliably stored and 
+cannot be erased. Availability make data available to the organization and its client whenever needed 
+to meet the expectations of both. So, CIA triad helps to protect the organization data through the 
+proper working standards.  
+-https://www.iso.org/standard/27001  
+Risk management strategy helps to identity and mitigate risks.  Organizations should execute a mix of 
+technical and non -technical measures to manage and minimize risks. While handling data online, 
+data encryption is one of the best practices to transforms data into a secure way so that only right 
+people can view it.  While transmitting the data, Transport Layer Security and only secure websites 
+should be used. Use AES (Advanced Encryption Standard) to keep the data  safe which is  stored on 
+devices. Implementi ng a  multi-factor Authentication to gain sensitive data for making more secure 
+than passwords. Always perform automation to systems to get the updates and implement a patch 
+management process to update the systems and software continuously. Frequent backups and recovery testing help to recover all of the updates and improvements. Furthermore, some security 
+awareness trainings should be promoted to train employees to make them a match with upcoming 
+skills and advancements. There should be an incident response team  and incident response plan for 
+every organization in the situation  of a data hacked . Regularly auditing and risk assessments should 
+be implemented to deal with vulnerabilities and implement security measures. Every sensitive data 
+should be licensed with legal agreements and regulatory compliance.  
+A data protection plan must be set up to look at the policies, roles and responsibilities. It will be the 
+best if a Data Protection Officer (DPO) is appointed to oversee the plan and security strategies. In 
+regards to assurance, encryption practices and po licies must be continuously checked and proper 
+evaluation of third -party vendors should be done while dealing with outsiders. Control mechanisms 
+focus on compliance checks and audit trails which ensures data security and policy adherence.  
+Reference ----- 
+https://copilot.microsoft.com/sl/cR50K6oQ0S4  
+https://copilot.microsoft.com/sl/jAYOkVMn8Vw  
+ 
+ 
+ 
