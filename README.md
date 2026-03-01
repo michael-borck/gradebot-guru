@@ -1,5 +1,9 @@
 # GradeBot Guru: Your AI Grading Assistant 👨‍🏫🤖
 
+<!-- BADGES:START -->
+[![edtech](https://img.shields.io/badge/-edtech-4caf50?style=flat-square)](https://github.com/topics/edtech) [![artificial-intelligence](https://img.shields.io/badge/-artificial--intelligence-blue?style=flat-square)](https://github.com/topics/artificial-intelligence) [![automated-grading](https://img.shields.io/badge/-automated--grading-blue?style=flat-square)](https://github.com/topics/automated-grading) [![cli-tool](https://img.shields.io/badge/-cli--tool-blue?style=flat-square)](https://github.com/topics/cli-tool) [![education](https://img.shields.io/badge/-education-blue?style=flat-square)](https://github.com/topics/education) [![feedback](https://img.shields.io/badge/-feedback-blue?style=flat-square)](https://github.com/topics/feedback) [![grading](https://img.shields.io/badge/-grading-blue?style=flat-square)](https://github.com/topics/grading) [![llm](https://img.shields.io/badge/-llm-ff6f00?style=flat-square)](https://github.com/topics/llm) [![python](https://img.shields.io/badge/-python-3776ab?style=flat-square)](https://github.com/topics/python) [![tool](https://img.shields.io/badge/-tool-607d8b?style=flat-square)](https://github.com/topics/tool)
+<!-- BADGES:END -->
+
 [![PyPI Version](https://img.shields.io/pypi/v/gradebot-guru?color=blue)](https://pypi.org/project/gradebot-guru/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
